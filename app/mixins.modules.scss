@@ -1,0 +1,73 @@
+// flexbox
+$flex-map: (
+	start: flex-start,
+	end: flex-end,
+	between: space-between,
+	around: space-around,
+	stretch: stretch,
+	center: center,
+);
+
+@function _get-flex-value($key) {
+	@return map-get($flex-map, $key);
+}
+
+@mixin flexbox($jc: center, $ai: center) {
+	display: flex;
+	align-items: _get-flex-value($ai);
+	justify-content: _get-flex-value($jc);
+}
+
+@mixin column-flexbox($jc: center, $ai: center) {
+	display: flex;
+	flex-direction: column;
+	align-items: _get-flex-value($ai);
+	justify-content: _get-flex-value($jc);
+}
+
+// position
+@mixin pos-center-x($type: absolute) {
+	@if ($type == "absolute" or $type == "fixed") {
+		position: $type;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+}
+
+@mixin pos-center-y($type: absolute) {
+	@if ($type == "absolute" or $type == "fixed") {
+		position: $type;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+}
+
+@mixin pos-center($type: absolute) {
+	@if ($type == "absolute" or $type == "fixed") {
+		position: $type;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+//
+@mixin truncate() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+@mixin layout() {
+	width: 100%;
+	margin: $sm-margin;
+	max-width: $content-max-width;
+
+	@media screen and (min-width: $md-breakpoint) {
+		margin: $md-margin;
+	}
+
+	@media screen and (min-width: $lg-breakpoint) {
+		margin: $lg-margin;
+	}
+}
