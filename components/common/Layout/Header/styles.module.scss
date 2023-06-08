@@ -1,5 +1,5 @@
-@import "@/app/mixins.module.scss";
 @import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
 
 .header {
 	@include flexbox(start, center);
@@ -16,7 +16,7 @@
 		@include flexbox(start, center);
 	}
 
-	&.scrolled {
+	&.hasBorder {
 		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 	}
 }
@@ -47,8 +47,13 @@
 			color: $text-primary;
 		}
 	}
+}
 
-	@media screen and (min-width: $sm-breakpoint) {
-		display: none;
-	}
+// tablet부터 visible
+.logo {
+	@include smHidden;
+}
+
+.menu {
+	@include smHidden;
 }
