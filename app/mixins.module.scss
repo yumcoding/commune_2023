@@ -52,6 +52,43 @@ $flex-map: (
 }
 
 //
+
+@mixin smHidden {
+	display: none;
+
+	@media screen and (min-width: $md-breakpoint) {
+		display: block;
+	}
+}
+
+// @mixin mdOnly {
+// 	@media screen and (max-width: $md-breakpoint - 1) {
+// 		display: none !important;
+// 	}
+
+// 	@media screen and (min-width: $lg-breakpoint) {
+// 		display: none !important;
+// 	}
+// }
+
+// @mixin lgOnly {
+// 	@media screen and (max-width: calc($lg-breakpoint - 1px)) {
+// 		display: none !important;
+// 	}
+// }
+
+// @mixin mdHidden {
+// 	@media screen and (min-width: $md-breakpoint) and(max-width: calc($lg-breakpoint - 1px)) {
+// 		display: none !important;
+// 	}
+// }
+
+// @mixin lgHidden {
+// 	@media screen and (min-width: $lg-breakpoint) {
+// 		display: none !important;
+// 	}
+// }
+
 @mixin layout() {
 	width: 100%;
 	margin: $sm-margin;
