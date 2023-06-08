@@ -1,11 +1,5 @@
 import "./globals.css";
-import { Noto_Sans_KR } from "next/font/google";
-
-const noto_sans = Noto_Sans_KR({
-	weight: ["400", "500", "700", "900"],
-	subsets: ["latin"],
-	display: "swap",
-});
+import { noto_sans } from "./fonts";
 
 export const metadata = {
 	title: "Commune",
