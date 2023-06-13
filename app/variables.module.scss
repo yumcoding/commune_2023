@@ -6,8 +6,8 @@ $accent: #0b2447;
 // 텍스트 회색
 // 텍스트 연한 회색
 $text-primary: #292a32;
-$text-secondary: #333;
-$text-tertiary: #555;
+$text-secondary: #74747b;
+$text-tertiary: #7e7e7e;
 
 $nav-default: #babac3;
 $nav-hover: #a5a5aa;
@@ -33,3 +33,6 @@ $content-max-width: 1330px;
 
 // book ratio
 $book-height: 145.37037%;
+
+// z-index
+$overlay-level: 99999;
