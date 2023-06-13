@@ -1,0 +1,53 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.footerWrapper {
+	@include smOnly;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100vw;
+	height: 60px;
+	background-color: $white;
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.nav {
+	ul {
+		@include flexbox(center, center);
+		width: 100%;
+	}
+
+	li {
+		@include flexbox(center, center);
+		flex: 1;
+		height: 59px;
+
+		a,
+		button {
+			@include column-flexbox(center, center);
+		}
+
+		svg {
+			width: 24px;
+			height: 24px;
+			color: $text-tertiary;
+		}
+
+		span {
+			font-size: 12px;
+			font-weight: 400;
+			line-height: 17px;
+			color: $nav-default;
+			padding: 3px 0 0 0;
+			transition: color 300ms ease-in;
+		}
+
+		&.isActive {
+			svg,
+			span {
+				color: $text-primary;
+			}
+		}
+	}
+}

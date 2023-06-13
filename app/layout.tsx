@@ -1,6 +1,6 @@
 import "./globals.css";
 import { noto_sans } from "./fonts";
-
+import MobileFooter from "@/components/common/Layout/MobileFooter";
 export const metadata = {
 	title: "Commune",
 	description: "느슨한 취향 공동체",
@@ -9,7 +9,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="ko">
-			<body className={noto_sans.className}>{children}</body>
+			<body className={noto_sans.className}>
+				{children}
+				<MobileFooter />
+			</body>
 		</html>
 	);
 }
