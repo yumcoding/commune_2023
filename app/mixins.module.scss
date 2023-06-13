@@ -53,11 +53,17 @@ $flex-map: (
 
 //
 
+@mixin smOnly {
+	@media screen and (min-width: $md-breakpoint) {
+		display: none !important;
+	}
+}
+
 @mixin smHidden {
-	display: none;
+	display: none !important;
 
 	@media screen and (min-width: $md-breakpoint) {
-		display: block;
+		display: block !important;
 	}
 }
 
