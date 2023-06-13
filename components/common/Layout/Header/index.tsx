@@ -2,15 +2,16 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cls } from "@/lib/front/cls";
+import { useEffect, useState, useRef } from "react";
+import { SearchIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
-import { useEffect, useState } from "react";
+import { dancing_script } from "@/app/fonts";
 
-// 720 이상 display block
 export default function Header() {
 	const pathname = usePathname();
 
+	// create border bottom on scroll
 	const [hasBorder, setHasBorder] = useState(false);
-
 	const changeBorder = () => {
 		if (window.scrollY > 0) {
 			setHasBorder(true);
@@ -26,34 +27,75 @@ export default function Header() {
 		};
 	}, []);
 
-	return (
-		<header className={cls(styles.header, hasBorder ? styles.hasBorder : "")}>
-			{/* 좌 */}
-			<div>
-				<h1 className={styles.logo}>
-					<Link href="/">Commune</Link>
-				</h1>
-				<nav>
-					<ul>
-						<li className={cls(styles.navItem, pathname === "/" ? styles.isActive : "")}>
-							<Link href="/">책</Link>
-						</li>
-						<li className={cls(styles.navItem, pathname === "/movie" ? styles.isActive : "")}>
-							<button type="button">영화</button>
-						</li>
-						<li className={cls(styles.navItem, pathname === "/music" ? styles.isActive : "")}>
-							<button type="button">음악</button>
-						</li>
-					</ul>
-				</nav>
-			</div>
+	// toggle input on click
+	const searchRef = useRef<HTMLFormElement>(null);
+	const [isSearchVisible, setIsSearchVisible] = useState(false);
+	const showSearch = () => {
+		if (!isSearchVisible) {
+			return setIsSearchVisible(true);
+		} else {
+			return;
+		}
+	};
 
-			{/* 우 */}
-			<div className={styles.menu}>
-				<button type="button">검색</button>
-				<button type="button">로그인</button>
-				{/* isAuthenticated&&<Link href="/profile">프로필</Link> */}
+	useEffect(() => {
+		const checkIfClickedOutside = (e: MouseEvent): void => {
+			if (isSearchVisible && searchRef.current && e.target instanceof HTMLElement && !searchRef.current.contains(e.target)) {
+				setIsSearchVisible(false);
+			}
+		};
+
+		document.addEventListener("mousedown", checkIfClickedOutside);
+		return () => {
+			document.removeEventListener("mousedown", checkIfClickedOutside);
+		};
+	}, [isSearchVisible]);
+
+	return (
+		<>
+			<div className={cls(styles.headerWrapper, hasBorder ? styles.hasBorder : "")}>
+				<header className={styles.header}>
+					{/* 좌 */}
+					<div>
+						<h1 className={cls(styles.logo, dancing_script.className)}>
+							<Link href="/">Commune</Link>
+						</h1>
+						<nav className={styles.nav}>
+							<ul>
+								<li className={pathname === "/" ? styles.isActive : ""}>
+									<Link href="/" className={styles.link}>
+										책
+									</Link>
+								</li>
+								<li className={pathname === "/movie" ? styles.isActive : ""}>
+									<button type="button" className={styles.link}>
+										영화
+									</button>
+								</li>
+								<li className={pathname === "/music" ? styles.isActive : ""}>
+									<button type="button" className={styles.link}>
+										음악
+									</button>
+								</li>
+							</ul>
+						</nav>
+					</div>
+					{/* 우 */}
+					<div className={styles.menuWrapper}>
+						<div className={styles.menu}>
+							<form className={cls(styles.search, isSearchVisible ? styles.visible : "")} ref={searchRef} onClick={showSearch}>
+								<input type="text" />
+								<SearchIcon />
+							</form>
+
+							<button type="button" className={styles.loginBtn}>
+								로그인
+							</button>
+							{/* isAuthenticated&&<Link href="/profile">프로필</Link> */}
+						</div>
+					</div>
+				</header>
 			</div>
-		</header>
+		</>
 	);
 }
