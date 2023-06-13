@@ -1,0 +1,21 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.modal {
+	@include flexbox(center, center);
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	// background-color: rgba(0, 0, 0, 0.75);
+	z-index: $overlay-level;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 300ms ease-in-out, visibility 300ms ease-in-out;
+
+	&.isVisible {
+		opacity: 1;
+		visibility: visible;
+	}
+}
