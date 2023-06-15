@@ -45,7 +45,7 @@
 	width: 30px;
 	height: 30px;
 	border-radius: 50%;
-	background-color: rgba(0, 0, 0, 0.08);
+	background-color: $btn-grey-default;
 	transition: background-color 300ms ease-in;
 
 	svg {
@@ -53,6 +53,6 @@
 	}
 
 	&:hover {
-		background-color: rgba(0, 0, 0, 0.2);
+		background-color: $btn-grey-hover;
 	}
 }
