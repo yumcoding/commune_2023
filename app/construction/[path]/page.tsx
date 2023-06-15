@@ -1,3 +1,9 @@
+import ConstructionContent from "@/components/common/ConstructionContent";
+
 export default function Page() {
-	return <>준비중</>;
+	return (
+		<>
+			<ConstructionContent isModal={false} />
+		</>
+	);
 }
