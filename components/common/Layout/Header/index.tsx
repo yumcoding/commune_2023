@@ -3,11 +3,13 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { cls } from "@/lib/front/cls";
 import { useEffect, useState, useRef } from "react";
-import { SearchIcon } from "@/assets/icons";
+import { SearchIcon, UserDefaultIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import { dancing_script } from "@/app/fonts";
 
 export default function Header() {
+	const { headerWrapper, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, search, visible, loginBtn } = styles;
+
 	const pathname = usePathname();
 
 	// create border bottom on scroll
@@ -53,42 +55,42 @@ export default function Header() {
 
 	return (
 		<>
-			<div className={cls(styles.headerWrapper, hasBorder ? styles.hasBorder : "")}>
-				<header className={styles.header}>
+			<div className={cls(headerWrapper, hasBorder ? hasBorderCss : "")}>
+				<header className={header}>
 					{/* 좌 */}
 					<div>
-						<h1 className={cls(styles.logo, dancing_script.className)}>
+						<h1 className={cls(logo, dancing_script.className)}>
 							<Link href="/">Commune</Link>
 						</h1>
-						<nav className={styles.nav}>
+						<nav className={nav}>
 							<ul>
-								<li className={pathname === "/" ? styles.isActive : ""}>
-									<Link href="/" className={styles.link}>
+								<li className={pathname === "/" ? isActive : ""}>
+									<Link href="/" className={link}>
 										책
 									</Link>
 								</li>
-								<li className={pathname === "/movie" ? styles.isActive : ""}>
-									<button type="button" className={styles.link}>
+								<li className={pathname === "/construction/movie" ? isActive : ""}>
+									<Link href="/construction/movie" className={link}>
 										영화
-									</button>
+									</Link>
 								</li>
-								<li className={pathname === "/music" ? styles.isActive : ""}>
-									<button type="button" className={styles.link}>
+								<li className={pathname === "/construction/music" ? isActive : ""}>
+									<Link href="/construction/music" className={link}>
 										음악
-									</button>
+									</Link>
 								</li>
 							</ul>
 						</nav>
 					</div>
 					{/* 우 */}
-					<div className={styles.menuWrapper}>
-						<div className={styles.menu}>
-							<form className={cls(styles.search, isSearchVisible ? styles.visible : "")} ref={searchRef} onClick={showSearch}>
+					<div className={menuWrapper}>
+						<div className={menu}>
+							<form className={cls(search, isSearchVisible ? visible : "")} ref={searchRef} onClick={showSearch}>
 								<input type="text" />
 								<SearchIcon />
 							</form>
 
-							<button type="button" className={styles.loginBtn}>
+							<button type="button" className={loginBtn}>
 								로그인
 							</button>
 							{/* isAuthenticated&&<Link href="/profile">프로필</Link> */}
