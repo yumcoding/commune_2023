@@ -1,0 +1,10 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.main {
+	margin: 60px 0;
+
+	@media screen and (min-width: $md-breakpoint) {
+		margin: 60px 0 0;
+	}
+}
