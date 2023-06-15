@@ -1,0 +1,29 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.heading {
+	@include truncate();
+	margin: 0 0 9px;
+	font-size: 22px;
+	font-weight: 600;
+	letter-spacing: -0.4px;
+	line-height: 30px;
+	color: $text-primary;
+}
+
+.bookList {
+	@include flexbox(between, center);
+}
+
+.bookItem {
+	width: 33.3333333333%;
+	margin: 0 5px 0 0;
+
+	@media screen and (min-width: $md-breakpoint) {
+		width: 25%;
+	}
+
+	@media screen and (min-width: $lg-breakpoint) {
+		width: 20%;
+	}
+}

@@ -30,14 +30,15 @@ $book-border: #eae9cd;
 $md-breakpoint: 720px;
 $lg-breakpoint: 1366px;
 
-$sm-margin: 0 20px;
-$md-margin: 0 3.5%;
-$lg-margin: 0 auto;
+$sm-margin: 70px 15px 60px;
+$md-margin: 70px 3.5% 0;
+$lg-margin: 70px auto 0;
 
-$content-max-width: 1330px;
+$content-max-width: 1320px;
 
 // book ratio
 $book-height: 145.37037%;
 
 // z-index
+$nav-level: 9999;
 $overlay-level: 99999;

@@ -10,6 +10,7 @@
 	height: 60px;
 	background-color: $white;
 	border-top: 1px solid rgba(0, 0, 0, 0.08);
+	z-index: $nav-level;
 }
 
 .nav {
