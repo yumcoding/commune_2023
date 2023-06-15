@@ -51,7 +51,25 @@ $flex-map: (
 	}
 }
 
-//
+@mixin layout() {
+	margin: $sm-margin;
+	max-width: $content-max-width;
+
+	@media screen and (min-width: $md-breakpoint) {
+		margin: $md-margin;
+	}
+
+	@media screen and (min-width: $lg-breakpoint) {
+		margin: $lg-margin;
+	}
+}
+
+// utils
+@mixin truncate() {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
 
 @mixin smOnly {
 	@media screen and (min-width: $md-breakpoint) {
@@ -67,44 +85,15 @@ $flex-map: (
 	}
 }
 
-// @mixin mdOnly {
-// 	@media screen and (max-width: $md-breakpoint - 1) {
-// 		display: none !important;
-// 	}
-
-// 	@media screen and (min-width: $lg-breakpoint) {
-// 		display: none !important;
-// 	}
-// }
-
-// @mixin lgOnly {
-// 	@media screen and (max-width: calc($lg-breakpoint - 1px)) {
-// 		display: none !important;
-// 	}
-// }
-
-// @mixin mdHidden {
-// 	@media screen and (min-width: $md-breakpoint) and(max-width: calc($lg-breakpoint - 1px)) {
-// 		display: none !important;
-// 	}
-// }
-
-// @mixin lgHidden {
-// 	@media screen and (min-width: $lg-breakpoint) {
-// 		display: none !important;
-// 	}
-// }
-
-@mixin layout() {
-	width: 100%;
-	margin: $sm-margin;
-	max-width: $content-max-width;
-
-	@media screen and (min-width: $md-breakpoint) {
-		margin: $md-margin;
-	}
-
-	@media screen and (min-width: $lg-breakpoint) {
-		margin: $lg-margin;
-	}
+/* visually hide semantic tags */
+@mixin visuallyHidden() {
+	position: absolute !important;
+	width: 1px !important;
+	height: 1px !important;
+	padding: 0 !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	clip: rect(0, 0, 0, 0) !important;
+	white-space: nowrap !important;
+	border: 0 !important;
 }
