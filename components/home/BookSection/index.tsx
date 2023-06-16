@@ -7,7 +7,7 @@ import Book from "@/components/common/Book";
 import styles from "./styles.module.scss";
 import { cls } from "@/lib/front/cls";
 import useSwiperRef from "@/hooks/useSwiperRef";
-import { ChevronLeft, ChevronRight } from "@/assets/icons";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/assets/icons";
 
 interface PropTypes {
 	title: string;
@@ -49,10 +49,10 @@ export default function BookSection({ title }: PropTypes) {
 					))}
 				</Swiper>
 				<button type="button" ref={prevElRef} className={cls(btn, prevBtn)}>
-					<ChevronLeft />
+					<ChevronLeftIcon />
 				</button>
 				<button type="button" ref={nextElRef} className={cls(btn, nextBtn)}>
-					<ChevronRight />
+					<ChevronRightIcon />
 				</button>
 			</div>
 		</section>
