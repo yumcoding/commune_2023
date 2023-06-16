@@ -17,7 +17,7 @@ export default function Book() {
 					<Link href="/">
 						<h3>책 이름</h3>
 						<div>
-							<strong>저자, 옮긴이dd ddddddd ddddddddd ddddddddddddddddddddddddddddddddd d dddddddd dddddddd ddddddddd dd ddddddddddddddddd</strong>
+							<strong>저자, 옮긴이</strong>
 							<span> | 출판사</span>
 						</div>
 					</Link>
