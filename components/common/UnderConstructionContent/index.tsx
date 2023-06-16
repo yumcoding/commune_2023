@@ -4,7 +4,7 @@ import { BulbIcon, CloseMarkIcon } from "@/assets/icons";
 import { cls } from "@/lib/front/cls";
 import styles from "./styles.module.scss";
 
-export default function ConstructionContent({ isModal }: { isModal: boolean }) {
+export default function UnderConstructionContent({ isModal }: { isModal: boolean }) {
 	const { contentWrapper, modalWrapper, pageWrapper, text, backBtn, backIconBtn } = styles;
 	const router = useRouter();
 	const onClickClose = () => router.back();

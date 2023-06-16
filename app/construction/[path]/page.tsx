@@ -1,9 +1,9 @@
-import ConstructionContent from "@/components/common/ConstructionContent";
+import UnderConstructionContent from "@/components/common/UnderConstructionContent";
 
 export default function Page() {
 	return (
 		<>
-			<ConstructionContent isModal={false} />
+			<UnderConstructionContent isModal={false} />
 		</>
 	);
 }
