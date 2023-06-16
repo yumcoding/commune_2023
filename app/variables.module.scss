@@ -18,6 +18,7 @@ $btn-grey-default: rgba(0, 0, 0, 0.07);
 $btn-grey-hover: rgba(0, 0, 0, 0.1);
 
 $border: #d2d2d2;
+$border-light: rgba(0, 0, 0, 0.08);
 $border-img: #eae9e8;
 $background: #f7f8fa;
 $white: #ffffff;
@@ -41,5 +42,7 @@ $book-height: 145.37037%;
 
 // z-index
 $swiper-nav-level: 9;
-$nav-level: 9999;
+$header-level: 99;
+$mobile-search-level: 999;
+$footer-level: 9999;
 $overlay-level: 99999;

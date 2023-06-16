@@ -11,9 +11,9 @@
 	background-color: $white;
 	border-bottom: 1px solid $white;
 	transition: border-color 300ms ease-in-out;
-	z-index: $nav-level;
+	z-index: $header-level;
 	&.hasBorder {
-		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+		border-bottom: 1px solid $border-light;
 	}
 }
 
@@ -106,7 +106,7 @@
 	width: 34px;
 	height: 34px;
 	background-color: $white;
-	border-radius: 2px;
+	border-radius: 4px;
 	transition: width 300ms ease-in-out, background-color 300ms ease-in;
 	cursor: pointer;
 
@@ -126,6 +126,7 @@
 		padding: 1px 6px 0 28px;
 		font-size: 12px;
 		font-weight: 400;
+		color: $text-primary;
 		caret-color: $accent;
 	}
 
