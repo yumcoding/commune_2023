@@ -100,13 +100,17 @@
 	@include flexbox(end, center);
 }
 
+.searchWrapper {
+	position: relative;
+}
+
 .search {
 	@include flexbox(start, center);
 	position: relative;
 	width: 34px;
 	height: 34px;
 	background-color: $white;
-	border-radius: 2px;
+	border-radius: 4px;
 	transition: width 300ms ease-in, background-color 300ms ease-in;
 	cursor: pointer;
 
@@ -119,7 +123,7 @@
 		}
 
 		@media screen and (min-width: $lg-breakpoint) {
-			width: 350px;
+			width: 330px;
 			transition: width 400ms ease-in, background-color 40ms ease-in;
 		}
 	}
@@ -133,6 +137,10 @@
 		font-weight: 400;
 		color: $text-primary;
 		caret-color: $accent;
+
+		::placeholder {
+			color: $text-tertiary;
+		}
 	}
 
 	svg {
@@ -141,6 +149,26 @@
 		height: 18px;
 		left: 6px;
 		color: $text-secondary;
+	}
+}
+
+.searchDropdown {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	background-color: $white;
+	border-radius: 2px;
+	width: 220px;
+	padding: 0 10px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+
+	@media screen and (min-width: 1100px) {
+		width: 300px;
+	}
+
+	@media screen and (min-width: $lg-breakpoint) {
+		width: 330px;
+		transition: width 400ms ease-in, background-color 40ms ease-in;
 	}
 }
 

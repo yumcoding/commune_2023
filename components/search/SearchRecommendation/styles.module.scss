@@ -3,12 +3,17 @@
 
 .section {
 	margin: 5px 0 40px;
+	width: 100%;
+
+	@media screen and (min-width: $md-breakpoint) {
+		margin: 2px 0 10px;
+	}
 }
 
 .header {
 	position: relative;
-
 	padding: 11px 0 10px;
+
 	h2 {
 		color: $text-primary;
 		font-size: 18px;
@@ -16,16 +21,30 @@
 		letter-spacing: -0.7px;
 		line-height: 1.28;
 	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		padding: 11px 0 3px;
+
+		h2 {
+			color: $accent;
+			font-size: 14px;
+		}
+	}
 }
 
 .delBtn {
 	@include pos-center-y();
-	right:0px;
+	right: 0px;
 	font-size: 14px;
 	letter-spacing: -0.3px;
 	line-height: 18px;
 	color: $accent;
 	cursor: pointer;
+
+	@media screen and (min-width: $md-breakpoint) {
+		font-size: 11px;
+		line-height: unset;
+	}
 }
 
 .list {
@@ -33,12 +52,32 @@
 		@include flexbox(start, center);
 		min-height: 44px;
 		border-bottom: 1px solid $border-light;
+
+		@media screen and (min-width: $md-breakpoint) {
+			min-height: 26px;
+			border-bottom: 1px solid transparent;
+		}
+
+		@media screen and (min-width: $lg-breakpoint) {
+			min-height: 28px;
+		}
 	}
+
 	p {
 		@include truncate();
 		color: $text-primary;
 		font-size: 14px;
 		letter-spacing: -0.6px;
 		line-height: 21px;
+
+		@media screen and (min-width: $md-breakpoint) {
+			font-size: 12px;
+			line-height: unset;
+		}
+
+		@media screen and (min-width: $lg-breakpoint) {
+			font-size: 13px;
+			line-height: unset;
+		}
 	}
 }

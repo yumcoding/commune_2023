@@ -1,14 +1,16 @@
 "use client";
+import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { cls } from "@/lib/front/cls";
-import { useEffect, useState, useRef } from "react";
-import { SearchIcon, UserDefaultIcon } from "@/assets/icons";
-import styles from "./styles.module.scss";
 import { dancing_script } from "@/app/fonts";
+import { cls } from "@/lib/front/cls";
+import styles from "./styles.module.scss";
+import { SearchIcon, UserDefaultIcon } from "@/assets/icons";
+import { recentSearch, popularSearch } from "@/assets/mockData";
+import SearchRecommendation from "@/components/search/SearchRecommendation";
 
 export default function Header() {
-	const { headerWrapper, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, search, visible, loginBtn } = styles;
+	const { headerWrapper, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn } = styles;
 
 	const pathname = usePathname();
 
@@ -85,10 +87,18 @@ export default function Header() {
 					{/* 우 */}
 					<div className={menuWrapper}>
 						<div className={menu}>
-							<form className={cls(search, isSearchVisible ? visible : "")} ref={searchRef} onClick={showSearch}>
-								<input type="text" />
-								<SearchIcon />
-							</form>
+							<div className={searchWrapper}>
+								<form className={cls(search, isSearchVisible ? visible : "")} ref={searchRef} onClick={showSearch}>
+									<input type="text" placeholder="검색검색" />
+									<SearchIcon />
+								</form>
+								{isSearchVisible && (
+									<div className={searchDropdown}>
+										<SearchRecommendation isRecent={true} />
+										<SearchRecommendation isRecent={false} />
+									</div>
+								)}
+							</div>
 
 							<button type="button" className={loginBtn}>
 								로그인
