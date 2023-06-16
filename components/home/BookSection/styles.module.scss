@@ -1,6 +1,18 @@
 @import "@/app/variables.module.scss";
 @import "@/app/mixins.module.scss";
 
+.section {
+	margin: 0 0 20px 0;
+
+	@media screen and (min-width: $md-breakpoint) {
+		margin: 0 0 30px 0;
+	}
+
+	@media screen and (min-width: $lg-breakpoint) {
+		margin: 0 0 40px 0;
+	}
+}
+
 .heading {
 	@include truncate();
 	margin: 0 0 9px;
@@ -11,19 +23,51 @@
 	color: $text-primary;
 }
 
-.bookList {
-	@include flexbox(between, center);
+.swiperWrapper {
+	position: relative;
 }
 
-.bookItem {
-	// width: 33.3333333333%;
-	margin: 0 5px 0 0;
+.btn {
+	@include smHidden();
+	position: absolute;
+	top: calc(50% - 48px);
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background-color: $white;
+	border: 1px solid #f9f9f9;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px 0px;
+	z-index: $swiper-nav-level;
 
-	@media screen and (min-width: $md-breakpoint) {
-		// width: 25%;
+	&:focus {
+		box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px 0px;
+	}
+
+	&:disabled {
+		cursor: default;
+	}
+
+	svg {
+		position: relative;
+		top: 1px;
 	}
 
 	@media screen and (min-width: $lg-breakpoint) {
-		// width: 20%;
+		width: 37px;
+		height: 37px;
+	}
+}
+
+.prevBtn {
+	left: -16px;
+	svg {
+		left: -1px;
+	}
+}
+
+.nextBtn {
+	right: -16px;
+	svg {
+		right: -1px;
 	}
 }

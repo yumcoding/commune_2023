@@ -5,13 +5,19 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import Book from "@/components/common/Book";
 import styles from "./styles.module.scss";
+import { cls } from "@/lib/front/cls";
+import useSwiperRef from "@/hooks/useSwiperRef";
+import { ChevronLeft, ChevronRight } from "@/assets/icons";
 
 interface PropTypes {
 	title: string;
 }
 
 export default function BookSection({ title }: PropTypes) {
-	const { heading, bookList, bookItem } = styles;
+	const { section, heading, swiperWrapper, btn, prevBtn, nextBtn } = styles;
+
+	const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
+	const [nextEl, nextElRef] = useSwiperRef<HTMLButtonElement>();
 
 	const swiperParams = {
 		slidesPerView: 3,
@@ -24,24 +30,31 @@ export default function BookSection({ title }: PropTypes) {
 			},
 		},
 		spaceBetween: 10,
-		navigation: true,
 		modules: [Navigation],
-		// navigation: {
-		// 	nextEl: ".swiper-button-next",
-		// 	prevEl: ".swiper-button-prev",
-		// },
+		navigation: {
+			prevEl,
+			nextEl,
+		},
 	};
 
 	return (
-		<section>
+		<section className={section}>
 			<h2 className={heading}>{title}</h2>
-			<Swiper {...swiperParams} className={bookList}>
-				{[0, 1, 2, 3, 4, 5, 6, 7, 8].map((item, i) => (
-					<SwiperSlide key={i} className={bookItem}>
-						<Book />
-					</SwiperSlide>
-				))}
-			</Swiper>
+			<div className={swiperWrapper}>
+				<Swiper {...swiperParams}>
+					{[0, 1, 2, 3, 4, 5, 6, 7, 8].map((item, i) => (
+						<SwiperSlide key={i}>
+							<Book />
+						</SwiperSlide>
+					))}
+				</Swiper>
+				<button type="button" ref={prevElRef} className={cls(btn, prevBtn)}>
+					<ChevronLeft />
+				</button>
+				<button type="button" ref={nextElRef} className={cls(btn, nextBtn)}>
+					<ChevronRight />
+				</button>
+			</div>
 		</section>
 	);
 }
