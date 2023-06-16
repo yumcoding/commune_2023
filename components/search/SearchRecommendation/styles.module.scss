@@ -50,12 +50,22 @@
 .list {
 	li {
 		@include flexbox(start, center);
+		width: 100%;
 		min-height: 44px;
 		border-bottom: 1px solid $border-light;
+		background-color: $white;
+		transition: background-color 400ms ease-in-out;
+
+		cursor: pointer;
 
 		@media screen and (min-width: $md-breakpoint) {
 			min-height: 26px;
+			padding: 0 0 0 6px;
 			border-bottom: 1px solid transparent;
+			border-radius: 4px;
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.05);
+			}
 		}
 
 		@media screen and (min-width: $lg-breakpoint) {
