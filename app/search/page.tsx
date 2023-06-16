@@ -1,6 +1,6 @@
 import SearchForm from "@/components/search/SearchForm";
 import styles from "./styles.module.scss";
-import SearchSection from "@/components/search/SearchSection";
+import SearchRecommendation from "@/components/search/SearchRecommendation";
 
 export default function Search() {
 	const { mobileSearch } = styles;
@@ -9,8 +9,8 @@ export default function Search() {
 		<>
 			<div className={mobileSearch}>
 				<SearchForm />
-				<SearchSection isRecent={true} title="최근 검색어" />
-				<SearchSection isRecent={false} title="인기 검색어" />
+				<SearchRecommendation isRecent={true} title="최근 검색어" />
+				<SearchRecommendation isRecent={false} title="인기 검색어" />
 			</div>
 		</>
 	);

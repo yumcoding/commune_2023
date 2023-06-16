@@ -1,7 +1,7 @@
 import { recentSearch, popularSearch } from "@/assets/mockData";
 import styles from "./styles.module.scss";
 
-export default function SearchSection({ title, isRecent }: { title: String; isRecent: Boolean }) {
+export default function SearchRecommendation({ title, isRecent }: { title: String; isRecent: Boolean }) {
 	const { section, header, delBtn, list } = styles;
 
 	return (
