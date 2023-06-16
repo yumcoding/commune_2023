@@ -9,9 +9,10 @@ export default function Search() {
 		<>
 			<div className={mobileSearch}>
 				<SearchForm />
-				<SearchRecommendation isRecent={true} title="최근 검색어" />
-				<SearchRecommendation isRecent={false} title="인기 검색어" />
+				<SearchRecommendation isRecent={true} />
+				<SearchRecommendation isRecent={false} />
 			</div>
+			{/* tablet 이후 search 화면 */}
 		</>
 	);
 }
