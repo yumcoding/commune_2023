@@ -1,0 +1,44 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.section {
+	margin: 5px 0 40px;
+}
+
+.header {
+	position: relative;
+
+	padding: 11px 0 10px;
+	h2 {
+		color: $text-primary;
+		font-size: 18px;
+		font-weight: 700;
+		letter-spacing: -0.7px;
+		line-height: 1.28;
+	}
+}
+
+.delBtn {
+	@include pos-center-y();
+	right:0px;
+	font-size: 14px;
+	letter-spacing: -0.3px;
+	line-height: 18px;
+	color: $accent;
+	cursor: pointer;
+}
+
+.list {
+	li {
+		@include flexbox(start, center);
+		min-height: 44px;
+		border-bottom: 1px solid $border-light;
+	}
+	p {
+		@include truncate();
+		color: $text-primary;
+		font-size: 14px;
+		letter-spacing: -0.6px;
+		line-height: 21px;
+	}
+}
