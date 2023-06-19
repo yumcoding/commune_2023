@@ -8,28 +8,14 @@ import styles from "./styles.module.scss";
 import { SearchIcon, UserDefaultIcon } from "@/assets/icons";
 import { recentSearch, popularSearch } from "@/assets/mockData";
 import SearchRecommendation from "@/components/search/SearchRecommendation";
+import useScrollDownCheck from "@/hooks/useScrollDownCheck";
 
 export default function Header() {
 	const { headerWrapper, isHome, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn } = styles;
 
 	const pathname = usePathname();
 
-	// create border bottom on scroll
-	const [hasBorder, setHasBorder] = useState(false);
-	const changeBorder = () => {
-		if (window.scrollY > 0) {
-			setHasBorder(true);
-		} else {
-			setHasBorder(false);
-		}
-	};
-
-	useEffect(() => {
-		window.addEventListener("scroll", changeBorder);
-		return () => {
-			window.removeEventListener("scroll", changeBorder);
-		};
-	}, []);
+	const hasScrolledDown = useScrollDownCheck();
 
 	// toggle input on click
 	const searchRef = useRef<HTMLFormElement>(null);
@@ -57,7 +43,7 @@ export default function Header() {
 
 	return (
 		<>
-			<div className={cls(headerWrapper, hasBorder ? hasBorderCss : "", pathname === "/" || pathname.includes("construction") ? isHome : "")}>
+			<div className={cls(headerWrapper, hasScrolledDown ? hasBorderCss : "", pathname === "/" || pathname.includes("construction") ? isHome : "")}>
 				<header className={header}>
 					{/* 좌 */}
 					<div>
