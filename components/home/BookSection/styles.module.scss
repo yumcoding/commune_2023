@@ -2,7 +2,7 @@
 @import "@/app/mixins.module.scss";
 
 .section {
-	margin: 0 0 20px 0;
+	margin: 10px 0;
 
 	@media screen and (min-width: $md-breakpoint) {
 		margin: 0 0 30px 0;
