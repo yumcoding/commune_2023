@@ -20,7 +20,7 @@ export default function MobileFooter() {
 								<span>홈</span>
 							</Link>
 						</li>
-						<li className={pathname === "/search" ? isActive : ""}>
+						<li className={pathname === "/search" || pathname.includes("book") ? isActive : ""}>
 							<Link href="/search">
 								<SearchIcon />
 								<span>검색</span>
