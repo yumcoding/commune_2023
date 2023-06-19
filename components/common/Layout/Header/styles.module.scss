@@ -2,7 +2,6 @@
 @import "@/app/mixins.module.scss";
 
 .headerWrapper {
-	@include flexbox(start, center);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -16,7 +15,14 @@
 		border-bottom: 1px solid $border-light;
 	}
 
+	display: none;
+
+	&.isHome {
+		@include flexbox(start, center);
+	}
+
 	@media screen and (min-width: $md-breakpoint) {
+		@include flexbox(start, center);
 		border-bottom: 1px solid $border-light;
 	}
 }

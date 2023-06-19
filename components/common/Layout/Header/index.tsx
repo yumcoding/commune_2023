@@ -10,7 +10,7 @@ import { recentSearch, popularSearch } from "@/assets/mockData";
 import SearchRecommendation from "@/components/search/SearchRecommendation";
 
 export default function Header() {
-	const { headerWrapper, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn } = styles;
+	const { headerWrapper, isHome, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn } = styles;
 
 	const pathname = usePathname();
 
@@ -57,7 +57,7 @@ export default function Header() {
 
 	return (
 		<>
-			<div className={cls(headerWrapper, hasBorder ? hasBorderCss : "")}>
+			<div className={cls(headerWrapper, hasBorder ? hasBorderCss : "", pathname === "/" || pathname.includes("construction") ? isHome : "")}>
 				<header className={header}>
 					{/* 좌 */}
 					<div>
@@ -66,7 +66,7 @@ export default function Header() {
 						</h1>
 						<nav className={nav}>
 							<ul>
-								<li className={pathname === "/" ? isActive : ""}>
+								<li className={pathname === "/" || pathname === "/search" || pathname === "/profile" ? isActive : ""}>
 									<Link href="/" className={link}>
 										책
 									</Link>
@@ -87,6 +87,8 @@ export default function Header() {
 					{/* 우 */}
 					<div className={menuWrapper}>
 						<div className={menu}>
+							{/* TODO */}
+							{/* 태블릿, 데탑에서 검색 시 onSubmit하고 결과 받으면 router 이용해서 /search 페이지로 이동 */}
 							<div className={searchWrapper}>
 								<form className={cls(search, isSearchVisible ? visible : "")} ref={searchRef} onClick={showSearch}>
 									<input type="text" placeholder="검색검색" />

@@ -5,7 +5,7 @@ import { NoResultIcon } from "@/assets/icons";
 
 // 검색 페이지는 완전 CSR로 구현?
 
-export default function Search() {
+export default function Page() {
 	const { mobileSearch, defaultSearch, queryWrapper, searchResultWrapper, noResult, resultList } = styles;
 
 	return (

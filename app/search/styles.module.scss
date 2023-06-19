@@ -3,14 +3,8 @@
 
 .mobileSearch {
 	@include smOnly();
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: $mobile-search-level;
 	width: 100%;
-	height: calc(100vh - 60px);
-	margin: 70px 0 0 0;
-	padding: 5px 15px 10px;
+	padding: 10px 0 0;
 	overflow-y: auto;
 	background-color: $white;
 }
