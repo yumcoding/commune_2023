@@ -14,7 +14,7 @@ export default function RootLayout({ modal, children }: { modal: React.ReactNode
 		<html lang="ko">
 			<body className={noto_sans.className}>
 				<Header />
-				<div className={styles.main}>{children}</div>
+				{children}
 				<MobileFooter />
 				{modal}
 			</body>

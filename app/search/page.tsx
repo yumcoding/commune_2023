@@ -6,10 +6,10 @@ import { NoResultIcon } from "@/assets/icons";
 // 검색 페이지는 완전 CSR로 구현?
 
 export default function Page() {
-	const { mobileSearch, defaultSearch, queryWrapper, searchResultWrapper, noResult, resultList } = styles;
+	const {main, mobileSearch, defaultSearch, queryWrapper, searchResultWrapper, noResult, resultList } = styles;
 
 	return (
-		<>
+		<main className={main}>
 			{/* 모바일 */}
 			<section className={mobileSearch}>
 				<SearchForm />
@@ -38,6 +38,6 @@ export default function Page() {
 					{/* <ul className={resultList}></ul> */}
 				</div>
 			</section>
-		</>
+		</main>
 	);
 }

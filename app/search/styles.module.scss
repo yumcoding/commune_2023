@@ -1,6 +1,10 @@
 @import "@/app/variables.module.scss";
 @import "@/app/mixins.module.scss";
 
+.main {
+	@include layout();
+}
+
 .mobileSearch {
 	@include smOnly();
 	width: 100%;
