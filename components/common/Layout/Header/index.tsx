@@ -52,7 +52,7 @@ export default function Header() {
 						</h1>
 						<nav className={nav}>
 							<ul>
-								<li className={pathname === "/" || pathname === "/search" || pathname === "/profile" ? isActive : ""}>
+								<li className={pathname === "/" || pathname.includes("/book") || pathname === "/search" || pathname === "/profile" ? isActive : ""}>
 									<Link href="/" className={link}>
 										책
 									</Link>
