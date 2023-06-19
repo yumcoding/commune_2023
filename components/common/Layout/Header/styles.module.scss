@@ -15,6 +15,10 @@
 	&.hasBorder {
 		border-bottom: 1px solid $border-light;
 	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		border-bottom: 1px solid $border-light;
+	}
 }
 
 .header {
