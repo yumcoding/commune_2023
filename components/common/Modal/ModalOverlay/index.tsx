@@ -2,14 +2,14 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 import styles from "./styles.module.scss";
-import useBlockBodyScroll from "@/hooks/useBlockBodyScroll";
+import useBodyScrollBlocking from "@/hooks/useBodyScrollBlocking";
 
 export default function ModalOverlay({ children }: { children: React.ReactNode }) {
 	const router = useRouter();
 
 	const onClickClose = () => router.back();
 
-	useBlockBodyScroll();
+	useBodyScrollBlocking();
 
 	return (
 		<div className={styles.modal} onClick={onClickClose}>

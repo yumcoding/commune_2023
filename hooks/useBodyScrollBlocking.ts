@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function useBlockBodyScroll() {
+export default function useBodyScrollBlocking() {
 	return useEffect(() => {
 		document.body.style.overflow = "hidden";
 		return () => {
