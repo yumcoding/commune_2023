@@ -1,8 +1,10 @@
 // 메타데이터?
 
-import { CartIcon, ChevronUpIcon } from "@/assets/icons";
+import { CartIcon, ChevronUpIcon, OutlineHeartIcon, OutlineStarIcon, SolidStarIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import ButtonGroup from "@/components/book/ButtonGroup";
+import Divider from "@/components/common/Layout/Divider";
+import { cls } from "@/lib/front/cls";
 
 // export async function generateStaticParams() {
 // 	// const posts = await fetch("https://.../posts").then((res) => res.json());
@@ -12,7 +14,7 @@ import ButtonGroup from "@/components/book/ButtonGroup";
 // }
 
 export default function Page({ params }: { params: { isbn: string } }) {
-	const { main, bookWrapper, book, bookInfo, bookImg, content, summary } = styles;
+	const { main, section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary } = styles;
 
 	return (
 		<main className={main}>
@@ -29,8 +31,8 @@ export default function Page({ params }: { params: { isbn: string } }) {
 				</div>
 			</div>
 
-			<section className={summary}>
-				<div className={content}>
+			<section className={cls(section, summary)}>
+				<div className={sectionContentWrapper}>
 					<h2>책 소개</h2>
 					<p>
 						Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae excepturi cumque dignissimos et nulla minima animi incidunt aliquam laborum, repudiandae ab? Odio officia at dolores
@@ -39,12 +41,41 @@ export default function Page({ params }: { params: { isbn: string } }) {
 					</p>
 				</div>
 			</section>
-
+			<Divider />
 			{/* 사용자 리뷰 */}
-			<section>
-				<div className={content}>
+			<section className={section}>
+				<div className={sectionContentWrapper}>
 					<h2>리뷰</h2>
-					<ul></ul>
+					<button type="button">쓰기</button>
+					<ul>
+						<li>
+							<div>
+								<div>img</div>
+								<div>
+									<h4>쫀득초코</h4>
+									<p>2023-05-05</p>
+								</div>
+								<div>
+									<SolidStarIcon />
+									<SolidStarIcon />
+									<SolidStarIcon />
+									<SolidStarIcon />
+									<OutlineStarIcon />
+								</div>
+							</div>
+							<p>
+								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed ducimus id eveniet perspiciatis, corporis velit exercitationem commodi tempore quibusdam quas eos recusandae.
+								Reprehenderit illum asperiores natus ipsa! Consectetur, corporis fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor quae rem dicta totam ratione natus ut eos
+								recusandae reiciendis provident, asperiores debitis inventore magni perspiciatis aspernatur quas numquam? Nihil, quibusdam.
+							</p>
+							<button type="button">더보기</button>
+							<div>
+								<button type="button">
+									<OutlineHeartIcon />
+								</button>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</section>
 
