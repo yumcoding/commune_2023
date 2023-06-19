@@ -71,6 +71,16 @@ $flex-map: (
 	white-space: nowrap;
 }
 
+@mixin multipleLineTruncate($line) {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	word-break: break-word;
+
+	display: -webkit-box;
+	-webkit-line-clamp: $line;
+	-webkit-box-orient: vertical;
+}
+
 @mixin smOnly {
 	@media screen and (min-width: $md-breakpoint) {
 		display: none !important;
