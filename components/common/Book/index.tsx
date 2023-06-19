@@ -6,7 +6,7 @@ export default function Book() {
 	return (
 		<>
 			<div className={book}>
-				<Link href="/">
+				<Link href="/book/temp-isbn">
 					<div className={bookImg}>
 						<div>{/* 이미지 */}</div>
 						{/* 순위 표시 */}
