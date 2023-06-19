@@ -73,7 +73,7 @@ export const NoResultIcon = () => (
 		width="800px"
 		height="800px"
 		viewBox="0 0 32 32"
-		enable-background="new 0 0 32 32"
+		enableBackground="new 0 0 32 32"
 		id="_x3C_Layer_x3E_"
 		version="1.1"
 		xmlSpace="preserve"
