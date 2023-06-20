@@ -1,10 +1,12 @@
 // 메타데이터?
 
-import { CartIcon, ChevronUpIcon, OutlineHeartIcon, OutlineStarIcon, SolidStarIcon } from "@/assets/icons";
+import { CartIcon, ChevronDownDoubleIcon, ChevronUpIcon, OutlineHeartIcon, OutlineStarIcon, PencilIcon, SolidStarIcon, UserCircleIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import ButtonGroup from "@/components/book/ButtonGroup";
 import Divider from "@/components/common/Layout/Divider";
 import { cls } from "@/lib/front/cls";
+import ReviewItem from "@/components/book/ReviewItem";
+import CommentForm from "@/components/book/CommentForm";
 
 // export async function generateStaticParams() {
 // 	// const posts = await fetch("https://.../posts").then((res) => res.json());
@@ -13,8 +15,10 @@ import { cls } from "@/lib/front/cls";
 // 	// }));
 // }
 
+//
+
 export default function Page({ params }: { params: { isbn: string } }) {
-	const { main, section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary } = styles;
+	const { main, section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary, reviewHeader, reviewWriteBtn, loadMoreReviewBtn } = styles;
 
 	return (
 		<main className={main}>
@@ -35,9 +39,10 @@ export default function Page({ params }: { params: { isbn: string } }) {
 				<div className={sectionContentWrapper}>
 					<h2>책 소개</h2>
 					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae excepturi cumque dignissimos et nulla minima animi incidunt aliquam laborum, repudiandae ab? Odio officia at dolores
-						consequuntur laboriosam ipsa itaque neque. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos nisi optio eos! Corrupti eaque voluptas id nemo expedita, aliquam
-						perspiciatis, repudiandae ipsum beatae iusto quidem provident itaque laboriosam saepe deserunt!
+						모든 국민은 학문과 예술의 자유를 가진다. 대한민국은 국제평화의 유지에 노력하고 침략적 전쟁을 부인한다. 국회는 국민의 보통·평등·직접·비밀선거에 의하여 선출된 국회의원으로 구성한다. 누구든지
+						병역의무의 이행으로 인하여 불이익한 처우를 받지 아니한다. 모든 국민은 보건에 관하여 국가의 보호를 받는다. 국무위원은 국무총리의 제청으로 대통령이 임명한다. 헌법재판소는 법관의 자격을 가진
+						9인의 재판관으로 구성하며, 재판관은 대통령이 임명한다. 모든 국민은 근로의 의무를 진다. 국가는 근로의 의무의 내용과 조건을 민주주의원칙에 따라 법률로 정한다. 혼인과 가족생활은 개인의 존엄과
+						양성의 평등을 기초로 성립되고 유지되어야 하며, 국가는 이를 보장한다.
 					</p>
 				</div>
 			</section>
@@ -45,45 +50,38 @@ export default function Page({ params }: { params: { isbn: string } }) {
 			{/* 사용자 리뷰 */}
 			<section className={section}>
 				<div className={sectionContentWrapper}>
-					<h2>리뷰</h2>
-					<button type="button">쓰기</button>
+					<div className={reviewHeader}>
+						<h2>
+							리뷰<small>(999+)</small>
+						</h2>
+						<button type="button" className={reviewWriteBtn}>
+							<span>리뷰 작성하기</span>
+							<PencilIcon />
+						</button>
+					</div>
+
 					<ul>
-						<li>
-							<div>
-								<div>img</div>
-								<div>
-									<h4>쫀득초코</h4>
-									<p>2023-05-05</p>
-								</div>
-								<div>
-									<SolidStarIcon />
-									<SolidStarIcon />
-									<SolidStarIcon />
-									<SolidStarIcon />
-									<OutlineStarIcon />
-								</div>
-							</div>
-							<p>
-								Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed ducimus id eveniet perspiciatis, corporis velit exercitationem commodi tempore quibusdam quas eos recusandae.
-								Reprehenderit illum asperiores natus ipsa! Consectetur, corporis fuga. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor quae rem dicta totam ratione natus ut eos
-								recusandae reiciendis provident, asperiores debitis inventore magni perspiciatis aspernatur quas numquam? Nihil, quibusdam.
-							</p>
-							<button type="button">더보기</button>
-							<div>
-								<button type="button">
-									<OutlineHeartIcon />
-								</button>
-							</div>
-						</li>
+						<ReviewItem key="123" />
+						<ReviewItem key="456" />
+						<ReviewItem key="789" />
 					</ul>
+
+					<button type="button" className={loadMoreReviewBtn}>
+						<span>더 많은 리뷰 읽기</span>
+						<ChevronDownDoubleIcon />
+					</button>
 				</div>
 			</section>
 
-			{/* 짧은 코멘트 달기 */}
-			<form>
-				<textarea></textarea>
-				<button type="submit">등록</button>
-			</form>
+			{/* 짧은 리뷰 */}
+			<section className={section}>
+				<div className={sectionContentWrapper}>
+					<h2>
+						한줄평<small>(55)</small>
+					</h2>
+					<CommentForm />
+				</div>
+			</section>
 
 			{/* aside 버튼 - smHidden */}
 			<aside>
