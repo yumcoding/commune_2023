@@ -61,7 +61,7 @@
 .backBtn {
 	@include flexbox(center, center);
 	height: 30px;
-	border-radius: 4px;
+	border-radius: 2px;
 	background-color: $accent-shades;
 	color: white;
 	font-size: 13px;
