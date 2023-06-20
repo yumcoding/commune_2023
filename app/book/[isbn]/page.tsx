@@ -8,6 +8,7 @@ import { cls } from "@/lib/front/cls";
 import ReviewItem from "@/components/book/ReviewItem";
 import CommentForm from "@/components/book/CommentForm";
 import CommentItem from "@/components/book/CommentItem";
+import CartLink from "@/components/book/CartLink";
 
 // export async function generateStaticParams() {
 // 	// const posts = await fetch("https://.../posts").then((res) => res.json());
@@ -97,12 +98,7 @@ export default function Page({ params }: { params: { isbn: string } }) {
 
 			{/* aside 버튼 - smHidden */}
 			<aside>
-				<button type="button">
-					<CartIcon />
-				</button>
-				<button type="button">
-					<ChevronUpIcon />
-				</button>
+				<CartLink />
 			</aside>
 		</main>
 	);
