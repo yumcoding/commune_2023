@@ -14,7 +14,7 @@
 	width: 65vw;
 	max-width: 360px;
 	padding: 40px 0 16px 0;
-	border-radius: 8px;
+	border-radius: 6px;
 	svg {
 		color: $accent;
 		width: 110px;
@@ -82,7 +82,7 @@
 	@include flexbox(center, center);
 	position: absolute;
 	top: 6px;
-	right: 7px;
+	right: 6px;
 	width: 24px;
 	height: 24px;
 	border-radius: 50%;
