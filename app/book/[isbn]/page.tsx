@@ -7,6 +7,7 @@ import Divider from "@/components/common/Layout/Divider";
 import { cls } from "@/lib/front/cls";
 import ReviewItem from "@/components/book/ReviewItem";
 import CommentForm from "@/components/book/CommentForm";
+import CommentItem from "@/components/book/CommentItem";
 
 // export async function generateStaticParams() {
 // 	// const posts = await fetch("https://.../posts").then((res) => res.json());
@@ -67,18 +68,29 @@ export default function Page({ params }: { params: { isbn: string } }) {
 					</ul>
 
 					<button type="button" className={loadMoreReviewBtn}>
-						<span>더 많은 리뷰 읽기</span>
+						<span>리뷰 더 읽기</span>
 						<ChevronDownDoubleIcon />
 					</button>
 				</div>
 			</section>
 
+			<Divider />
+
 			{/* 짧은 리뷰 */}
 			<section className={section}>
 				<div className={sectionContentWrapper}>
 					<h2>
-						한줄평<small>(55)</small>
+						한줄평<small>(127)</small>
 					</h2>
+					<ul>
+						<CommentItem key={15} />
+						<CommentItem key={15} />
+						<CommentItem key={25} />
+					</ul>
+					<button type="button" className={loadMoreReviewBtn}>
+						<span>코멘트 더 읽기</span>
+						<ChevronDownDoubleIcon />
+					</button>
 					<CommentForm />
 				</div>
 			</section>
