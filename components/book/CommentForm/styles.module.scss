@@ -3,7 +3,11 @@
 
 .wrapper {
 	@include flexbox(start, center);
-	margin: 20px 0 0 0;
+	margin: 20px 0 10px;
+
+	@media screen and (min-width: $md-breakpoint) {
+		margin: 20px 0 0;
+	}
 }
 
 .avatar {
@@ -51,7 +55,6 @@
 	background-color: $pink;
 	border-radius: 4px;
 	color: $white;
-
 	font-size: 15px;
 	font-weight: 500;
 }
