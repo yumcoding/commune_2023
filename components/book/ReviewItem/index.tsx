@@ -1,11 +1,11 @@
 "use client";
 
-import { ChevronDownIcon, ChevronUpIcon, OutlineHeartIcon, OutlineStarIcon, SolidStarIcon, UserDefaultIcon, LoginIcon } from "@/assets/icons";
+import { ChevronDownIcon, ChevronUpIcon, OutlineStarIcon, SolidStarIcon, LoginIcon, OutlineThumbUpIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import { cls } from "@/lib/front/cls";
 import { useState } from "react";
 export default function ReviewItem() {
-	const { flexbox, flexboxBetween, reviewItem, authorInfo, avatar, title, author, date, rating, reviewText, moreText, btnWrapper, showMoreBtn, heartBtnWrapper } = styles;
+	const { flexbox, flexboxBetween, reviewItem, authorInfo, avatar, title, author, date, rating, reviewText, moreText, btnWrapper, showMoreBtn, thumbBtnWrapper } = styles;
 	const [showMore, setShowMore] = useState(false);
 	const toggleShowMore = () => setShowMore((prev) => !prev);
 
@@ -63,9 +63,9 @@ export default function ReviewItem() {
 						</>
 					)}
 				</button>
-				<div className={heartBtnWrapper}>
+				<div className={thumbBtnWrapper}>
 					<button type="button">
-						<OutlineHeartIcon />
+						<OutlineThumbUpIcon />
 					</button>
 					<span>(999+)</span>
 				</div>
