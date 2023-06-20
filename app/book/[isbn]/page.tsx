@@ -1,6 +1,6 @@
 // 메타데이터?
 
-import { CartIcon, ChevronDownDoubleIcon, ChevronUpIcon, OutlineHeartIcon, OutlineStarIcon, PencilIcon, SolidStarIcon, UserCircleIcon } from "@/assets/icons";
+import { ChevronDownDoubleIcon, PencilIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import ButtonGroup from "@/components/book/ButtonGroup";
 import Divider from "@/components/common/Layout/Divider";
