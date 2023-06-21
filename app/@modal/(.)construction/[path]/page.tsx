@@ -1,10 +1,10 @@
-import ModalOverlay from "@/components/common/Modal/ModalOverlay";
+import PageModalOverlay from "@/components/common/Modal/PageModalOverlay";
 import UnderConstructionContent from "@/components/common/UnderConstructionContent";
 
 export default function Page() {
 	return (
-		<ModalOverlay>
+		<PageModalOverlay>
 			<UnderConstructionContent isModal={true} />
-		</ModalOverlay>
+		</PageModalOverlay>
 	);
 }
