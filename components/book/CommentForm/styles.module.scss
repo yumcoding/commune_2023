@@ -51,4 +51,9 @@
 	color: $white;
 	font-size: 15px;
 	font-weight: 500;
+	transition: background-color 200ms ease-in-out;
+
+	&:hover {
+		background-color: $pink-dark;
+	}
 }

@@ -16,6 +16,11 @@
 	background-color: $pink;
 	border-radius: 2px;
 	color: $white;
+	transition: background-color 200ms ease-in-out;
+
+	&:hover {
+		background-color: $pink-dark;
+	}
 
 	svg {
 		width: 16px;
