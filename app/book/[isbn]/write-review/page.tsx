@@ -1,9 +1,9 @@
-import styles from "./styles.module.scss";
+import ReviewWriteModalContent from "@/components/book/ReviewWriteModalContent";
 
 export default function Page() {
 	return (
 		<>
-			<div className={styles.test}>새로고침화면</div>
+			<ReviewWriteModalContent isModal={false} />
 		</>
 	);
 }
