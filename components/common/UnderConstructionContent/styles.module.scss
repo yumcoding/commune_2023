@@ -3,18 +3,12 @@
 
 .contentWrapper {
 	@include column-flexbox(center, center);
-	background-color: $white;
-	svg {
-		color: $accent;
-	}
-}
-
-.modalWrapper {
 	position: relative;
 	width: 65vw;
 	max-width: 360px;
 	padding: 40px 0 16px 0;
 	border-radius: 6px;
+
 	svg {
 		color: $accent;
 		width: 110px;
@@ -28,21 +22,9 @@
 			height: 120px;
 		}
 	}
-}
-
-.pageWrapper {
-	height: calc(100vh - 60px - 60px);
-
+	background-color: $white;
 	svg {
-		width: 130px;
-		height: 130px;
-	}
-
-	@media screen and (min-width: $md-breakpoint) {
-		svg {
-			width: 160px;
-			height: 160px;
-		}
+		color: $accent;
 	}
 }
 
@@ -73,7 +55,7 @@
 	}
 
 	@media screen and (min-width: $md-breakpoint) {
-		height: 40px;
+		height: 36px;
 		font-size: 14px;
 	}
 }
