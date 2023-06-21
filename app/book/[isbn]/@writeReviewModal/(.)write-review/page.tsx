@@ -17,13 +17,14 @@ export default function WriteReview() {
 		<PageModalOverlay>
 			<section className={wrapper}>
 				<header className={header}>
-					<h1>책 이름 자리</h1>
+					<h1>책 이름이 들어가요 :) </h1>
 					<button type="button" className={closeBtn} onClick={onClickClose}>
 						<CloseMarkIcon />
 					</button>
 				</header>
 				<div className={formWrapper}>
 					<form>
+						<input type="text" placeholder="리뷰 제목" />
 						<textarea placeholder="자유롭게" value={review} onChange={onChangeReview}></textarea>
 						<button type="submit" className={cls(saveBtn, review?.length > 0 ? saveActive : "")} disabled={review?.length > 0 ? false : true}>
 							저장

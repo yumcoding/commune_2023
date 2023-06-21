@@ -68,12 +68,16 @@
 		left: unset;
 		top: 12px;
 		right: 0;
-		color: $text-secondary;
-		background-color: rgba(0, 0, 0, 0.07);
-		border-radius: 50%;
-
 		width: 26px;
 		height: 26px;
+		border-radius: 50%;
+		color: $text-secondary;
+		background-color: rgba(0, 0, 0, 0.07);
+		transition: background-color 300ms ease-in;
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.1);
+		}
 
 		svg {
 			width: 16px;
@@ -109,21 +113,26 @@
 		position: absolute;
 		top: unset;
 		bottom: 0;
-		right: -10px;
-		bottom: -10px;
+		right: 0px;
+		bottom: -60px;
 
 		height: 34px;
 		padding: 0 16px;
 		background-color: $pink;
 		color: $white;
-		border-radius: 4px;
+		border-radius: 2px;
 
 		font-size: 15px;
 		letter-spacing: -0.3px;
 		line-height: 18px;
+		transition: background-color 200ms ease-in-out;
 
 		&.saveActive {
 			color: $white;
+		}
+
+		&:hover {
+			background-color: $pink-dark;
 		}
 	}
 }
@@ -133,22 +142,36 @@
 	height: calc(100vh - 44px);
 	padding: 16px;
 	position: relative;
+
+	input {
+		width: 100%;
+		height: 44px;
+		border-radius: 4px;
+		background-color: $input-grey-bg;
+		font-size: 14px;
+		padding: 0 15px 0 10px;
+		color: $text-primary;
+		margin: 0 0 10px 0;
+	}
+
 	textarea {
 		width: 100%;
-		height: calc(100vh - 44px - 16px - 16px);
+		height: calc(100vh - 44px - 16px - 16px - 44px - 30px);
+		padding: 10px 15px 10px 10px;
 		caret-color: $accent;
+		background-color: $input-grey-bg;
 		border: unset;
-		font-size: 16px;
+		border-radius: 4px;
+		font-size: 14px;
 		font-weight: 400;
-		letter-spacing: -0.2px;
 		line-height: 20px;
 	}
 
 	@media screen and (min-width: $md-breakpoint) {
-		height: calc(460px - 16px - 48px - 20px);
+		height: calc(460px - 16px - 48px - 20px - 44px - 10px);
 		padding: 0;
 		textarea {
-			height: 345px;
+			height: 285px;
 		}
 	}
 }
@@ -163,7 +186,7 @@
 	color: $text-tertiary;
 
 	@media screen and (min-width: $md-breakpoint) {
-		right: 59px;
-		bottom: -10px;
+		right: 69px;
+		bottom: -61px;
 	}
 }
