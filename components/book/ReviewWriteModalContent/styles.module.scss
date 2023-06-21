@@ -25,29 +25,33 @@
 		}
 
 		.closeBtn {
-			display: none;
+			@media screen and (min-width: $md-breakpoint) {
+				display: none;
+			}
 		}
 
 		.backBtn {
-			@include flexbox(start, center);
-			position: absolute;
-			left: 18px;
-			bottom: 12px;
-			height: 34px;
-			padding: 0;
-			font-size: 15px;
-			letter-spacing: -0.3px;
-			line-height: 18px;
-			color: $pink;
-			transition: color 200ms ease-in-out;
+			@media screen and (min-width: $md-breakpoint) {
+				@include flexbox(start, center);
+				position: absolute;
+				left: 18px;
+				bottom: 12px;
+				height: 34px;
+				padding: 0;
+				font-size: 15px;
+				letter-spacing: -0.3px;
+				line-height: 18px;
+				color: $pink;
+				transition: color 200ms ease-in-out;
 
-			&:hover {
-				color: $pink-dark;
-			}
+				&:hover {
+					color: $pink-dark;
+				}
 
-			svg {
-				width: 18px;
-				height: 18px;
+				svg {
+					width: 18px;
+					height: 18px;
+				}
 			}
 		}
 	}
