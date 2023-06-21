@@ -5,10 +5,11 @@ import Link from "next/link";
 import { dancing_script } from "@/app/fonts";
 import { cls } from "@/lib/front/cls";
 import styles from "./styles.module.scss";
-import { SearchIcon, UserDefaultIcon } from "@/assets/icons";
-import { recentSearch, popularSearch } from "@/assets/mockData";
+import { SearchIcon } from "@/assets/icons";
 import SearchRecommendation from "@/components/search/SearchRecommendation";
 import useScrollDownCheck from "@/hooks/useScrollDownCheck";
+import DefaultModalOverlay from "../../Modal/DefaultModalOverlay";
+import UnderConstructionContent from "../../UnderConstructionContent";
 
 export default function Header() {
 	const { headerWrapper, isHome, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn } = styles;
@@ -41,9 +42,14 @@ export default function Header() {
 		};
 	}, [isSearchVisible]);
 
+	// 준비 중 모달
+	const [isModalVisible, setIsModalVisible] = useState(false);
+	const onClickPrepareMenu = () => setIsModalVisible(true);
+	const onClickClose = () => setIsModalVisible(false);
+
 	return (
 		<>
-			<div className={cls(headerWrapper, hasScrolledDown ? hasBorderCss : "", pathname === "/" || pathname.includes("construction") ? isHome : "")}>
+			<div className={cls(headerWrapper, hasScrolledDown ? hasBorderCss : "", pathname === "/" ? isHome : "")}>
 				<header className={header}>
 					{/* 좌 */}
 					<div>
@@ -57,15 +63,15 @@ export default function Header() {
 										책
 									</Link>
 								</li>
-								<li className={pathname === "/construction/movie" ? isActive : ""}>
-									<Link href="/construction/movie" className={link}>
+								<li>
+									<button type="button" className={link} onClick={onClickPrepareMenu}>
 										영화
-									</Link>
+									</button>
 								</li>
-								<li className={pathname === "/construction/music" ? isActive : ""}>
-									<Link href="/construction/music" className={link}>
+								<li>
+									<button type="button" className={link} onClick={onClickPrepareMenu}>
 										음악
-									</Link>
+									</button>
 								</li>
 							</ul>
 						</nav>
@@ -96,6 +102,11 @@ export default function Header() {
 					</div>
 				</header>
 			</div>
+			{isModalVisible && (
+				<DefaultModalOverlay onClickOverlay={onClickClose}>
+					<UnderConstructionContent onClickClose={onClickClose} />
+				</DefaultModalOverlay>
+			)}
 		</>
 	);
 }
