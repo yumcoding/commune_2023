@@ -1,10 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
-import styles from "./styles.module.scss";
+import styles from "../styles.module.scss";
 import useBodyScrollBlocking from "@/hooks/useBodyScrollBlocking";
 
-export default function ModalOverlay({ children }: { children: React.ReactNode }) {
+export default function PageModalOverlay({ children }: { children: React.ReactNode }) {
 	const router = useRouter();
 
 	const onClickClose = () => router.back();

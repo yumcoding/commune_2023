@@ -39,12 +39,6 @@
 	letter-spacing: -0.2px;
 	line-height: 24px;
 	padding: 5px 10px;
-
-	&::-webkit-scrollbar {
-		display: none;
-	}
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
 }
 
 .submitBtn {
@@ -57,4 +51,9 @@
 	color: $white;
 	font-size: 15px;
 	font-weight: 500;
+	transition: background-color 200ms ease-in-out;
+
+	&:hover {
+		background-color: $pink-dark;
+	}
 }

@@ -1,0 +1,232 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.wrapper {
+	width: 100vw;
+	height: 100vh;
+	background-color: $white;
+	position: relative;
+
+	@media screen and (min-width: $md-breakpoint) {
+		width: 480px;
+		height: 460px;
+		padding: 16px 20px 18px;
+		border-radius: 6px;
+		box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 6px 0px;
+	}
+
+	&.isPage {
+		z-index: $full-modal-level;
+		@media screen and (min-width: $md-breakpoint) {
+			z-index: unset;
+			box-shadow: unset;
+
+			@include pos-center();
+		}
+
+		.closeBtn {
+			display: none;
+		}
+
+		.backBtn {
+			@include flexbox(start, center);
+			position: absolute;
+			left: 18px;
+			bottom: 12px;
+			height: 34px;
+			padding: 0;
+			font-size: 15px;
+			letter-spacing: -0.3px;
+			line-height: 18px;
+			color: $pink;
+			transition: color 200ms ease-in-out;
+
+			&:hover {
+				color: $pink-dark;
+			}
+
+			svg {
+				width: 18px;
+				height: 18px;
+			}
+		}
+	}
+}
+.header {
+	position: relative;
+	width: 100%;
+	height: 44px;
+	border-bottom: 1px solid $border;
+	padding: 0 16px;
+
+	h1 {
+		@include pos-center();
+		@include truncate();
+		padding: 0 16px;
+
+		font-size: 18px;
+		font-weight: 700;
+		letter-spacing: -0.5px;
+		color: $text-primary;
+	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		height: 33px;
+		padding: 0;
+		border-bottom: 1px solid transparent;
+		margin: 0 0 15px 0;
+
+		h1 {
+			position: unset;
+			transform: unset;
+			padding: 0;
+			line-height: 27px;
+		}
+	}
+}
+
+.closeBtn {
+	@include flexbox(center, center);
+	@include pos-center-y();
+	left: 16px;
+
+	width: 25px;
+	height: 25px;
+	padding: 0;
+	color: $pink;
+
+	svg {
+		position: relative;
+		top: 0.5px;
+	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		left: unset;
+		top: 12px;
+		right: 0;
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		color: $text-secondary;
+		background-color: rgba(0, 0, 0, 0.07);
+		transition: background-color 300ms ease-in;
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.1);
+		}
+
+		svg {
+			width: 16px;
+			height: 16px;
+		}
+	}
+}
+
+.saveBtn {
+	position: fixed;
+	top: 12px;
+	right: 16px;
+	padding: 0;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -0.7px;
+	line-height: 22px;
+	color: $text-tertiary;
+	opacity: 1;
+	transition: opacity 300ms ease-in, color 300ms ease-in, font-weight 300ms ease-in;
+
+	&:disabled {
+		pointer-events: none;
+		opacity: 0.3;
+	}
+
+	&.saveActive {
+		color: $pink;
+		font-weight: 700;
+	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		position: absolute;
+		top: unset;
+		bottom: 0;
+		right: 0px;
+		bottom: -60px;
+
+		height: 34px;
+		padding: 0 16px;
+		background-color: $pink;
+		color: $white;
+		border-radius: 2px;
+
+		font-size: 15px;
+		letter-spacing: -0.3px;
+		line-height: 18px;
+		transition: background-color 200ms ease-in-out;
+
+		&.saveActive {
+			color: $white;
+		}
+
+		&:hover {
+			background-color: $pink-dark;
+		}
+	}
+}
+
+.formWrapper {
+	width: 100%;
+	height: calc(100vh - 44px);
+	padding: 16px;
+	position: relative;
+
+	input {
+		width: 100%;
+		height: 44px;
+		border-radius: 4px;
+		background-color: $input-grey-bg;
+		font-size: 14px;
+		padding: 0 15px 0 10px;
+		color: $text-primary;
+		margin: 0 0 10px 0;
+	}
+
+	textarea {
+		width: 100%;
+		height: calc(100vh - 44px - 16px - 16px - 44px - 30px);
+		padding: 10px 15px 10px 10px;
+		caret-color: $accent;
+		background-color: $input-grey-bg;
+		border: unset;
+		border-radius: 4px;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 20px;
+	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		height: calc(460px - 16px - 48px - 20px - 44px - 10px);
+		padding: 0;
+		textarea {
+			height: 285px;
+		}
+	}
+}
+
+.counter {
+	position: absolute;
+	bottom: 16px;
+	right: 16px;
+	font-size: 13px;
+	font-weight: 400;
+	letter-spacing: -0.3px;
+	color: $text-tertiary;
+
+	@media screen and (min-width: $md-breakpoint) {
+		right: 69px;
+		bottom: -61px;
+	}
+}
+
+.backBtn {
+	display: none;
+}

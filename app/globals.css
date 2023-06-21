@@ -401,4 +401,11 @@ textarea {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
+
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+textarea::-webkit-scrollbar {
+	display: none;
 }

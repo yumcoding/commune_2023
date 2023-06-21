@@ -1,14 +1,15 @@
 // 메타데이터?
 
-import { ChevronDownDoubleIcon, PencilIcon } from "@/assets/icons";
+"use client";
+import { ChevronDownDoubleIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import ButtonGroup from "@/components/book/ButtonGroup";
 import Divider from "@/components/common/Layout/Divider";
 import { cls } from "@/lib/front/cls";
-import ReviewItem from "@/components/book/ReviewItem";
 import CommentForm from "@/components/book/CommentForm";
 import CommentItem from "@/components/book/CommentItem";
 import CartLink from "@/components/book/CartLink";
+import ReviewSection from "@/components/book/ReviewSection";
 
 // export async function generateStaticParams() {
 // 	// const posts = await fetch("https://.../posts").then((res) => res.json());
@@ -20,7 +21,7 @@ import CartLink from "@/components/book/CartLink";
 //
 
 export default function Page({ params }: { params: { isbn: string } }) {
-	const { main, section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary, reviewHeader, reviewWriteBtn, loadMoreReviewBtn } = styles;
+	const { main, section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary, loadMoreReviewBtn } = styles;
 
 	return (
 		<main className={main}>
@@ -52,26 +53,7 @@ export default function Page({ params }: { params: { isbn: string } }) {
 			{/* 사용자 리뷰 */}
 			<section className={section}>
 				<div className={sectionContentWrapper}>
-					<div className={reviewHeader}>
-						<h2>
-							리뷰<small>(999+)</small>
-						</h2>
-						<button type="button" className={reviewWriteBtn}>
-							<span>리뷰 작성하기</span>
-							<PencilIcon />
-						</button>
-					</div>
-
-					<ul>
-						<ReviewItem key="123" />
-						<ReviewItem key="456" />
-						<ReviewItem key="789" />
-					</ul>
-
-					<button type="button" className={loadMoreReviewBtn}>
-						<span>리뷰 더 읽기</span>
-						<ChevronDownDoubleIcon />
-					</button>
+					<ReviewSection />
 				</div>
 			</section>
 
@@ -85,7 +67,7 @@ export default function Page({ params }: { params: { isbn: string } }) {
 					</h2>
 					<ul>
 						<CommentItem key={15} />
-						<CommentItem key={15} />
+						<CommentItem key={115} />
 						<CommentItem key={25} />
 					</ul>
 					<button type="button" className={loadMoreReviewBtn}>
