@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 import Nav from "@/components/book/library/Nav";
 export default function Page() {
-	const { main, userInfoSection, userInfoBg, userInfo, avatarContainer, avatarImg, changeBtn, userName, staticRow, staticItem, reviewSection } = styles;
+	const { main, userInfoSection, userInfoBg, userInfo, avatarContainer, avatarImg, changeBtn, userName, statList, statItem, reviewSection } = styles;
 
 	return (
 		<main className={main}>
@@ -21,47 +21,43 @@ export default function Page() {
 					</div>
 
 					<div>
-						<h1 className={userName}>사용자이름</h1>
-						<dl>
-							<div className={staticRow}>
-								<div className={staticItem}>
-									<dt>작성 리뷰</dt>
-									<dd>524</dd>
-								</div>
-								<div className={staticItem}>
-									<dt>좋아요 받은 리뷰</dt>
-									<dd>57</dd>
-								</div>
-							</div>
-							<div className={staticRow}>
-								<div className={staticItem}>
-									<dt>작성 한줄평</dt>
-									<dd>1920</dd>
-								</div>
-								<div className={staticItem}>
-									<dt>좋아요 받은 한줄평</dt>
-									<dd>557</dd>
-								</div>
-							</div>
-						</dl>
+						<h1 className={userName}>달달한 초코칩</h1>
+						<ul className={statList}>
+							<li className={statItem}>
+								<h3>리뷰</h3>
+								<strong>527</strong>
+								<p>
+									좋아요<small>535</small>
+								</p>
+							</li>
+							<li className={statItem}>
+								<h3>한줄평</h3>
+								<strong>1920</strong>
+								<p>
+									좋아요<small>777</small>
+								</p>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</section>
 
-			{/*  */}
 			<section className={reviewSection}>
-				<h1>
-					작성한 리뷰 <small>(524)</small>
-				</h1>
-				<button type="button">
-					<span>더 보기</span>
-					<ChevronRightIcon />
-				</button>
+				<div>
+					<h1>
+						작성한 리뷰 <small>(524)</small>
+					</h1>
+					<button type="button">
+						<span>더 보기</span>
+						<ChevronRightIcon />
+					</button>
+				</div>
+
 				{/* 책 swiper 영역 */}
-				{/* <Link href="/">
+				<Link href="/">
 					<span>리스트 더 보기</span>
 					<ChevronRightIcon />
-				</Link> */}
+				</Link>
 			</section>
 		</main>
 	);
