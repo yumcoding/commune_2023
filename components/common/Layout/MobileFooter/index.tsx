@@ -27,10 +27,15 @@ export default function MobileFooter() {
 							</Link>
 						</li>
 						<li className={pathname === "/login" ? isActive : ""}>
-							<button type="button">
+							{/* temporary */}
+							{/* <button type="button">
 								<LoginIcon />
 								<span>로그인</span>
-							</button>
+							</button> */}
+							<Link href="/library">
+								<LoginIcon />
+								<span>로그인</span>
+							</Link>
 						</li>
 					</ul>
 				</nav>

@@ -94,9 +94,13 @@ export default function Header() {
 								)}
 							</div>
 
-							<button type="button" className={loginBtn}>
+							{/* temporary */}
+							{/* <button type="button" className={loginBtn}>
 								로그인
-							</button>
+							</button> */}
+							<Link href="/library" className={loginBtn}>
+								로그인
+							</Link>
 							{/* isAuthenticated&&<Link href="/profile">프로필</Link> */}
 						</div>
 					</div>
