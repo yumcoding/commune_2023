@@ -1,0 +1,51 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.swiperWrapper {
+	position: relative;
+}
+
+.btn {
+	@include smHidden();
+	position: absolute;
+	top: calc(50% - 48px);
+	width: 34px;
+	height: 34px;
+	border-radius: 50%;
+	background-color: $white;
+	border: 1px solid #f9f9f9;
+	box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px 0px;
+	z-index: $swiper-nav-level;
+
+	&:focus {
+		box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 4px 0px;
+	}
+
+	&:disabled {
+		cursor: default;
+	}
+
+	svg {
+		position: relative;
+		top: 1px;
+	}
+
+	@media screen and (min-width: $lg-breakpoint) {
+		width: 37px;
+		height: 37px;
+	}
+}
+
+.prevBtn {
+	left: -16px;
+	svg {
+		left: -1px;
+	}
+}
+
+.nextBtn {
+	right: -16px;
+	svg {
+		right: -1px;
+	}
+}
