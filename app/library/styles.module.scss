@@ -38,6 +38,10 @@
 	background-image: url("../../assets/bookshelf.jpeg");
 	background-repeat: no-repeat;
 	background-position: 0 -126px;
+
+	@media screen and (min-width: $md-breakpoint) {
+		background-size: cover;
+	}
 }
 
 .userInfo {
@@ -45,6 +49,17 @@
 	top: 235px;
 	width: 100%;
 	padding: 0 15px;
+	max-width: $content-max-width;
+
+	@media screen and (min-width: $md-breakpoint) {
+		padding: 0 3.5%;
+	}
+
+	@media screen and (min-width: $lg-breakpoint) {
+		padding: 0;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 }
 
 .avatarContainer {
@@ -122,7 +137,7 @@
 		margin: 8px 0 0 0;
 		font-size: 14px;
 		color: $text-secondary;
-		
+
 		small {
 			font-weight: 700;
 			color: $text-tertiary;
@@ -134,10 +149,11 @@
 
 // 리뷰
 .reviewSection {
-	
-	h1{
-		
+	margin: 405px 0 0 0;
+	padding: 20px 0;
+
+	h1 {
+		font-size: 20px;
+		margin: 0 0 15px 0;
 	}
 }
-
-

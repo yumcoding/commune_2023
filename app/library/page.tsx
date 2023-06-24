@@ -1,7 +1,7 @@
-import { ChevronRightIcon, LoginIcon } from "@/assets/icons";
-import Link from "next/link";
-import styles from "./styles.module.scss";
 import Nav from "@/components/book/library/Nav";
+import styles from "./styles.module.scss";
+import BookSwiper from "@/components/common/BookSwiper";
+
 export default function Page() {
 	const { main, userInfoSection, userInfoBg, userInfo, avatarContainer, avatarImg, changeBtn, userName, statList, statItem, reviewSection } = styles;
 
@@ -43,21 +43,10 @@ export default function Page() {
 			</section>
 
 			<section className={reviewSection}>
-				<div>
-					<h1>
-						작성한 리뷰 <small>(524)</small>
-					</h1>
-					<button type="button">
-						<span>더 보기</span>
-						<ChevronRightIcon />
-					</button>
-				</div>
-
-				{/* 책 swiper 영역 */}
-				<Link href="/">
-					<span>리스트 더 보기</span>
-					<ChevronRightIcon />
-				</Link>
+				<h1>
+					작성한 리뷰 <small>(527)</small>
+				</h1>
+				<BookSwiper hasShowMore={true} />
 			</section>
 		</main>
 	);
