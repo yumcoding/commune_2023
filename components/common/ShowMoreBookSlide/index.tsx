@@ -2,13 +2,15 @@ import { BookIdeaIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 
 export default function ShowMoreBookSlide() {
-	const { wrapper } = styles;
+	const { moreSlide, text } = styles;
 	return (
-		<div className={wrapper}>
-			<button type="button">
-				<BookIdeaIcon />
-				<span>더보기</span>
+		<>
+			<button type="button" className={moreSlide}>
+				<span>
+					<BookIdeaIcon />
+					<span className={text}>더보기</span>
+				</span>
 			</button>
-		</div>
+		</>
 	);
 }
