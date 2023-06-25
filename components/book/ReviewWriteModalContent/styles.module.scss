@@ -2,128 +2,15 @@
 @import "@/app/mixins.module.scss";
 
 .wrapper {
-	width: 100vw;
-	height: 100vh;
-	background-color: $white;
-	position: relative;
-
-	@media screen and (min-width: $md-breakpoint) {
-		width: 480px;
-		height: 460px;
-		padding: 16px 20px 18px;
-		border-radius: 6px;
-		box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 6px 0px;
-	}
-
-	&.isPage {
-		z-index: $full-modal-level;
-		@media screen and (min-width: $md-breakpoint) {
-			z-index: unset;
-			box-shadow: unset;
-
-			@include pos-center();
-		}
-
-		.closeBtn {
-			@media screen and (min-width: $md-breakpoint) {
-				display: none;
-			}
-		}
-
-		.backBtn {
-			@media screen and (min-width: $md-breakpoint) {
-				@include flexbox(start, center);
-				position: absolute;
-				left: 18px;
-				bottom: 12px;
-				height: 34px;
-				padding: 0;
-				font-size: 15px;
-				letter-spacing: -0.3px;
-				line-height: 18px;
-				color: $pink;
-				transition: color 200ms ease-in-out;
-
-				&:hover {
-					color: $pink-dark;
-				}
-
-				svg {
-					width: 18px;
-					height: 18px;
-				}
-			}
-		}
-	}
+	@include modalContentLayout();
 }
+
 .header {
-	position: relative;
-	width: 100%;
-	height: 44px;
-	border-bottom: 1px solid $border;
-	padding: 0 16px;
-
-	h1 {
-		@include pos-center();
-		@include truncate();
-		padding: 0 16px;
-
-		font-size: 18px;
-		font-weight: 700;
-		letter-spacing: -0.5px;
-		color: $text-primary;
-	}
-
-	@media screen and (min-width: $md-breakpoint) {
-		height: 33px;
-		padding: 0;
-		border-bottom: 1px solid transparent;
-		margin: 0 0 15px 0;
-
-		h1 {
-			position: unset;
-			transform: unset;
-			padding: 0;
-			line-height: 27px;
-		}
-	}
+	@include modalContentHeader();
 }
 
 .closeBtn {
-	@include flexbox(center, center);
-	@include pos-center-y();
-	left: 16px;
-
-	width: 25px;
-	height: 25px;
-	padding: 0;
-	color: $pink;
-
-	svg {
-		position: relative;
-		top: 0.5px;
-	}
-
-	@media screen and (min-width: $md-breakpoint) {
-		left: unset;
-		top: 12px;
-		right: 0;
-		width: 26px;
-		height: 26px;
-		border-radius: 50%;
-		color: $text-secondary;
-		background-color: rgba(0, 0, 0, 0.07);
-		transition: background-color 300ms ease-in;
-
-		&:hover {
-			background-color: rgba(0, 0, 0, 0.1);
-		}
-
-		svg {
-			width: 16px;
-			height: 16px;
-		}
-	}
+	@include modalContentCloseBtn();
 }
 
 .saveBtn {
@@ -152,7 +39,6 @@
 	@media screen and (min-width: $md-breakpoint) {
 		position: absolute;
 		top: unset;
-		bottom: 0;
 		right: 0px;
 		bottom: -60px;
 
@@ -229,8 +115,4 @@
 		right: 69px;
 		bottom: -61px;
 	}
-}
-
-.backBtn {
-	display: none;
 }
