@@ -75,7 +75,7 @@ export default function BookSwiper({ hasShowMore }: BookSwiperPropTypes) {
 
 			{isReviewModalVisible && (
 				<DefaultModalOverlay onClickOverlay={onClickClose}>
-					<MoreReviewModalContent />
+					<MoreReviewModalContent onClickClose={onClickClose} />
 				</DefaultModalOverlay>
 			)}
 		</>
