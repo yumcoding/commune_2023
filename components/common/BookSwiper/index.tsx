@@ -1,14 +1,17 @@
 "use client";
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper";
 import useSwiperRef from "@/hooks/useSwiperRef";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/assets/icons";
-import styles from "./styles.module.scss";
 import Book from "@/components/common/Book";
 import { cls } from "@/lib/front/cls";
+import { ChevronLeftIcon, ChevronRightIcon } from "@/assets/icons";
+import styles from "./styles.module.scss";
 import ShowMoreBookSlide from "../ShowMoreBookSlide";
+import DefaultModalOverlay from "../Modal/DefaultModalOverlay";
+import MoreReviewModalContent from "@/components/library/MoreReviewModalContent";
 
 // TODO: 책 리스트 데이터 추가
 interface BookSwiperPropTypes {
@@ -39,6 +42,11 @@ export default function BookSwiper({ hasShowMore }: BookSwiperPropTypes) {
 		},
 	};
 
+	// 준비 중 모달
+	const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
+	const onClickMoreReview = () => setIsReviewModalVisible(true);
+	const onClickClose = () => setIsReviewModalVisible(false);
+
 	return (
 		<>
 			<div className={swiperWrapper}>
@@ -51,7 +59,7 @@ export default function BookSwiper({ hasShowMore }: BookSwiperPropTypes) {
 					))}
 					{hasShowMore ? (
 						<SwiperSlide key="show-more-btn">
-							<ShowMoreBookSlide />
+							<ShowMoreBookSlide onClickMoreReview={onClickMoreReview} />
 						</SwiperSlide>
 					) : (
 						""
@@ -64,6 +72,12 @@ export default function BookSwiper({ hasShowMore }: BookSwiperPropTypes) {
 					<ChevronRightIcon />
 				</button>
 			</div>
+
+			{isReviewModalVisible && (
+				<DefaultModalOverlay onClickOverlay={onClickClose}>
+					<MoreReviewModalContent />
+				</DefaultModalOverlay>
+			)}
 		</>
 	);
 }

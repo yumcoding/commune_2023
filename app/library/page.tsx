@@ -1,4 +1,4 @@
-import Nav from "@/components/book/library/Nav";
+import Nav from "@/components/library/Nav";
 import styles from "./styles.module.scss";
 import BookSwiper from "@/components/common/BookSwiper";
 
