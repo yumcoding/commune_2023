@@ -157,3 +157,13 @@
 		margin: 0 0 15px 0;
 	}
 }
+
+.noItem {
+	@include column-flexbox(center, center);
+	margin: 35px 0 0 0;
+	color: $text-primary;
+	p {
+		margin: 15px 0 0 0;
+		font-size: 14px;
+	}
+}

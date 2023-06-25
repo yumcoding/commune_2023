@@ -1,9 +1,10 @@
 import Nav from "@/components/library/Nav";
 import styles from "./styles.module.scss";
 import BookSwiper from "@/components/common/BookSwiper";
+import { NoListItemIcon } from "@/assets/icons";
 
 export default function Page() {
-	const { main, userInfoSection, userInfoBg, userInfo, avatarContainer, avatarImg, changeBtn, userName, statList, statItem, reviewSection } = styles;
+	const { main, userInfoSection, userInfoBg, userInfo, avatarContainer, avatarImg, changeBtn, userName, statList, statItem, reviewSection, noItem } = styles;
 
 	return (
 		<main className={main}>
@@ -46,7 +47,13 @@ export default function Page() {
 				<h1>
 					작성한 리뷰 <small>(527)</small>
 				</h1>
-				<BookSwiper hasShowMore={true} />
+				{/* 작성한 책 리뷰 없을 때  */}
+				<div className={noItem}>
+					<NoListItemIcon />
+					<p>아직 작성한 리뷰가 없어요.</p>
+				</div>
+				{/* 작성한 책 리뷰 있을 때  */}
+				{/* <BookSwiper hasShowMore={true} /> */}
 			</section>
 		</main>
 	);
