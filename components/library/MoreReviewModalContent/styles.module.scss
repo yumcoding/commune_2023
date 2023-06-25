@@ -1,0 +1,56 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.wrapper {
+	@include modalContentLayout();
+}
+
+.header {
+	@include modalContentHeader();
+}
+
+.closeBtn {
+	@include modalContentCloseBtn();
+}
+
+.scrollWrapper {
+	width: 100%;
+	overflow-y: hidden;
+}
+
+.bookList {
+	width: 100%;
+	max-width: $content-max-width;
+	padding: 16px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 10px;
+
+	&::-webkit-scrollbar {
+		width: 12px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		border-radius: 6px;
+		background-color: #dedede;
+		background-clip: padding-box;
+		border-left: 3px solid transparent;
+		border-right: 3px solid transparent;
+		border-top: 1px solid transparent;
+		border-bottom: 1px solid transparent;
+	}
+
+	&::-webkit-scrollbar-track {
+		background-color: transparent;
+	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		max-height: calc(460px - 33px - 15px - 40px);
+		overflow-y: auto;
+		padding: 0;
+	}
+
+	// @media screen and (min-width: $md-breakpoint) {
+	// 	padding: 0;
+	// }
+}
