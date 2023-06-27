@@ -1,0 +1,36 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.item {
+	@include flexbox(start, center);
+	height: 60px;
+	width: 270px;
+	padding: 0 10px;
+	border-radius: 4px;
+	color: $white;
+
+	&:not(:last-of-type) {
+		margin: 0 0 15px 0;
+	}
+
+	button {
+		@include flexbox(start, center);
+		color: $white;
+		font-weight:500;
+		font-size:15px;
+		letter-spacing:-0.1px;
+	}
+	svg {
+		width: 40px;
+		height: 40px;
+		margin: 0 15px 0 0;
+	}
+
+	&.naver {
+		background-color: #03c75a;
+	}
+
+	&.github {
+		background-color: #1d1d1d;
+	}
+}

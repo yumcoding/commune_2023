@@ -1,0 +1,18 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.wrapper {
+	@include column-flexbox(center, center);
+	width: 100%;
+	height: calc(100vh - 60px - 60px);
+	color: $text-primary;
+}
+
+.logo {
+	font-size: 70px;
+}
+
+.desc {
+	font-size: 16px;
+	margin: 5px 0 50px;
+}
