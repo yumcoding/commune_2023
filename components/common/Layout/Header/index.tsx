@@ -13,7 +13,7 @@ import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
 import UnderConstructionContent from "@/components/common/UnderConstructionContent";
 
 export default function Header() {
-	const { headerWrapper, isHome, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn } = styles;
+	const { headerWrapper, isHome, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn, libraryLink } = styles;
 
 	//auth
 	const { data: session } = useSession();
@@ -101,11 +101,11 @@ export default function Header() {
 							</div>
 							{session?.user ? (
 								<>
-									<Link href="/library">
+									<Link href="/library" className={libraryLink}>
 										<LibraryIcon />
 									</Link>
-									<button type="button" onClick={() => signOut()}>
-										<LogOutIcon />
+									<button type="button" onClick={() => signOut()} className={loginBtn}>
+										로그아웃
 									</button>
 								</>
 							) : (
