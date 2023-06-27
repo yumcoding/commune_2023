@@ -2,12 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { HomeIcon, SearchIcon, LoginIcon, UserDefaultIcon } from "@/assets/icons";
+import { HomeIcon, SearchIcon, LoginIcon, UserDefaultIcon, LibraryIcon, LogOutIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function MobileFooter() {
 	const { footerWrapper, nav, isActive } = styles;
 	const pathname = usePathname();
+
+	const session = useSession();
+	console.log("session", session);
 
 	return (
 		<div className={footerWrapper}>
@@ -27,16 +31,27 @@ export default function MobileFooter() {
 							</Link>
 						</li>
 						<li className={pathname === "/login" ? isActive : ""}>
-							{/* temporary */}
-							{/* <button type="button">
-								<LoginIcon />
-								<span>로그인</span>
-							</button> */}
-							<Link href="/library">
-								<LoginIcon />
-								<span>로그인</span>
-							</Link>
+							{session?.status === "authenticated" ? (
+								<Link href="/library">
+									<LibraryIcon />
+									<span>내 서재</span>
+								</Link>
+							) : (
+								<button type="button" onClick={() => signIn()}>
+									<LoginIcon />
+									<span>로그인</span>
+								</button>
+							)}
 						</li>
+
+						{session?.status === "authenticated" && (
+							<li>
+								<button type="button" onClick={() => signOut()}>
+									<LogOutIcon />
+									로그아웃
+								</button>
+							</li>
+						)}
 					</ul>
 				</nav>
 			</footer>
