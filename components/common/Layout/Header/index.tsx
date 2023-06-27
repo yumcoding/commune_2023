@@ -13,7 +13,7 @@ import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
 import UnderConstructionContent from "@/components/common/UnderConstructionContent";
 
 export default function Header() {
-	const { headerWrapper, isHome, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn, libraryLink } = styles;
+	const { headerWrapper, isVisible, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn, libraryLink } = styles;
 
 	//auth
 	const { data: session } = useSession();
@@ -54,7 +54,7 @@ export default function Header() {
 
 	return (
 		<>
-			<div className={cls(headerWrapper, hasScrolledDown ? hasBorderCss : "", pathname === "/" ? isHome : "")}>
+			<div className={cls(headerWrapper, hasScrolledDown ? hasBorderCss : "", pathname === "/" || pathname === "/auth/signin" ? isVisible : "")}>
 				<header className={header}>
 					{/* 좌 */}
 					<div>

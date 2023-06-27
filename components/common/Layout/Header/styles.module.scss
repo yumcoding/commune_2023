@@ -17,7 +17,7 @@
 
 	display: none;
 
-	&.isHome {
+	&.isVisible {
 		@include flexbox(start, center);
 	}
 
