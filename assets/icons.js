@@ -14,6 +14,16 @@ export const LoginIcon = () => (
 	</svg>
 );
 
+export const LogOutIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+		<path
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
+		/>
+	</svg>
+);
+
 export const UserDefaultIcon = () => (
 	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
 		<path
@@ -380,6 +390,16 @@ export const NoListItemIcon = () => (
 		<path
 			d="M544.051 269.926C558.449 256.577 571.83 244.17 586.481 230.586C626.928 274.049 667.187 317.312 707.711 360.858C693.884 373.418 680.181 385.864 665.381 399.307C624.974 356.218 584.725 313.298 544.051 269.926Z"
 			fill="white"
+		/>
+	</svg>
+);
+
+export const LibraryIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" class="w-6 h-6">
+		<path
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"
 		/>
 	</svg>
 );
