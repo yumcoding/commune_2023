@@ -81,6 +81,7 @@ export default function Header() {
 							</ul>
 						</nav>
 					</div>
+
 					{/* 우 */}
 					<div className={menuWrapper}>
 						<div className={menu}>
@@ -98,8 +99,6 @@ export default function Header() {
 									</div>
 								)}
 							</div>
-
-							{/* temporary */}
 							{session?.status === "authenticated" ? (
 								<>
 									<Link href="/library">
