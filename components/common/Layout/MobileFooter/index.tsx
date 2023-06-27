@@ -5,14 +5,13 @@ import { usePathname } from "next/navigation";
 import { HomeIcon, SearchIcon, LoginIcon, UserDefaultIcon, LibraryIcon, LogOutIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import { signIn, signOut, useSession } from "next-auth/react";
+import { cls } from "@/lib/front/cls";
 
 export default function MobileFooter() {
-	const { footerWrapper, nav, isActive } = styles;
+	const { footerWrapper, nav, isActive, logoutBtn } = styles;
 	const pathname = usePathname();
 
-	const { data: session, status } = useSession();
-
-	console.log("session", session);
+	const { data: session } = useSession();
 
 	return (
 		<div className={footerWrapper}>
@@ -31,25 +30,26 @@ export default function MobileFooter() {
 								<span>검색</span>
 							</Link>
 						</li>
-						<li className={pathname === "/login" ? isActive : ""}>
-							{session?.user ? (
+						{session?.user && (
+							<li className={pathname === "/library" ? isActive : ""}>
 								<Link href="/library">
 									<LibraryIcon />
 									<span>내 서재</span>
 								</Link>
-							) : (
+							</li>
+						)}
+						{session?.user ? (
+							<li className={pathname.includes("/signout") ? isActive : ""}>
+								<button type="button" className={logoutBtn} onClick={() => signOut()}>
+									<LogOutIcon />
+									<span>로그아웃</span>
+								</button>
+							</li>
+						) : (
+							<li className={pathname.includes("/signin") ? isActive : ""}>
 								<button type="button" onClick={() => signIn()}>
 									<LoginIcon />
 									<span>로그인</span>
-								</button>
-							)}
-						</li>
-
-						{session?.user && (
-							<li>
-								<button type="button" onClick={() => signOut()}>
-									<LogOutIcon />
-									로그아웃
 								</button>
 							</li>
 						)}
