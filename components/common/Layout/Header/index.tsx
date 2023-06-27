@@ -16,7 +16,7 @@ export default function Header() {
 	const { headerWrapper, isHome, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn } = styles;
 
 	//auth
-	const session = useSession();
+	const { data: session } = useSession();
 
 	// active link
 	const pathname = usePathname();
@@ -99,7 +99,7 @@ export default function Header() {
 									</div>
 								)}
 							</div>
-							{session?.status === "authenticated" ? (
+							{session?.user ? (
 								<>
 									<Link href="/library">
 										<LibraryIcon />

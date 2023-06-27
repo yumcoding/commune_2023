@@ -10,7 +10,8 @@ export default function MobileFooter() {
 	const { footerWrapper, nav, isActive } = styles;
 	const pathname = usePathname();
 
-	const session = useSession();
+	const { data: session, status } = useSession();
+
 	console.log("session", session);
 
 	return (
@@ -31,7 +32,7 @@ export default function MobileFooter() {
 							</Link>
 						</li>
 						<li className={pathname === "/login" ? isActive : ""}>
-							{session?.status === "authenticated" ? (
+							{session?.user ? (
 								<Link href="/library">
 									<LibraryIcon />
 									<span>내 서재</span>
@@ -44,7 +45,7 @@ export default function MobileFooter() {
 							)}
 						</li>
 
-						{session?.status === "authenticated" && (
+						{session?.user && (
 							<li>
 								<button type="button" onClick={() => signOut()}>
 									<LogOutIcon />
