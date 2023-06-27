@@ -2,21 +2,25 @@
 import { useEffect, useState, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { dancing_script } from "@/app/fonts";
 import { cls } from "@/lib/front/cls";
 import styles from "./styles.module.scss";
 import { SearchIcon } from "@/assets/icons";
 import SearchRecommendation from "@/components/search/SearchRecommendation";
 import useScrollDownCheck from "@/hooks/useScrollDownCheck";
-import DefaultModalOverlay from "../../Modal/DefaultModalOverlay";
-import UnderConstructionContent from "../../UnderConstructionContent";
+import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
+import UnderConstructionContent from "@/components/common/UnderConstructionContent";
 
 export default function Header() {
 	const { headerWrapper, isHome, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn } = styles;
 
-	const pathname = usePathname();
+	//auth
+	const { data: session } = useSession();
+	console.log("session", session);
 
-	const hasScrolledDown = useScrollDownCheck();
+	// active link
+	const pathname = usePathname();
 
 	// toggle input on click
 	const searchRef = useRef<HTMLFormElement>(null);
@@ -46,6 +50,8 @@ export default function Header() {
 	const [isModalVisible, setIsModalVisible] = useState(false);
 	const onClickPrepareMenu = () => setIsModalVisible(true);
 	const onClickClose = () => setIsModalVisible(false);
+
+	const hasScrolledDown = useScrollDownCheck();
 
 	return (
 		<>
@@ -95,12 +101,20 @@ export default function Header() {
 							</div>
 
 							{/* temporary */}
-							{/* <button type="button" className={loginBtn}>
-								로그인
-							</button> */}
-							<Link href="/library" className={loginBtn}>
-								로그인
-							</Link>
+							{session?.user ? (
+								<>
+									<button type="button" onClick={() => signOut()}>
+										로그아웃
+									</button>
+								</>
+							) : (
+								<>
+									<button type="button" className={loginBtn} onClick={() => signIn()}>
+										로그인
+									</button>
+								</>
+							)}
+
 							{/* isAuthenticated&&<Link href="/profile">프로필</Link> */}
 						</div>
 					</div>
