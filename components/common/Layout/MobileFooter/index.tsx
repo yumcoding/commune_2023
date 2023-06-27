@@ -46,7 +46,7 @@ export default function MobileFooter() {
 								</button>
 							</li>
 						) : (
-							<li className={pathname.includes("/signin") ? isActive : ""}>
+							<li className={pathname === "/auth/signin" ? isActive : ""}>
 								<button type="button" onClick={() => signIn()}>
 									<LoginIcon />
 									<span>로그인</span>
