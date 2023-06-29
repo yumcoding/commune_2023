@@ -2,8 +2,11 @@ import { NextApiHandler } from "next";
 import NextAuth from "next-auth";
 import NaverProvider from "next-auth/providers/naver";
 import GithubProvider from "next-auth/providers/github";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import prisma from "@/lib/server/prisma";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
+// import prisma from "@/lib/server/prisma";
+
+const prisma = new PrismaClient();
 
 export const authOptions = {
 	// Configure one or more authentication providers
@@ -17,6 +20,7 @@ export const authOptions = {
 			clientSecret: process.env.GITHUB_SECRET ?? "",
 		}),
 	],
+	adapter: PrismaAdapter(prisma),
 	pages: {
 		signIn: "/auth/signin",
 	},
