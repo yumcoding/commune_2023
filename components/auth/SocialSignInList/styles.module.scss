@@ -4,7 +4,7 @@
 .item {
 	@include flexbox(start, center);
 	height: 60px;
-	width: 270px;
+	width: 240px;
 	padding: 0 10px;
 	border-radius: 4px;
 	color: $white;
@@ -16,9 +16,9 @@
 	button {
 		@include flexbox(start, center);
 		color: $white;
-		font-weight:500;
-		font-size:15px;
-		letter-spacing:-0.1px;
+		font-weight: 500;
+		font-size: 15px;
+		letter-spacing: -0.1px;
 	}
 	svg {
 		width: 40px;
