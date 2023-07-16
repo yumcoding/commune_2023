@@ -2,7 +2,8 @@ import "./globals.css";
 import { noto_sans } from "./fonts";
 import MobileFooter from "@/components/common/Layout/MobileFooter";
 import Header from "@/components/common/Layout/Header";
-import AuthSession from "./AuthSession";
+import AuthSessionProvider from "@/providers/authSessionProvider";
+import SearchQueryProvider from "@/providers/searchQueryProvider";
 
 export const metadata = {
 	title: "Commune",
@@ -13,12 +14,14 @@ export default function RootLayout({ modal, children }: { modal: React.ReactNode
 	return (
 		<html lang="ko">
 			<body className={noto_sans.className}>
-				<AuthSession>
-					<Header />
-					{children}
-					<MobileFooter />
-					{modal}
-				</AuthSession>
+				<AuthSessionProvider>
+					<SearchQueryProvider>
+						<Header />
+						{children}
+						<MobileFooter />
+						{modal}
+					</SearchQueryProvider>
+				</AuthSessionProvider>
 			</body>
 		</html>
 	);
