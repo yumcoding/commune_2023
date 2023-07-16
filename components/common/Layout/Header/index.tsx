@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useState, useRef, FormEvent, useContext } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { dancing_script } from "@/app/fonts";
@@ -11,6 +11,7 @@ import SearchRecommendation from "@/components/search/SearchRecommendation";
 import useScrollDownCheck from "@/hooks/useScrollDownCheck";
 import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
 import UnderConstructionContent from "@/components/common/UnderConstructionContent";
+import { SearchQueryContext } from "@/providers/searchQueryProvider";
 
 export default function Header() {
 	const { headerWrapper, isVisible, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn, libraryLink } = styles;
@@ -52,6 +53,19 @@ export default function Header() {
 
 	const hasScrolledDown = useScrollDownCheck();
 
+	// 검색어 입력
+	const router = useRouter();
+	const inputRef = useRef<HTMLInputElement>(null);
+
+	const { setQuery } = useContext(SearchQueryContext);
+
+	const onSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setQuery(inputRef.current?.value);
+		setIsSearchVisible(false);
+		router.push("/search");
+	};
+
 	return (
 		<>
 			<div className={cls(headerWrapper, hasScrolledDown ? hasBorderCss : "", pathname === "/" || pathname === "/auth/signin" ? isVisible : "")}>
@@ -88,8 +102,8 @@ export default function Header() {
 							{/* TODO */}
 							{/* 태블릿, 데탑에서 검색 시 onSubmit하고 결과 받으면 router 이용해서 /search 페이지로 이동 */}
 							<div className={searchWrapper}>
-								<form className={cls(search, isSearchVisible ? visible : "")} ref={searchRef} onClick={showSearch}>
-									<input type="text" placeholder="검색검색" />
+								<form className={cls(search, isSearchVisible ? visible : "")} ref={searchRef} onClick={showSearch} onSubmit={onSearchSubmit}>
+									<input type="text" placeholder="궁금한 책, 영화, 음악을 검색해봐요 :)" ref={inputRef} />
 									<SearchIcon />
 								</form>
 								{isSearchVisible && (
