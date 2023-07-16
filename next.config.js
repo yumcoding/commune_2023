@@ -4,7 +4,7 @@ const nextConfig = {
 		return [
 			{
 				destination: "https://openapi.naver.com/:path*",
-				source: "/api/openapi/:path*",
+				source: "/openapi/:path*",
 			},
 		];
 	},
