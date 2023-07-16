@@ -25,6 +25,13 @@ $flex-map: (
 	justify-content: _get-flex-value($jc);
 }
 
+// grid
+@mixin grid($num, $gap) {
+	display: grid;
+	grid-template-columns: repeat($num, 1fr);
+	grid-gap: $gap;
+}
+
 // position
 @mixin pos-center-x($type: absolute) {
 	@if ($type == "absolute" or $type == "fixed") {

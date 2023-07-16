@@ -22,9 +22,7 @@
 	width: 100%;
 	max-width: $content-max-width;
 	padding: 16px;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	grid-gap: 10px;
+	@include grid(3, 10px);
 
 	&::-webkit-scrollbar {
 		width: 12px;
