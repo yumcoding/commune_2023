@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { ItemTypes } from "@/components/search/SearchResult";
+import { ItemTypes } from "@/components/search/SearchResultSection";
 
 // TODO 1
 // href 두 군데 넣어주어야 한다.
@@ -11,11 +11,11 @@ import { ItemTypes } from "@/components/search/SearchResult";
 // ? '/book/isbn'으로 갈지 '/review'로 갈지 구분하는 방법
 
 export default function Book(props: { item: ItemTypes }) {
-	const { bookImg, bookDesc } = styles;
+	const { book, bookImg, bookDesc } = styles;
 	const { isbn, image, title, author, publisher } = props.item;
 	return (
 		<>
-			<div>
+			<div className={book}>
 				<Link href={`/book/${isbn}`}>
 					<div className={bookImg}>
 						<div>{/* 이미지 */}</div>
