@@ -12,10 +12,16 @@ export default function SearchForm() {
 
 	const { setQuery } = useContext(SearchQueryContext);
 
+	const onClickClear = () => {
+		if (inputRef.current) {
+			inputRef.current.value = "";
+		}
+		setQuery("");
+	};
+
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-			setQuery(inputRef.current?.value);
-		
+		setQuery(inputRef.current?.value);
 	};
 
 	return (
@@ -25,7 +31,7 @@ export default function SearchForm() {
 					<SearchIcon />
 				</div>
 				<input type="text" ref={inputRef} />
-				<button type="button" className={searchClearBtn}>
+				<button type="button" className={searchClearBtn} onClick={onClickClear}>
 					<CloseMarkIcon />
 				</button>
 			</form>
