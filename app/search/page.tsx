@@ -1,10 +1,10 @@
 import SearchForm from "@/components/search/SearchForm";
 import styles from "./styles.module.scss";
 import SearchRecommendation from "@/components/search/SearchRecommendation";
-import SearchResult from "@/components/search/SearchResult";
+import SearchResultSection from "@/components/search/SearchResultSection";
 
 export default function Page() {
-	const { main, mobileSearch, defaultSearch, queryWrapper } = styles;
+	const { main, mobileSearch } = styles;
 
 	return (
 		<main className={main}>
@@ -15,14 +15,7 @@ export default function Page() {
 				<SearchRecommendation isRecent={false} />
 			</section>
 
-			{/* 태블릿 이후 */}
-			<section className={defaultSearch}>
-				<div className={queryWrapper}>
-					<div>&quot;{}&quot;의 검색 결과</div>
-				</div>
-			</section>
-
-			<SearchResult />
+			<SearchResultSection />
 		</main>
 	);
 }
