@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
+import { ItemTypes } from "@/components/search/SearchResultSection";
 
 // TODO 1
 // href 두 군데 넣어주어야 한다.
@@ -9,12 +10,13 @@ import styles from "./styles.module.scss";
 // props로 detail인지 review인지 구분해서
 // ? '/book/isbn'으로 갈지 '/review'로 갈지 구분하는 방법
 
-export default function Book() {
+export default function Book(props: { item: ItemTypes }) {
 	const { book, bookImg, bookDesc } = styles;
+	const { isbn, image, title, author, publisher } = props.item;
 	return (
 		<>
 			<div className={book}>
-				<Link href="/book/temp-isbn">
+				<Link href={`/book/${isbn}`}>
 					<div className={bookImg}>
 						<div>{/* 이미지 */}</div>
 						{/* 순위 표시 */}
@@ -22,11 +24,11 @@ export default function Book() {
 				</Link>
 
 				<div className={bookDesc}>
-					<Link href="/book/temp-isbn">
-						<h3>책 이름</h3>
+					<Link href={`/book/${isbn}`}>
+						<h3>{title}</h3>
 						<div>
-							<strong>저자, 옮긴이</strong>
-							<span> | 출판사</span>
+							<strong>{author.replaceAll("^", ", ")}</strong>
+							<span> | {publisher}</span>
 						</div>
 					</Link>
 				</div>
