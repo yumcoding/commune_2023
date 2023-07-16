@@ -53,9 +53,7 @@ export default function BookSwiper({ hasShowMore }: BookSwiperPropTypes) {
 				<Swiper {...swiperParams}>
 					{/* TODO: 책 리스트 데이터 */}
 					{[0, 1, 2, 3, 4, 5].map((item, i) => (
-						<SwiperSlide key={i}>
-							<Book />
-						</SwiperSlide>
+						<SwiperSlide key={i}>{/* <Book /> */}</SwiperSlide>
 					))}
 					{hasShowMore ? (
 						<SwiperSlide key="show-more-btn">
