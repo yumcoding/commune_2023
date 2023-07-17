@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState, useRef, useContext } from "react";
+import { FormEvent, useState, useRef, useContext, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { CloseMarkIcon, SearchIcon } from "@/assets/icons";
 import { SearchQueryContext } from "@/providers/searchQueryProvider";
@@ -18,6 +18,12 @@ export default function SearchForm() {
 		}
 		setQuery("");
 	};
+
+	useEffect(() => {
+		return () => {
+			setQuery("");
+		};
+	}, [setQuery]);
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
