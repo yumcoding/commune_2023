@@ -3,9 +3,9 @@ import styles from "./styles.module.scss";
 import { ItemTypes } from "../SearchResultSection";
 
 export default function SearchResultList(props: { items: ItemTypes[] }) {
-	const { wrapper, list } = styles;
+	const { list } = styles;
 	return (
-		<div className={wrapper}>
+		<div>
 			<ul className={list}>
 				{props.items.map((item) => {
 					return (

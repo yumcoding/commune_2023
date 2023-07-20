@@ -1,15 +1,6 @@
 @import "@/app/variables.module.scss";
 @import "@/app/mixins.module.scss";
 
-.wrapper {
-	@include pos-center-x();
-  top:90px;
-  
-
-	background-color: $white;
-	z-index: $swiper-nav-level;
-}
-
 .list {
 	@include grid(2, 10px);
 
