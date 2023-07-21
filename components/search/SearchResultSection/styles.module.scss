@@ -2,7 +2,8 @@
 @import "@/app/mixins.module.scss";
 
 .wrapper {
-	padding: 0 15px 100px;
+	padding: 0 0 100px;
+	margin: 15px 0 0 0;
 	background-color: $white;
 }
 
