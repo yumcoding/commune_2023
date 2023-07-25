@@ -63,7 +63,7 @@ export default function Header() {
 		e.preventDefault();
 		setQuery(inputRef.current?.value);
 		setIsSearchVisible(false);
-		router.push("/search");
+		router.push(`/search?query=${inputRef.current?.value}`);
 	};
 
 	return (
