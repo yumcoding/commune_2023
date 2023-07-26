@@ -18,7 +18,7 @@ import ReviewSection from "@/components/book/ReviewSection";
 // 	// }));
 // }
 
-//
+// isbn 이용해서 server data fetching한 내용 보여주기
 
 export default function Page({ params }: { params: { isbn: string } }) {
 	const { main, section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary, loadMoreReviewBtn } = styles;

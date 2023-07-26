@@ -3,6 +3,12 @@ import styles from "./styles.module.scss";
 import BookSwiper from "@/components/common/BookSwiper";
 import { NoListItemIcon } from "@/assets/icons";
 
+
+
+
+// auth 이용 -> user info get -> server data fetching한 내용 보여주기
+
+
 export default function Page() {
 	const { main, userInfoSection, userInfoBg, userInfo, avatarContainer, avatarImg, changeBtn, userName, statList, statItem, reviewSection, noItem } = styles;
 

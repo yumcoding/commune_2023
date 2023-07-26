@@ -3,7 +3,9 @@ import styles from "./styles.module.scss";
 import SearchRecommendation from "@/components/search/SearchRecommendation";
 import SearchResultSection from "@/components/search/SearchResultSection";
 
-export default function Page() {
+// props { params: {}, searchParams: { query: '검색' } }
+export default function Page({ searchParams: { query } }: { searchParams: { query: string } }) {
+	// console.log("search page props", query); // server comp라서 vs console에 찍힘
 	const { main, mobileSearch } = styles;
 
 	return (
@@ -15,7 +17,7 @@ export default function Page() {
 				<SearchRecommendation isRecent={false} />
 			</section>
 
-			<SearchResultSection />
+			<SearchResultSection searchParam={query} />
 		</main>
 	);
 }

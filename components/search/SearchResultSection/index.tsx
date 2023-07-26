@@ -30,20 +30,12 @@ export interface SearchResultTypes {
 
 const PAGE_SIZE = 10;
 
-export default function SearchResultSection() {
+// 여기다가 기존 스크롤 위치로 가는 동작도 가능할까?
+
+export default function SearchResultSection({ searchParam }: { searchParam: string }) {
 	const { wrapper, searchHeader, noResult, testTarget } = styles;
 
 	const { query, setQuery } = useContext(SearchQueryContext);
-
-	const searchParams = useSearchParams();
-
-	const search = searchParams.get("query");
-
-	useEffect(() => {
-		if (search && search?.length > 0) {
-			setQuery(search);
-		}
-	}, []);
 
 	// infinite scroll
 
@@ -55,6 +47,9 @@ export default function SearchResultSection() {
 	};
 
 	const { data, size, setSize, error, isValidating, isLoading } = useSWRInfinite<SearchResultTypes>(getKey, searchFetcher);
+
+	// searchParam이 있을 때 mutate 써서 검색결과받아오기
+	// 스크롤 아래로 내리기
 
 	const isLoadingMore = isLoading || (size > 0 && data && typeof data[size - 1] === "undefined");
 	const isEmpty = data?.[0]?.items?.length === 0;
