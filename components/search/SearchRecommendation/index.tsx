@@ -4,13 +4,17 @@ import { recentSearch, popularSearch } from "@/assets/mockData";
 import styles from "./styles.module.scss";
 import { useContext } from "react";
 import { SearchQueryContext } from "@/providers/searchQueryProvider";
+import { useSearchParams } from "next/navigation";
 
 export default function SearchRecommendation({ isRecent }: { isRecent: Boolean }) {
 	const { section, header, delBtn, list } = styles;
 
 	const { query } = useContext(SearchQueryContext);
 
-	if (query && query?.length > 0) {
+	const searchParams = useSearchParams();
+
+	const search = searchParams.get("query");
+	if ((query && query?.length > 0) || search) {
 		return null;
 	}
 

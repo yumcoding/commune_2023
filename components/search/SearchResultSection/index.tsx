@@ -28,27 +28,58 @@ export interface SearchResultTypes {
 	items: ItemTypes[];
 }
 
-const PAGE_SIZE = 10;
+export const PAGE_SIZE = 10;
 
 // 여기다가 기존 스크롤 위치로 가는 동작도 가능할까?
+
+// 0번. 일단 resultList state 없애고 기존 방식대로 data를 사용한다.
+// 1번. 스크롤 위치 기억하는 것 적용한다.
+// 3번. isLoading, isValidating, no result 적용한다.
+// 4번. context로 query 가져오는 부분들.. 어차피 client 컴포면 그냥 useSearchParam으로 가져오는 걸로
+//       물론 이때, setQuery도 같이 있는 컴포넌트면 그냥 context 그대로 사용하기로 한다.
 
 export default function SearchResultSection({ searchParam }: { searchParam: string }) {
 	const { wrapper, searchHeader, noResult, testTarget } = styles;
 
-	const { query, setQuery } = useContext(SearchQueryContext);
+	const { query } = useContext(SearchQueryContext);
 
 	// infinite scroll
 
 	const observeTarget = useRef<HTMLDivElement>(null);
 
 	const getKey = (index: number) => {
-		if (!query || query?.length === 0 || index >= 100) return null;
+		if ((!query || query?.length === 0 || index >= 100) && !searchParam) return null;
+		if ((!query || query?.length === 0) && searchParam && searchParam?.length > 0) {
+			const startIndex = Number(localStorage.getItem("startIndex"));
+			return `/openapi/v1/search/book.json?query=${searchParam}&display=${PAGE_SIZE}&start=${startIndex}`;
+		}
 		return `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}&start=${PAGE_SIZE * index + 1}`;
 	};
 
-	const { data, size, setSize, error, isValidating, isLoading } = useSWRInfinite<SearchResultTypes>(getKey, searchFetcher);
+	const { data, size, setSize, error, isValidating, isLoading, mutate } = useSWRInfinite<SearchResultTypes>(getKey, searchFetcher);
+	// const resultList = data ? data.map((list) => list.items).flat() : [];
+
+	const [resultList, setResultList] = useState<ItemTypes[]>();
+
+	useEffect(() => {
+		if (data) {
+			setResultList(data.map((list) => list.items).flat());
+		} else {
+			setResultList([]);
+		}
+	}, [data]);
 
 	// searchParam이 있을 때 mutate 써서 검색결과받아오기
+
+	useEffect(() => {
+		localStorage.setItem("startIndex", "1");
+	}, []);
+
+	useEffect(() => {
+		if (searchParam && searchParam?.length > 0) {
+			mutate();
+		}
+	}, []);
 	// 스크롤 아래로 내리기
 
 	const isLoadingMore = isLoading || (size > 0 && data && typeof data[size - 1] === "undefined");
@@ -62,6 +93,8 @@ export default function SearchResultSection({ searchParam }: { searchParam: stri
 			(entries, observer) => {
 				if (entries[0].isIntersecting) {
 					setSize((prev) => prev + 1);
+					const startIndex = PAGE_SIZE * size + 1;
+					localStorage.setItem("startIndex", startIndex + "");
 					observer.unobserve(entries[0].target);
 				}
 			},
@@ -73,9 +106,7 @@ export default function SearchResultSection({ searchParam }: { searchParam: stri
 		io.observe(observeTarget.current);
 
 		return () => io.disconnect();
-	}, [setSize, data, isReachingEnd, isValidating, isLoadingMore]);
-
-	const resultList = data ? data.map((list) => list.items).flat() : [];
+	}, [size, setSize, data, isReachingEnd, isValidating, isLoadingMore]);
 
 	return (
 		<section className={wrapper}>
@@ -87,16 +118,16 @@ export default function SearchResultSection({ searchParam }: { searchParam: stri
 			<div>{resultList && <SearchResultList items={resultList} />}</div>
 			<div ref={observeTarget} className={testTarget} />
 
-			{isLoadingMore && <div>로딩중...</div>}
+			{/* {isLoadingMore && <div>로딩중...</div>}
 			{isReachingEnd && <p>검색완료</p>}
-			{!resultList && (
+			{!isValidating && !isLoadingMore && resultList?.length === 0 && (
 				<div className={noResult}>
 					<NoResultIcon />
 					<p>
 						검색 결과가 없어요. <br /> 다른 검색어를 입력해보세요.
 					</p>
 				</div>
-			)}
+			)} */}
 		</section>
 	);
 }
