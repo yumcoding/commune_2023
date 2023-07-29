@@ -7,6 +7,7 @@ import { NoResultIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import SearchResultList from "../SearchResultList";
 import { useSearchParams } from "next/navigation";
+import useScrollRestoration from "@/hooks/useScrollRestoration";
 
 export interface ItemTypes {
 	title: string;
@@ -37,6 +38,8 @@ export const PAGE_SIZE = 10;
 //       물론 이때, setQuery도 같이 있는 컴포넌트면 그냥 context 그대로 사용하기로 한다.
 
 export default function SearchResultSection({ searchParam }: { searchParam: string }) {
+	// useScrollRestoration();
+
 	const { wrapper, searchHeader, noResult, testTarget } = styles;
 
 	const { query } = useContext(SearchQueryContext);

@@ -4,6 +4,7 @@ import MobileFooter from "@/components/common/Layout/MobileFooter";
 import Header from "@/components/common/Layout/Header";
 import AuthSessionProvider from "@/providers/authSessionProvider";
 import SearchQueryProvider from "@/providers/searchQueryProvider";
+import ScrollRestoration from "@/components/common/ScrollRestoration";
 
 export const metadata = {
 	title: "Commune",
@@ -16,10 +17,12 @@ export default function RootLayout({ modal, children }: { modal: React.ReactNode
 			<body className={noto_sans.className}>
 				<AuthSessionProvider>
 					<SearchQueryProvider>
-						<Header />
-						{children}
-						<MobileFooter />
-						{modal}
+						<ScrollRestoration>
+							<Header />
+							{children}
+							<MobileFooter />
+							{modal}
+						</ScrollRestoration>
 					</SearchQueryProvider>
 				</AuthSessionProvider>
 			</body>
