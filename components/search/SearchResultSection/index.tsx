@@ -30,9 +30,7 @@ export interface SearchResultTypes {
 
 export const PAGE_SIZE = 10;
 
-// 여기다가 기존 스크롤 위치로 가는 동작도 가능할까?
-
-// 0번. 일단 resultList state 없애고 기존 방식대로 data를 사용한다.
+// 0번. 검색어 바꾸면 index 0 되도록
 // 1번. 스크롤 위치 기억하는 것 적용한다.
 // 3번. isLoading, isValidating, no result 적용한다.
 // 4번. context로 query 가져오는 부분들.. 어차피 client 컴포면 그냥 useSearchParam으로 가져오는 걸로
@@ -48,33 +46,23 @@ export default function SearchResultSection({ searchParam }: { searchParam: stri
 	const observeTarget = useRef<HTMLDivElement>(null);
 
 	const getKey = (index: number) => {
-		if ((!query || query?.length === 0 || index >= 100) && !searchParam) return null;
-		if ((!query || query?.length === 0) && searchParam && searchParam?.length > 0) {
-			const startIndex = Number(localStorage.getItem("startIndex"));
-			return `/openapi/v1/search/book.json?query=${searchParam}&display=${PAGE_SIZE}&start=${startIndex}`;
+		if (index >= 100) return null;
+
+		if (!query || query?.length === 0) {
+			if (!searchParam) {
+				return null;
+			} else if (searchParam && searchParam?.length > 0) {
+				const startIndex = Number(localStorage.getItem("startIndex"));
+				return `/openapi/v1/search/book.json?query=${searchParam}&display=${PAGE_SIZE}&start=${startIndex + PAGE_SIZE * index}`;
+			}
 		}
 		return `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}&start=${PAGE_SIZE * index + 1}`;
 	};
 
 	const { data, size, setSize, error, isValidating, isLoading, mutate } = useSWRInfinite<SearchResultTypes>(getKey, searchFetcher);
-	// const resultList = data ? data.map((list) => list.items).flat() : [];
-
-	const [resultList, setResultList] = useState<ItemTypes[]>();
-
-	useEffect(() => {
-		if (data) {
-			setResultList(data.map((list) => list.items).flat());
-		} else {
-			setResultList([]);
-		}
-	}, [data]);
+	const resultList = data ? data.map((list) => list.items).flat() : [];
 
 	// searchParam이 있을 때 mutate 써서 검색결과받아오기
-
-	useEffect(() => {
-		localStorage.setItem("startIndex", "1");
-	}, []);
-
 	useEffect(() => {
 		if (searchParam && searchParam?.length > 0) {
 			mutate();
