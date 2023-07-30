@@ -6,8 +6,8 @@ import { searchFetcher } from "@/lib/front/fetchers";
 import { NoResultIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import SearchResultList from "../SearchResultList";
-import { useSearchParams } from "next/navigation";
-import useScrollRestoration from "@/hooks/useScrollRestoration";
+import useDebounce from "@/hooks/useDebounce";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export interface ItemTypes {
 	title: string;
@@ -38,8 +38,6 @@ export const PAGE_SIZE = 10;
 //       물론 이때, setQuery도 같이 있는 컴포넌트면 그냥 context 그대로 사용하기로 한다.
 
 export default function SearchResultSection({ searchParam }: { searchParam: string }) {
-	// useScrollRestoration();
-
 	const { wrapper, searchHeader, noResult, testTarget } = styles;
 
 	const { query } = useContext(SearchQueryContext);
@@ -48,6 +46,7 @@ export default function SearchResultSection({ searchParam }: { searchParam: stri
 
 	const observeTarget = useRef<HTMLDivElement>(null);
 
+	// bug alert!!!!!!!!!!!!!!
 	const getKey = (index: number) => {
 		if (index >= 100) return null;
 
@@ -55,7 +54,7 @@ export default function SearchResultSection({ searchParam }: { searchParam: stri
 			if (!searchParam) {
 				return null;
 			} else if (searchParam && searchParam?.length > 0) {
-				const startIndex = Number(localStorage.getItem("startIndex"));
+				const startIndex = Number(sessionStorage.getItem("startIndex"));
 				return `/openapi/v1/search/book.json?query=${searchParam}&display=${PAGE_SIZE}&start=${startIndex + PAGE_SIZE * index}`;
 			}
 		}
@@ -65,13 +64,57 @@ export default function SearchResultSection({ searchParam }: { searchParam: stri
 	const { data, size, setSize, error, isValidating, isLoading, mutate } = useSWRInfinite<SearchResultTypes>(getKey, searchFetcher);
 	const resultList = data ? data.map((list) => list.items).flat() : [];
 
-	// searchParam이 있을 때 mutate 써서 검색결과받아오기
-	useEffect(() => {
-		if (searchParam && searchParam?.length > 0) {
-			mutate();
-		}
-	}, []);
 	// 스크롤 아래로 내리기
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+	const params = new URLSearchParams(Object.fromEntries(searchParams.entries()));
+	const stringParams = params.toString();
+	const fullRoute = pathname + "?" + stringParams;
+
+	console.log("fullRoute", fullRoute);
+
+	const paddingFunction = useDebounce({
+		cb: () => sessionStorage.setItem(fullRoute, window.scrollY.toString()),
+		ms: 100,
+	});
+
+	useEffect(() => {
+		const scrollHandler = function () {
+			paddingFunction();
+		};
+
+		window.addEventListener("scroll", scrollHandler);
+
+		return () => {
+			window.removeEventListener("scroll", scrollHandler);
+		};
+	}, [paddingFunction]);
+
+	//
+
+	const popHandler = function () {
+		sessionStorage.setItem("isBack", "true");
+		console.log("poppppp");
+	};
+
+	useEffect(() => {
+		window.addEventListener("popstate", popHandler);
+
+		return () => {
+			window.removeEventListener("popstate", popHandler);
+		};
+	});
+
+	useEffect(() => {
+		const isHistoryBack = sessionStorage.getItem("isBack") === "true" ? true : false;
+		const scrollYValue = sessionStorage.getItem(fullRoute) ?? false;
+		if (isHistoryBack && scrollYValue) {
+			mutate().then(() => {
+				window.scrollTo({ top: +scrollYValue, left: 0 });
+				sessionStorage.setItem("isBack", "false");
+			});
+		}
+	}, [fullRoute, mutate]);
 
 	const isLoadingMore = isLoading || (size > 0 && data && typeof data[size - 1] === "undefined");
 	const isEmpty = data?.[0]?.items?.length === 0;
@@ -85,7 +128,7 @@ export default function SearchResultSection({ searchParam }: { searchParam: stri
 				if (entries[0].isIntersecting) {
 					setSize((prev) => prev + 1);
 					const startIndex = PAGE_SIZE * size + 1;
-					localStorage.setItem("startIndex", startIndex + "");
+					sessionStorage.setItem("startIndex", startIndex + "");
 					observer.unobserve(entries[0].target);
 				}
 			},

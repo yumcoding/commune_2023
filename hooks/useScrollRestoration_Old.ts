@@ -4,19 +4,18 @@ import { useEffect, useState } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import useDebounce from "./useDebounce";
 
-const useScrollRestoration = () => {
+const useScrollRestoration_Old = () => {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 	const params = new URLSearchParams(Object.fromEntries(searchParams.entries()));
 	const stringParams = params.toString();
 	const fullRoute = pathname + "?" + stringParams;
 
-	const [path, setPath] = useState(pathname);
-
 	const paddingFunction = useDebounce({
 		cb: () => sessionStorage.setItem(fullRoute, window.scrollY.toString()),
 		ms: 100,
 	});
+
 	useEffect(() => {
 		const backHandler = function () {
 			sessionStorage.setItem("isBack", "true");
@@ -26,27 +25,32 @@ const useScrollRestoration = () => {
 			paddingFunction();
 		};
 
-		if (path !== pathname) {
+		const isHistoryBack = sessionStorage.getItem("isBack") === "true" ? true : false;
+		const prevPage = sessionStorage.getItem("prevPage");
+
+		if (isHistoryBack && fullRoute === prevPage) {
 			const scrollY = Number(sessionStorage.getItem(fullRoute));
-			const isHistoryBack = Boolean(sessionStorage.getItem("isBack"));
+
 			window.scrollTo({ top: scrollY, left: 0 });
-			sessionStorage.setItem("isBack", "false");
+			// sessionStorage.setItem("isBack", "false");
+			// sessionStorage.setItem("prevPage", "");
+			sessionStorage.removeItem("isBack");
+			sessionStorage.removeItem("prevPage");
+			sessionStorage.removeItem("fullRoute");
 		}
 
 		window.addEventListener("popstate", backHandler);
 		window.addEventListener("scroll", scrollHandler);
-		setPath(fullRoute);
-
-		console.log("heyyyyyyyyyy");
+		sessionStorage.setItem("prevPage", fullRoute);
 
 		return () => {
 			window.removeEventListener("popstate", backHandler);
 			window.removeEventListener("scroll", scrollHandler);
 		};
-	}, [fullRoute, path, pathname, paddingFunction]);
+	}, [fullRoute, pathname, paddingFunction]);
 };
 
-export default useScrollRestoration;
+export default useScrollRestoration_Old;
 
 // scrollY
 // historyBack
