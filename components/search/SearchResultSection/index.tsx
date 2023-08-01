@@ -1,5 +1,5 @@
 "use client";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import SearchResult from "../SearchResult";
 import styles from "./styles.module.scss";
@@ -16,6 +16,10 @@ export default function SearchResultSection() {
 	const isResultHidden = search || search?.length === 0;
 
 	const [pageIndex, setPageIndex] = useState(0);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pageIndex]);
 
 	return (
 		<section className={isResultHidden ? cls(wrapper, hidden) : wrapper}>
