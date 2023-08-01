@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import { ItemTypes } from "@/components/search/SearchResult";
-
+import Image from "next/image";
 
 // TODO 1
 // href 두 군데 넣어주어야 한다.
@@ -19,7 +19,9 @@ export default function Book(props: { item: ItemTypes }) {
 			<div className={book}>
 				<Link href={`/book/${isbn}`}>
 					<div className={bookImg}>
-						<div>{/* 이미지 */}</div>
+						<div>
+							<Image src={image} alt={`${title} 책 표지`} fill={true} />
+						</div>
 						{/* 순위 표시 */}
 					</div>
 				</Link>
