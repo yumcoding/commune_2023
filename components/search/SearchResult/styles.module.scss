@@ -1,23 +1,29 @@
 @import "@/app/variables.module.scss";
 @import "@/app/mixins.module.scss";
 
-.wrapper {
-	@include pos-center-x();
-	top: 90px;
+.listItem {
+	padding: 0 0 16px 0;
+	border-bottom: 1px solid $border-light;
 
-	background-color: $white;
-	z-index: $swiper-nav-level;
-}
-
-.list {
-	@include grid(2, 10px);
-
-	@media screen and (min-width: $md-breakpoint) {
-		@include grid(4, 20px);
+	&:not(:first-of-type) {
+		margin: 16px 0 0 0;
 	}
 
-	@media screen and (min-width: $md-breakpoint) {
-		@include grid(5, 20px);
+	a {
+		@include flexbox(start, center);
+	}
+}
+
+.bookInfo {
+	margin: 0 0 0 13px;
+	font-size: 14px;
+	color: $text-secondary;
+
+	h1 {
+		font-size: 16px;
+		font-weight: 500;
+		margin: 0 0 4px 0;
+		color: $text-primary;
 	}
 }
 

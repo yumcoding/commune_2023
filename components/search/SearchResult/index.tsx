@@ -1,12 +1,12 @@
 "use client";
+import { useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import useSWR from "swr";
 import { searchFetcher } from "@/lib/front/fetchers";
+import Loader from "@/components/common/Loader";
 import { NoResultIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
-import Image from "next/image";
-import Loader from "@/components/common/Loader";
-import Link from "next/link";
-import { useEffect } from "react";
 
 export interface ItemTypes {
 	title: string;
@@ -30,8 +30,12 @@ export interface SearchResultTypes {
 
 export const PAGE_SIZE = 10;
 
+const strToDate = (str: string) => {
+	return `${str.substring(0, 4)}.${str.substring(4, 6)}.${str.substring(6)}`;
+};
+
 export default function SearchResult({ query, pageIndex }: { query: string; pageIndex: number }) {
-	const { list, noResult } = styles;
+	const { listItem, bookInfo, noResult } = styles;
 
 	const { data, isLoading, error } = useSWR<SearchResultTypes>(
 		query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}&start=${PAGE_SIZE * pageIndex + 1}` : null,
@@ -59,17 +63,15 @@ export default function SearchResult({ query, pageIndex }: { query: string; page
 	return (
 		<ul>
 			{data?.items.map((item) => (
-				<li key={item.isbn}>
+				<li key={item.isbn} className={listItem}>
 					<Link href={`/book/${item.isbn}`}>
 						<div>
-							<Image src={item.image} width={50} height={50} alt={`${item.title} 책 커버`} style={{ background: "grey" }} />
+							<Image src={item.image} width={50} height={73} alt={`${item.title} 책 커버`} style={{ background: "grey" }} />
 						</div>
-						<div>
+						<div className={bookInfo}>
 							<h1>{item.title}</h1>
 							<p>
-								<strong>
-									{item.author.replaceAll("^", ", ")} | {item.publisher}
-								</strong>
+								{item.author.replaceAll("^", ", ")} | {strToDate(item.pubdate)}
 							</p>
 						</div>
 					</Link>
