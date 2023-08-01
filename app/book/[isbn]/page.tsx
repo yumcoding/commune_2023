@@ -10,7 +10,6 @@ import CommentForm from "@/components/book/CommentForm";
 import CommentItem from "@/components/book/CommentItem";
 import CartLink from "@/components/book/CartLink";
 import ReviewSection from "@/components/book/ReviewSection";
-import { useEffect } from "react";
 
 // export async function generateStaticParams() {
 // 	// const posts = await fetch("https://.../posts").then((res) => res.json());
@@ -23,18 +22,7 @@ import { useEffect } from "react";
 
 export default function Page({ params }: { params: { isbn: string } }) {
 	const { main, section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary, loadMoreReviewBtn } = styles;
-	const popHandler = function () {
-		sessionStorage.setItem("isBack", "true");
-		console.log("eeeeee");
-	};
 
-	useEffect(() => {
-		window.addEventListener("popstate", popHandler);
-
-		return () => {
-			window.removeEventListener("popstate", popHandler);
-		};
-	});
 	return (
 		<main className={main}>
 			{/* 상단 버튼 nav */}
