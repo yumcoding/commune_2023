@@ -1,27 +1,32 @@
 "use client";
-import { useContext, useState } from "react";
-import { SearchQueryContext } from "@/providers/searchQueryProvider";
+import { useContext, useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import SearchResult from "../SearchResult";
 import styles from "./styles.module.scss";
 import Pagination from "@/components/common/Pagination";
+import { cls } from "@/lib/front/cls";
 
 export default function SearchResultSection() {
-	const { wrapper, searchHeader } = styles;
+	const { wrapper, hidden, searchHeader } = styles;
 
-	const { query } = useContext(SearchQueryContext);
+	const searchParams = useSearchParams();
+
+	const search = searchParams.get("query");
+
+	const isResultHidden = search || search?.length === 0;
 
 	const [pageIndex, setPageIndex] = useState(0);
 
 	return (
-		<section className={wrapper}>
+		<section className={isResultHidden ? cls(wrapper, hidden) : wrapper}>
 			<header className={searchHeader}>
-				<div>&quot;{query}&quot;의 검색 결과</div>
+				<div>&quot;{search ?? ""}&quot;의 검색 결과</div>
 			</header>
-			<SearchResult query={query ?? ""} pageIndex={pageIndex} />
+			<SearchResult query={search ?? ""} pageIndex={pageIndex} />
 			<div style={{ display: "none" }}>
-				<SearchResult query={query ?? ""} pageIndex={pageIndex + 1} />
+				<SearchResult query={search ?? ""} pageIndex={pageIndex + 1} />
 			</div>
-			<Pagination query={query ?? ""} pageIndex={pageIndex} setPageIndex={setPageIndex} />
+			<Pagination query={search ?? ""} pageIndex={pageIndex} setPageIndex={setPageIndex} />
 		</section>
 	);
 }
