@@ -19,7 +19,18 @@ export default function Pagination({ query, pageIndex, setPageIndex }: { query: 
 	// console.log(`Loading items from ${itemOffset} to ${endOffset}`);
 	// const currentItems = items.slice(itemOffset, endOffset);
 	// const pageCount = Math.ceil(items.length / itemsPerPage);
-	const pageCount = data?.total ? Math.ceil(data.total / PAGE_SIZE) : 0;
+
+	const getPageCount = () => {
+		if (!data?.total) {
+			return 0;
+		} else {
+			if (Math.ceil(data.total / PAGE_SIZE) >= 99) {
+				return 99;
+			} else {
+				return Math.ceil(data.total / PAGE_SIZE);
+			}
+		}
+	};
 
 	// Invoke when user click to request another page.
 
@@ -41,7 +52,7 @@ export default function Pagination({ query, pageIndex, setPageIndex }: { query: 
 
 	return (
 		<>
-			<ReactPaginate pageCount={pageCount} onPageChange={handlePageClick} pageRangeDisplayed={5} breakLabel="..." nextLabel="next >" previousLabel="< previous" renderOnZeroPageCount={null} />
+			<ReactPaginate pageCount={getPageCount()} onPageChange={handlePageClick} pageRangeDisplayed={5} breakLabel="..." nextLabel="next >" previousLabel="< previous" renderOnZeroPageCount={null} />
 		</>
 	);
 }
