@@ -5,6 +5,8 @@ import { NoResultIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import Loader from "@/components/common/Loader";
+import Link from "next/link";
+import { useEffect } from "react";
 
 export interface ItemTypes {
 	title: string;
@@ -36,23 +38,29 @@ export default function SearchResult({ query, pageIndex }: { query: string; page
 		searchFetcher
 	);
 
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, []);
+
 	if (isLoading) return <Loader isSmall={false} />;
 
 	return (
 		<ul>
 			{data?.items.map((item) => (
 				<li key={item.isbn}>
-					<div>
-						<Image src={item.image} width={50} height={50} alt={`${item.title} 책 커버`} style={{ background: "grey" }} />
-					</div>
-					<div>
-						<h1>{item.title}</h1>
-						<p>
-							<strong>
-								{item.author.replaceAll("^", ", ")} | {item.publisher}
-							</strong>
-						</p>
-					</div>
+					<Link href={`/book/${item.isbn}`}>
+						<div>
+							<Image src={item.image} width={50} height={50} alt={`${item.title} 책 커버`} style={{ background: "grey" }} />
+						</div>
+						<div>
+							<h1>{item.title}</h1>
+							<p>
+								<strong>
+									{item.author.replaceAll("^", ", ")} | {item.publisher}
+								</strong>
+							</p>
+						</div>
+					</Link>
 				</li>
 			))}
 		</ul>
