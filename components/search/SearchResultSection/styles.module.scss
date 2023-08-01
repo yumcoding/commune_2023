@@ -4,6 +4,10 @@
 .wrapper {
 	padding: 0 15px 100px;
 	background-color: $white;
+
+	.hidden{
+		display:none;
+	}
 }
 
 .searchHeader {
