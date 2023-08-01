@@ -1,7 +1,6 @@
 "use client";
 import useSWR from "swr";
 import { searchFetcher } from "@/lib/front/fetchers";
-import Book from "@/components/common/Book";
 import { NoResultIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import Image from "next/image";
@@ -37,7 +36,7 @@ export default function SearchResult({ query, pageIndex }: { query: string; page
 		searchFetcher
 	);
 
-	if (isLoading) return <Loader />;
+	if (isLoading) return <Loader isSmall={false} />;
 
 	return (
 		<ul>

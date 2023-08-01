@@ -1,3 +1,6 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
 @keyframes loader {
 	0% {
 		height: 0px;
@@ -8,46 +11,22 @@
 }
 
 .box {
-	display: inline-block;
-	width: 200px;
-	height: 200px;
-	border: 1px solid black;
-	border-radius: 3px;
-	font-size: 30px;
-	padding: 1em;
-	position: relative;
-	margin-bottom: 0.25em;
-	vertical-align: top;
-	transition: 0.3s color, 0.3s border, 0.3s transform, 0.3s opacity;
-	// &:not(:hover) {
-	// 	[class*="loader-"] {
-	// 		animation: none;
-	// 		&:before, &:after {
-	// 			animation: none;
-	// 		}
-	// 	}
-	// }
-	&:hover {
-		color: #fff; //#d60b52;
-		background-color: rgba(0, 0, 0, 0.1);
-		font-size: 0;
-		padding: 0;
-		border-width: 3px;
-		line-height: 200px;
-		opacity: 1;
-		transform: scale(1.2);
-		z-index: 2;
-		[class*="loader"] {
-			font-size: 70px;
-			line-height: 200px;
-		}
+	@include flexbox(center, center);
+	width: 100%;
+	height: calc(100vh - 70px - 60px);
+	font-size: 60px;
+
+	&.small {
+		height: 50px;
+		font-size: 30px;
+		margin: 10px 0 0;
 	}
 }
 
 .loader {
 	width: 0.8em;
 	height: 1em;
-	border: 0.1em black solid;
+	border: 0.1em $text-primary solid;
 	border-radius: 0px 0px 0.2em 0.2em;
 	position: relative;
 
@@ -60,7 +39,7 @@
 	&:after {
 		width: 0.2em;
 		height: 50%;
-		border: 0.1em black solid;
+		border: 0.1em $text-primary solid;
 		border-left: none;
 		border-radius: 0px 0.5em 0.5em 0px;
 		left: calc(100% + 0.1em);
@@ -70,10 +49,10 @@
 	&:before {
 		width: 0.1em;
 		height: 0.3em;
-		background-color: black;
+		background-color: $text-primary;
 		top: -0.3em;
 		left: 0.05em;
-		box-shadow: 0.2em 0px 0px 0px black, 0.2em -0.2em 0px 0px black, 0.4em 0px 0px 0px black;
+		box-shadow: 0.2em 0px 0px 0px $text-primary, 0.2em -0.2em 0px 0px $text-primary, 0.4em 0px 0px 0px $text-primary;
 		animation: loader 1s linear infinite alternate;
 	}
 }
