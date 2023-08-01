@@ -1,6 +1,7 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { ItemTypes } from "@/components/search/SearchResultSection";
+import { ItemTypes } from "@/components/search/SearchResult";
+
 
 // TODO 1
 // href 두 군데 넣어주어야 한다.
