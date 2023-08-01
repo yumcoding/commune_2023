@@ -31,7 +31,7 @@ export interface SearchResultTypes {
 export const PAGE_SIZE = 10;
 
 export default function SearchResult({ query, pageIndex }: { query: string; pageIndex: number }) {
-	const { wrapper, list, noResult } = styles;
+	const { list, noResult } = styles;
 
 	const { data, isLoading, error } = useSWR<SearchResultTypes>(
 		query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}&start=${PAGE_SIZE * pageIndex + 1}` : null,
@@ -43,6 +43,18 @@ export default function SearchResult({ query, pageIndex }: { query: string; page
 	}, []);
 
 	if (isLoading) return <Loader isSmall={false} />;
+
+	if (data && data.total === 0)
+		return (
+			<>
+				<div className={noResult}>
+					<NoResultIcon />
+					<p>
+						검색 결과가 없어요. <br /> 다른 검색어를 입력해보세요.
+					</p>
+				</div>
+			</>
+		);
 
 	return (
 		<ul>
