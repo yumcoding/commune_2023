@@ -1,2 +1,46 @@
 @import "@/app/variables.module.scss";
 @import "@/app/mixins.module.scss";
+
+.hidden {
+	display: none;
+}
+
+.wrapper {
+	@include flexbox(center, center);
+	margin: 16px 0 0 0;
+}
+
+.list {
+	@include flexbox(start, center);
+}
+
+.item {
+	width: 30px;
+	padding: 16px 0;
+	margin: 0 3px;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	font-weight: 500;
+	color: $text-tertiary;
+	transition: color 150ms ease-in-out;
+	&:hover {
+		color: $text-primary;
+	}
+}
+
+.active {
+	color: $text-primary;
+	font-weight: 700;
+	font-size: 15px;
+}
+
+.ellipsis {
+	margin: 0 10px;
+	transition: color 150ms ease-in-out;
+	color: $text-tertiary;
+
+	&:hover {
+		color: $text-primary;
+	}
+}
