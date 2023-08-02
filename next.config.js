@@ -8,6 +8,16 @@ const nextConfig = {
 			},
 		];
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "shopping-phinf.pstatic.net",
+				// port: '',
+				// pathname: '/account123/**',
+			},
+		],
+	},
 };
 
 module.exports = nextConfig;

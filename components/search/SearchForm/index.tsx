@@ -1,43 +1,37 @@
 "use client";
 
-import { FormEvent, useRef, useContext, useEffect } from "react";
+import { FormEvent, useRef, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+
 import styles from "./styles.module.scss";
 import { CloseMarkIcon, SearchIcon } from "@/assets/icons";
-import { SearchQueryContext } from "@/providers/searchQueryProvider";
-import { useRouter } from "next/navigation";
 
 export default function SearchForm() {
 	const { form, searchIconWrapper, searchClearBtn } = styles;
 
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const { query, setQuery } = useContext(SearchQueryContext);
+	const searchParams = useSearchParams();
+
+	const search = searchParams.get("query");
 
 	const onClickClear = () => {
 		if (inputRef.current) {
 			inputRef.current.value = "";
 		}
-		setQuery("");
 	};
 
 	useEffect(() => {
-		if (inputRef.current && query && query?.length > 0) {
-			inputRef.current.value = query;
+		if (inputRef.current && search && search.length > 0) {
+			inputRef.current.value = search;
 		}
-	}, [query]);
-
-	useEffect(() => {
-		return () => {
-			setQuery("");
-		};
-	}, [setQuery]);
+	}, []);
 
 	const router = useRouter();
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setQuery(inputRef.current?.value);
-		router.push(`/search?query=${inputRef.current?.value}`);
+		router.push(`/search?query=${inputRef.current?.value}&pageIndex=1`);
 	};
 
 	return (

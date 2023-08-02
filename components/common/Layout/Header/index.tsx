@@ -11,7 +11,6 @@ import SearchRecommendation from "@/components/search/SearchRecommendation";
 import useScrollDownCheck from "@/hooks/useScrollDownCheck";
 import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
 import UnderConstructionContent from "@/components/common/UnderConstructionContent";
-import { SearchQueryContext } from "@/providers/searchQueryProvider";
 
 export default function Header() {
 	const { headerWrapper, isVisible, hasBorder: hasBorderCss, header, logo, nav, isActive, link, menuWrapper, menu, searchWrapper, search, searchDropdown, visible, loginBtn, libraryLink } = styles;
@@ -57,13 +56,10 @@ export default function Header() {
 	const router = useRouter();
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const { setQuery } = useContext(SearchQueryContext);
-
 	const onSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setQuery(inputRef.current?.value);
 		setIsSearchVisible(false);
-		router.push(`/search?query=${inputRef.current?.value}`);
+		router.push(`/search?query=${inputRef.current?.value}&pageIndex=1`);
 	};
 
 	return (
