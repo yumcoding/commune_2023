@@ -31,7 +31,7 @@ export default function SearchForm() {
 
 	const onSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		router.push(`/search?query=${inputRef.current?.value}`);
+		router.push(`/search?query=${inputRef.current?.value}&pageIndex=1`);
 	};
 
 	return (

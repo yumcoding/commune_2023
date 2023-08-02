@@ -12,10 +12,13 @@ export default function SearchResultSection() {
 	const searchParams = useSearchParams();
 
 	const search = searchParams.get("query");
+	const pageIndex = Number(searchParams.get("pageIndex"));
+
+	
 
 	const isResultHidden = search || search?.length === 0;
 
-	const [pageIndex, setPageIndex] = useState(0);
+	// const [pageIndex, setPageIndex] = useState(0);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -30,7 +33,7 @@ export default function SearchResultSection() {
 			<div style={{ display: "none" }}>
 				<SearchResult query={search ?? ""} pageIndex={pageIndex + 1} />
 			</div>
-			<Pagination query={search ?? ""} pageIndex={pageIndex} setPageIndex={setPageIndex} />
+			<Pagination query={search ?? ""} pageIndex={pageIndex}  />
 		</section>
 	);
 }

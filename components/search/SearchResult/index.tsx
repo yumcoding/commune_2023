@@ -38,7 +38,7 @@ export default function SearchResult({ query, pageIndex }: { query: string; page
 	const { listItem, bookInfo, noResult } = styles;
 
 	const { data, isLoading, error } = useSWR<SearchResultTypes>(
-		query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}&start=${PAGE_SIZE * pageIndex + 1}` : null,
+		query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}&start=${PAGE_SIZE * (pageIndex - 1) + 1}` : null,
 		searchFetcher
 	);
 

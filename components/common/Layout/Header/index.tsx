@@ -59,7 +59,7 @@ export default function Header() {
 	const onSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		setIsSearchVisible(false);
-		router.push(`/search?query=${inputRef.current?.value}`);
+		router.push(`/search?query=${inputRef.current?.value}&pageIndex=1`);
 	};
 
 	return (
