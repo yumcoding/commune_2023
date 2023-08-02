@@ -66,7 +66,7 @@ export default function SearchResult({ query, pageIndex }: { query: string; page
 				<li key={item.isbn} className={listItem}>
 					<Link href={`/book/${item.isbn}`}>
 						<div>
-							<Image src={item.image} width={50} height={73} alt={`${item.title} 책 커버`} style={{ background: "grey" }} />
+							<Image src={item.image} width={60} height={87} alt={`${item.title} 책 커버`} style={{ background: "grey" }} />
 						</div>
 						<div className={bookInfo}>
 							<h1>{item.title}</h1>
