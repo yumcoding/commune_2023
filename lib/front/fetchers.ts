@@ -10,7 +10,7 @@ export const searchFetcher = (url: string) =>
 		headers: requestHeaders,
 	}).then((res) => res.json());
 
-export const searchFetcherXML = (url: string) => {
+export const searchFetcherXML = (url: string) =>
 	fetch(url, {
 		headers: requestHeaders,
 	})
@@ -20,8 +20,4 @@ export const searchFetcherXML = (url: string) => {
 			const json: any = convertXMLtoJSON(xmlNode);
 			const { rss } = json;
 			return rss.channel.item;
-		})
-		.catch((e) => {
-			console.error(e);
 		});
-};
