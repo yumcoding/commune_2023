@@ -19,7 +19,6 @@ export const searchFetcherXML = (url: string) => {
 			const xmlNode = new DOMParser().parseFromString(xmlString, "text/xml");
 			const json: any = convertXMLtoJSON(xmlNode);
 			const { rss } = json;
-			console.log(rss.channel.item);
 			return rss.channel.item;
 		})
 		.catch((e) => {
