@@ -50,7 +50,7 @@ export default function BookInfo() {
 			<section className={cls(section, summary)}>
 				<div className={sectionContentWrapper}>
 					<h2>책 소개</h2>
-					<p>{data ? data.description : "-"}</p>
+					{data && <p>{data.description}</p>}
 				</div>
 			</section>
 		</>
