@@ -5,7 +5,7 @@ import CommentForm from "@/components/book/CommentForm";
 import CommentItem from "@/components/book/CommentItem";
 import CartLink from "@/components/book/CartLink";
 import ReviewSection from "@/components/book/ReviewSection";
-import BookInfo from "@/components/book/BookInfo";
+import BookInfo from "../../../components/book/BookInfo/index";
 import { ChevronDownDoubleIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 
