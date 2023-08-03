@@ -7,6 +7,7 @@ import { searchFetcher } from "@/lib/front/fetchers";
 import Loader from "@/components/common/Loader";
 import { NoResultIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
+import convertStrToDate from "@/lib/front/convertStrToDate";
 
 export interface ItemTypes {
 	title: string;
@@ -29,10 +30,6 @@ export interface SearchResultTypes {
 }
 
 export const PAGE_SIZE = 10;
-
-const strToDate = (str: string) => {
-	return `${str.substring(0, 4)}.${str.substring(4, 6)}.${str.substring(6)}`;
-};
 
 export default function SearchResult({ query, pageIndex }: { query: string; pageIndex: number }) {
 	const { list, listItem, bookInfo, desc, noResult } = styles;
@@ -84,7 +81,7 @@ export default function SearchResult({ query, pageIndex }: { query: string; page
 						<div className={bookInfo}>
 							<h1>{item.title}</h1>
 							<p>
-								{item.author.replaceAll("^", ", ")} | {strToDate(item.pubdate)}
+								{item.author.replaceAll("^", ", ")} | {convertStrToDate(item.pubdate)}
 							</p>
 							{device === "md" && <p className={desc}>{item.description}</p>}
 						</div>
