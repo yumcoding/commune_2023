@@ -9,14 +9,14 @@ import BookInfo from "@/components/book/BookInfo";
 import { ChevronDownDoubleIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 
-export default function Page({ params }: { params: { title: string } }) {
+export default function Page() {
 	const { main, section, sectionContentWrapper, loadMoreReviewBtn } = styles;
 
 	return (
 		<main className={main}>
 			{/* 상단 버튼 nav */}
 			<ButtonGroup />
-			<BookInfo isbn={params.title} />
+			<BookInfo />
 			<Divider />
 			{/* 사용자 리뷰 */}
 			<section className={section}>
