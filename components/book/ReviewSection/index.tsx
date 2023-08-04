@@ -1,14 +1,25 @@
 "use client";
 import ReviewItem from "../ReviewItem";
-import { ChevronDownDoubleIcon, PencilIcon } from "@/assets/icons";
+import { ChevronDownDoubleIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export default function ReviewSection() {
 	const { reviewHeader, reviewWriteBtn, loadMoreReviewBtn } = styles;
 
 	const pathname = usePathname();
+	const params = useParams();
+
+	const fetchData = async () => {
+		const res = await fetch(`/api/book/${params.isbn}`);
+		const data = await res.json();
+		console.log("data", data);
+	};
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	return (
 		<>
@@ -23,10 +34,13 @@ export default function ReviewSection() {
 			</div>
 
 			<ul>
-				<ReviewItem key="da123" />
+				{/* <ReviewItem key="da123" />
 				<ReviewItem key="4da56" />
-				<ReviewItem key="78aa9" />
+				<ReviewItem key="78aa9" /> */}
 			</ul>
+
+			{/* 데이터 없는 경우 */}
+			{/* <NoListItemIcon /> */}
 
 			<button type="button" className={loadMoreReviewBtn}>
 				<span>리뷰 더 읽기</span>
