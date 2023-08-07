@@ -13,7 +13,7 @@ export default function ReviewSection() {
 	const params = useParams();
 
 	const fetchData = async () => {
-		const res = await fetch(`/api/book/${params.isbn}`);
+		const res = await fetch(`/api/book/${params.isbn}/reviews`);
 		const data = await res.json();
 		console.log("data", data);
 	};
