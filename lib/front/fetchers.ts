@@ -21,3 +21,5 @@ export const searchFetcherXML = (url: string) =>
 			const { rss } = json;
 			return rss.channel.item;
 		});
+
+export const fetcher = (url: string) => fetch(url).then((res) => res.json());
