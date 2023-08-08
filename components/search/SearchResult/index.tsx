@@ -8,26 +8,7 @@ import Loader from "@/components/common/Loader";
 import { NoResultIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import convertStrToDate from "@/lib/front/convertStrToDate";
-
-export interface ItemTypes {
-	title: string;
-	link: string;
-	image: string;
-	author: string;
-	discount: string;
-	publisher: string;
-	pubdate: string;
-	isbn: string;
-	description: string;
-}
-
-export interface SearchResultTypes {
-	lastBuildDate: string;
-	total: number;
-	start: number;
-	display: number;
-	items: ItemTypes[];
-}
+import { SearchResultTypes } from "@/types/db";
 
 export const PAGE_SIZE = 10;
 

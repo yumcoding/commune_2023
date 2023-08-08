@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { ItemTypes } from "@/components/search/SearchResult";
 import Image from "next/image";
+import { SearchItemTypes } from "@/types/db";
 
 // TODO 1
 // href 두 군데 넣어주어야 한다.
@@ -11,7 +11,7 @@ import Image from "next/image";
 // props로 detail인지 review인지 구분해서
 // ? '/book/isbn'으로 갈지 '/review'로 갈지 구분하는 방법
 
-export default function Book(props: { item: ItemTypes }) {
+export default function Book(props: { item: SearchItemTypes }) {
 	const { book, bookImg, bookDesc } = styles;
 	const { isbn, image, title, author, publisher } = props.item;
 	return (

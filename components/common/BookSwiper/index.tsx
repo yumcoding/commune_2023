@@ -13,12 +13,11 @@ import ShowMoreBookSlide from "../ShowMoreBookSlide";
 import DefaultModalOverlay from "../Modal/DefaultModalOverlay";
 import MoreReviewModalContent from "@/components/library/MoreReviewModalContent";
 
-// TODO: 책 리스트 데이터 추가
-interface BookSwiperPropTypes {
+interface BookSwiperTypes {
 	hasShowMore: boolean;
 }
 
-export default function BookSwiper({ hasShowMore }: BookSwiperPropTypes) {
+export default function BookSwiper({ hasShowMore }: BookSwiperTypes) {
 	const { swiperWrapper, btn, prevBtn, nextBtn } = styles;
 
 	const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();

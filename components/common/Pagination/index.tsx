@@ -17,7 +17,7 @@ interface PageClickEventTypes {
 }
 
 export default function Pagination({ query, pageIndex }: { query: string; pageIndex: number }) {
-	const { hidden, wrapper, list, item, active,ellipsis } = styles;
+	const { hidden, wrapper, list, item, active, ellipsis } = styles;
 
 	const { data, isLoading } = useSWR(query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}&start=${PAGE_SIZE * (pageIndex - 1) + 1}` : null, searchFetcher);
 

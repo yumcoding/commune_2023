@@ -6,18 +6,7 @@ import { searchFetcherXML } from "@/lib/front/fetchers";
 import convertStrToDate from "@/lib/front/convertStrToDate";
 import { cls } from "@/lib/front/cls";
 import styles from "./styles.module.scss";
-
-export interface BookDescTypes {
-	author: string;
-	description: string;
-	discount: string;
-	image: string;
-	isbn: string;
-	link: string;
-	pubdate: string;
-	publisher: string;
-	title: string;
-}
+import { BookDescTypes } from "@/types/db";
 
 export default function BookInfo() {
 	const { section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary } = styles;

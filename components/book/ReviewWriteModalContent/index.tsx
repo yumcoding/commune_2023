@@ -6,25 +6,11 @@ import useSWR from "swr";
 import { ChevronLeftIcon, CloseMarkIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import { cls } from "@/lib/front/cls";
-import { BookDescTypes } from "../BookInfo";
 import { searchFetcherXML } from "@/lib/front/fetchers";
-import { Review } from "@prisma/client";
 import useMutation from "@/hooks/useMutation";
-import { getSession, useSession } from "next-auth/react";
+import { BookDescTypes, ReviewMutationTypes } from "@/types/db";
 
-interface ReviewTypes {
-	title: string;
-	content: string;
-	bookIsbn: string;
-	bookAuthor: string;
-	bookTitle: string;
-	bookImage: string;
-}
 
-interface ReviewMutationTypes {
-	ok: boolean;
-	review: Review;
-}
 
 export default function ReviewWriteModalContent({ isModal }: { isModal: boolean }) {
 	const { wrapper, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, counter, backBtn } = styles;
@@ -34,8 +20,6 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 		revalidateOnFocus: false,
 		revalidateOnReconnect: false,
 	});
-
-	const session = useSession();
 
 	const router = useRouter();
 	const onClickClose = () => router.back();
@@ -57,7 +41,7 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		if (mutateLoading) return;
-		if (searchData && title?.length > 0 && content?.length > 0 && session?.data) {
+		if (searchData && title?.length > 0 && content?.length > 0) {
 			mutateData({
 				title,
 				content,
@@ -65,10 +49,10 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 				bookAuthor: searchData.author,
 				bookTitle: searchData.title,
 				bookImage: searchData.image,
-				user: session.data.user,
 			});
 		}
 	};
+	
 
 	return (
 		<>
