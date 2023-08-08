@@ -1,10 +1,12 @@
 "use client";
-import ReviewItem from "../ReviewItem";
+import { useParams, usePathname } from "next/navigation";
+import useSWR from "swr";
+import Link from "next/link";
+import ReviewItem from "../ReviewList";
 import { ChevronDownDoubleIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
-import { useParams, usePathname } from "next/navigation";
-import Link from "next/link";
-import { useEffect } from "react";
+import { fetcher } from "@/lib/front/fetchers";
+import { ReviewsTypes } from "@/types/db";
 
 export default function ReviewSection() {
 	const { reviewHeader, reviewWriteBtn, loadMoreReviewBtn } = styles;
@@ -12,14 +14,7 @@ export default function ReviewSection() {
 	const pathname = usePathname();
 	const params = useParams();
 
-	const fetchData = async () => {
-		const res = await fetch(`/api/book/${params.isbn}/reviews`);
-		const data = await res.json();
-		console.log("data", data);
-	};
-	useEffect(() => {
-		fetchData();
-	}, []);
+	const { data } = useSWR<ReviewsTypes>(`/api/book/${params.isbn}/reviews`, fetcher);
 
 	return (
 		<>
@@ -32,15 +27,9 @@ export default function ReviewSection() {
 					<PencilIcon />
 				</Link>
 			</div>
+			{}
 
-			<ul>
-				{/* <ReviewItem key="da123" />
-				<ReviewItem key="4da56" />
-				<ReviewItem key="78aa9" /> */}
-			</ul>
-
-			{/* 데이터 없는 경우 */}
-			{/* <NoListItemIcon /> */}
+			{data?.data && data.data.length > 0 ? <ul></ul> : <NoListItemIcon />}
 
 			<button type="button" className={loadMoreReviewBtn}>
 				<span>리뷰 더 읽기</span>
