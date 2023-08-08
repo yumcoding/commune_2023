@@ -16,19 +16,21 @@ export default function ReviewSection() {
 
 	const { data } = useSWR<ReviewsTypes>(`/api/book/${params.isbn}/reviews`, fetcher);
 
+	const totalNum = data?.data ? data.data.length : 0;
+
 	return (
 		<>
 			<div className={reviewHeader}>
 				<h2>
-					리뷰<small>(999+)</small>
+					리뷰<small>({totalNum})</small>
 				</h2>
+				{/* TODO : 이미 작성한 리뷰가 있는 경우 */}
 				<Link href={`${pathname}/write-review`} className={reviewWriteBtn}>
 					<span>리뷰 작성하기</span>
 					<PencilIcon />
 				</Link>
 			</div>
-			{}
-
+			{/* TODO : 에러, 아이템 없는 경우, 리스트 */}
 			{data?.data && data.data.length > 0 ? <ul></ul> : <NoListItemIcon />}
 
 			<button type="button" className={loadMoreReviewBtn}>
