@@ -1,23 +1,42 @@
-// import prisma from "@/lib/server/prisma";
-// import { NextResponse } from "next/server";
+import prisma from "@/lib/server/prisma";
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 // // 특정 책, 특정 사용자가 쓴 특정 리뷰를 GET, PATCH, DELETE
-// export async function GET({ params }: { params: { isbn: string } }) {
-// 	const response = await prisma.$queryRaw`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';`.then(async () => {
-// 		const review = await prisma.review.findMany({
-// 			where: {
-// 				bookIsbn: params.isbn,
-// 			},
-// 			include: {
-// 				user: {
-// 					select: {
-// 						name: true,
-// 						image: true,
-// 					},
-// 				},
-// 			},
-// 		});
-// 		return review;
-// 	});
-// 	return NextResponse.json({ ok: true, review: response });
-// }
+export async function GET(req: Request, { params }: { params: { isbn: string; id: string } }) {
+	const session = await getServerSession(authOptions);
+
+	const review = await prisma.review.findUnique({
+		where: {
+			id: +params.id,
+		},
+		include: {
+			user: {
+				select: {
+					id: true,
+					name: true,
+					image: true,
+				},
+			},
+			_count: {
+				select: {
+					likes: true,
+				},
+			},
+		},
+	});
+	const isLiked = Boolean(
+		await prisma.like.findFirst({
+			where: {
+				reviewId: +params.id,
+				userId: session.user.id,
+			},
+			select: {
+				id: true,
+			},
+		})
+	);
+
+	return NextResponse.json({ ok: true, review, isLiked });
+}
