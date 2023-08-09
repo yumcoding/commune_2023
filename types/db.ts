@@ -1,4 +1,4 @@
-import { Review } from "@prisma/client";
+import { Review, User } from "@prisma/client";
 
 export interface SearchItemTypes {
 	title: string;
@@ -32,12 +32,25 @@ export interface BookDescTypes {
 	title: string;
 }
 
-export interface ReviewsTypes {
-	ok: boolean;
-	data: Review[];
-}
-
 export interface ReviewMutationTypes {
 	ok: boolean;
 	data: Review;
+}
+
+export interface ReviewWithUser extends Review {
+	user: User;
+	_count: {
+		likes: number;
+	};
+}
+
+export interface ReviewsTypes {
+	ok: boolean;
+	data: ReviewWithUser[];
+}
+
+export interface ReviewItemTypes {
+	ok: boolean;
+	review: ReviewWithUser;
+	isLiked: boolean;
 }
