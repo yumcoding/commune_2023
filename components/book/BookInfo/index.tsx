@@ -2,7 +2,7 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import useSWR from "swr";
-import { searchFetcherXML } from "@/lib/front/fetchers";
+import { noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import convertStrToDate from "@/lib/front/convertStrToDate";
 import { cls } from "@/lib/front/cls";
 import styles from "./styles.module.scss";
@@ -12,11 +12,7 @@ export default function BookInfo() {
 	const { section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary } = styles;
 
 	const params = useParams();
-	const { data } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, {
-		revalidateIfStale: false,
-		revalidateOnFocus: false,
-		revalidateOnReconnect: false,
-	});
+	const { data } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
 
 	return (
 		<>
@@ -39,6 +35,7 @@ export default function BookInfo() {
 			<section className={cls(section, summary)}>
 				<div className={sectionContentWrapper}>
 					<h2>책 소개</h2>
+					{/* TODO : loader image */}
 					{data && <p>{data.description}</p>}
 				</div>
 			</section>

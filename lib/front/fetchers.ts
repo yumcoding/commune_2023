@@ -1,5 +1,11 @@
 import convertXMLtoJSON from "./convertXMLtoJSON";
 
+export const noRevalidationOption = {
+	revalidateIfStale: false,
+	revalidateOnFocus: false,
+	revalidateOnReconnect: false,
+};
+
 const requestHeaders = new Headers();
 requestHeaders.set("Content-Type", "application/json");
 requestHeaders.set("X-Naver-Client-Id", process.env.NEXT_PUBLIC_NAVER_CLIENT_ID ? process.env.NEXT_PUBLIC_NAVER_CLIENT_ID : "");

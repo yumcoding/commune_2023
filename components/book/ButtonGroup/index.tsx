@@ -8,7 +8,7 @@ import { cls } from "@/lib/front/cls";
 import { ArrowLeftIcon, CartIcon, LinkIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import { BookDescTypes } from "../BookInfo";
-import { searchFetcherXML } from "@/lib/front/fetchers";
+import { noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import { useState } from "react";
 import ToastPopup from "@/components/common/ToastPopup";
 
@@ -38,11 +38,7 @@ export default function ButtonGroup() {
 
 	// 책 구매 페이지 띄우기
 	const params = useParams();
-	const { data } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, {
-		revalidateIfStale: false,
-		revalidateOnFocus: false,
-		revalidateOnReconnect: false,
-	});
+	const { data } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
 
 	return (
 		<>
