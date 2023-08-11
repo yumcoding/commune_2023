@@ -45,8 +45,7 @@ export interface ReviewWithUser extends Review {
 }
 
 export interface ReviewsTypes {
-	ok: boolean;
-	data: ReviewWithUser[];
+	reviews: ReviewWithUser[];
 }
 
 export interface ReviewItemTypes {
