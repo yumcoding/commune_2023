@@ -10,7 +10,7 @@ import { ChevronDownIcon, ChevronUpIcon, OutlineStarIcon, SolidStarIcon, LoginIc
 import styles from "./styles.module.scss";
 
 export default function ReviewItem(props: { review: ReviewWithUser }) {
-	const { flexbox, flexboxBetween, reviewItem, authorInfo, avatar, reviewTitle, author, date, rating, reviewText, moreText, btnWrapper, showMoreBtn, thumbBtnWrapper } = styles;
+	const { flexbox, flexboxBetween, reviewItem, reviewWriter, writerAvatar, writerInfo, reviewTitle, author, date, rating, reviewText, moreText, btnWrapper, showMoreBtn, thumbBtnWrapper } = styles;
 
 	const [showMore, setShowMore] = useState(false);
 	const toggleShowMore = () => setShowMore((prev) => !prev);
@@ -54,13 +54,13 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 		<>
 			<li className={reviewItem}>
 				{/* ---------------------- */}
-				<div className={flexbox}>
-					<div className={avatar}>
+				<div className={reviewWriter}>
+					<div className={writerAvatar}>
 						{/* TODO : 사용자 아바타  */}
 						<LoginIcon />
 					</div>
 
-					<div className={authorInfo}>
+					<div className={writerInfo}>
 						<h3 className={reviewTitle}>{title}</h3>
 
 						<div className={flexboxBetween}>
