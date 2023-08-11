@@ -1,16 +1,17 @@
 "use client";
+import { useState } from "react";
 import { useParams, usePathname } from "next/navigation";
-import useSWRInfinite from "swr/infinite";
-import Link from "next/link";
-import { ChevronDownDoubleIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
-import styles from "./styles.module.scss";
-import { fetcher } from "@/lib/front/fetchers";
-import { ReviewsTypes } from "@/types/db";
 import { useSession } from "next-auth/react";
+import useSWR from "swr";
+import useSWRInfinite from "swr/infinite";
+import { fetcher, noRevalidationOption } from "@/lib/front/fetchers";
+import Link from "next/link";
+import { ReviewItemTypes, ReviewWithUser, ReviewsTypes } from "@/types/db";
 import ReviewItem from "../ReviewItem";
-import { useEffect, useState } from "react";
+import { ChevronDownDoubleIcon, HorizontalLoaderIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
+import styles from "./styles.module.scss";
 
-const PAGE_SIZE = 1;
+const PAGE_SIZE = 10;
 
 export default function ReviewSection() {
 	const { reviewHeader, reviewWriteBtn, loadMoreReviewBtn } = styles;
@@ -21,55 +22,49 @@ export default function ReviewSection() {
 	const session = useSession();
 	const userId = session?.data?.user?.id;
 
-	const [cursor, setCursor] = useState("");
+	const { data: reviewData, size, setSize, isLoading } = useSWRInfinite<ReviewWithUser[]>((index) => `/api/book/${params.isbn}/reviews?page=${index}`, fetcher);
+	const { data: totalNum } = useSWR(`/api/book/${params.isbn}/reviews/total`, fetcher, noRevalidationOption);
 
-	const { data, mutate, size, setSize, isValidating, isLoading } = useSWRInfinite((index) => `/api/book/${params.isbn}/reviews?page=${index}`, fetcher);
+	const reviews = reviewData ? ([] as ReviewWithUser[]).concat(...reviewData) : [];
+	const isLoadingMore = isLoading || (size > 0 && reviewData && typeof reviewData[size - 1] === "undefined");
+	const isEmpty = reviewData?.[0]?.length === 0;
+	const isReachingEnd = isEmpty || (reviewData && reviewData[reviewData.length - 1]?.length < PAGE_SIZE);
 
-	const reviews = data ? [].concat(...data) : [];
-	const isLoadingMore = isLoading || (size > 0 && data && typeof data[size - 1] === "undefined");
-	const isEmpty = data?.[0]?.length === 0;
-	const isReachingEnd = isEmpty || (data && data[data.length - 1]?.length < PAGE_SIZE);
-	const isRefreshing = isValidating && data && data.length === size;
-
-	console.log("data", data);
-	// const totalNum = data?.data ? data.data.length : 0;
-
-	// const myReview = data?.data && userId ? data?.data.find((review) => review.userId === userId) : null;
-
-	const onClickShowMoreReivew = () => {
-		// setCursor(data ? data[data.length - 1][0].id : "0");
-		setSize(size + 1);
-	};
+	const onClickShowMoreReivew = () => setSize(size + 1);
 
 	return (
 		<>
-			{/* <div className={reviewHeader}>
+			<div className={reviewHeader}>
 				<h2>
-					리뷰<small>({totalNum})</small>
-				</h2> */}
-			{/* 
+					리뷰<small>({totalNum && totalNum > 999 ? "999+" : totalNum})</small>
+				</h2>
+
 				{userId && (
 					<Link href={`${pathname}/write-review`} className={reviewWriteBtn}>
-						<span>리뷰 {myReview ? "수정하기" : "작성하기"}</span>
+						{/* <span>리뷰 {myReview ? "수정하기" : "작성하기"}</span> */}
 						<PencilIcon />
 					</Link>
 				)}
 			</div>
-			{!data ? null : data?.data.length > 0 ? (
-				<ul>
-					{data?.data.map((review) => (
-						<ReviewItem key={review.id} review={review} />
-					))}
-				</ul>
-			) : (
-				<NoListItemIcon />
-			)} */}
 
-			{/* TODO : pagination */}
-			<button type="button" className={loadMoreReviewBtn} onClick={onClickShowMoreReivew}>
-				<span>리뷰 더 읽기</span>
-				<ChevronDownDoubleIcon />
-			</button>
+			{isEmpty && <NoListItemIcon />}
+			<ul>
+				{reviews.map((review) => (
+					<ReviewItem key={review.id} review={review} />
+				))}
+			</ul>
+
+			{isLoadingMore && (
+				<div style={{ width: "50px", height: "50px" }}>
+					<HorizontalLoaderIcon />
+				</div>
+			)}
+			{!isReachingEnd && (
+				<button type="button" className={loadMoreReviewBtn} onClick={onClickShowMoreReivew}>
+					<span>리뷰 더 읽기</span>
+					<ChevronDownDoubleIcon />
+				</button>
+			)}
 		</>
 	);
 }
