@@ -6,30 +6,35 @@ import { NextRequest, NextResponse } from "next/server";
 // reviews 전체 GET
 
 export async function GET(req: NextRequest, { params }: { params: { isbn: string } }) {
-	// const pageIndex = Number(req.nextUrl.searchParams.get("page")) - 1;
-	const response = await prisma.$queryRaw`SET SESSION sql_mode = 'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';`.then(async () => {
-		const reviews = await prisma.review.findMany({
-			where: {
-				bookIsbn: params.isbn,
-			},
-			include: {
-				user: {
-					select: {
-						name: true,
-						image: true,
-					},
+	const pageIndex = Number(req.nextUrl.searchParams.get("page"));
+	const isFirstPage = pageIndex === 0;
+
+	const pageCondition = {
+		skip: 10 * pageIndex,
+	};
+
+	const reviews = await prisma.review.findMany({
+		where: {
+			bookIsbn: params.isbn,
+		},
+		include: {
+			user: {
+				select: {
+					name: true,
+					image: true,
 				},
-				_count: {
-					select: {
-						likes: true,
-					},
+			},
+			_count: {
+				select: {
+					likes: true,
 				},
 			},
-		});
-		return reviews;
+		},
+		take: 10,
+		...(!isFirstPage && pageCondition),
 	});
 
-	return NextResponse.json({ ok: true, data: response });
+	return NextResponse.json(reviews);
 }
 
 // review 작성
