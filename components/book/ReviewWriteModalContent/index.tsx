@@ -6,20 +6,14 @@ import useSWR from "swr";
 import { ChevronLeftIcon, CloseMarkIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import { cls } from "@/lib/front/cls";
-import { searchFetcherXML } from "@/lib/front/fetchers";
+import { noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import useMutation from "@/hooks/useMutation";
 import { BookDescTypes, ReviewMutationTypes } from "@/types/db";
-
-
 
 export default function ReviewWriteModalContent({ isModal }: { isModal: boolean }) {
 	const { wrapper, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, counter, backBtn } = styles;
 	const params = useParams();
-	const { data: searchData } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, {
-		revalidateIfStale: false,
-		revalidateOnFocus: false,
-		revalidateOnReconnect: false,
-	});
+	const { data: searchData } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
 
 	const router = useRouter();
 	const onClickClose = () => router.back();
@@ -52,7 +46,6 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 			});
 		}
 	};
-	
 
 	return (
 		<>
