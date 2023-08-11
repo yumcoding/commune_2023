@@ -36,6 +36,32 @@
 	}
 }
 
+.noListWrapper {
+	@include column-flexbox(center, center);
+	padding: 20px 0;
+	svg {
+		width: 80px;
+		color: $text-primary;
+		margin: 0 0 13px 0;
+	}
+
+	p {
+		font-size: 14px;
+		line-height: 16px;
+		color: $text-primary;
+	}
+}
+
+.isLoadingWrapper {
+	@include flexbox(center, center);
+
+	svg {
+		width: 60px;
+		position: relative;
+		left: 15px;
+	}
+}
+
 .loadMoreReviewBtn {
 	@include flexbox(start, center);
 	height: 25px;

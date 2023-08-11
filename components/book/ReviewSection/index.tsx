@@ -14,7 +14,7 @@ import styles from "./styles.module.scss";
 const PAGE_SIZE = 10;
 
 export default function ReviewSection() {
-	const { reviewHeader, reviewWriteBtn, loadMoreReviewBtn } = styles;
+	const { reviewHeader, reviewWriteBtn, noListWrapper, isLoadingWrapper, loadMoreReviewBtn } = styles;
 
 	const pathname = usePathname();
 	const params = useParams();
@@ -47,7 +47,14 @@ export default function ReviewSection() {
 				)}
 			</div>
 
-			{isEmpty && <NoListItemIcon />}
+			{isEmpty && (
+				<div className={noListWrapper}>
+					<NoListItemIcon />
+					<p>아직 작성된 리뷰가 없어요.</p>
+					<p>혹시 책을 읽었다면, 리뷰를 작성해봐요 :)</p>
+				</div>
+			)}
+
 			<ul>
 				{reviews.map((review) => (
 					<ReviewItem key={review.id} review={review} />
@@ -55,10 +62,11 @@ export default function ReviewSection() {
 			</ul>
 
 			{isLoadingMore && (
-				<div style={{ width: "50px", height: "50px" }}>
+				<div className={isLoadingWrapper}>
 					<HorizontalLoaderIcon />
 				</div>
 			)}
+
 			{!isReachingEnd && (
 				<button type="button" className={loadMoreReviewBtn} onClick={onClickShowMoreReivew}>
 					<span>리뷰 더 읽기</span>
