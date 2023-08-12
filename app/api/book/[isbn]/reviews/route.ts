@@ -6,6 +6,8 @@ import { NextRequest, NextResponse } from "next/server";
 // reviews 전체 GET
 
 export async function GET(req: NextRequest, { params }: { params: { isbn: string } }) {
+	const session = await getServerSession(authOptions);
+
 	const pageIndex = Number(req.nextUrl.searchParams.get("page"));
 	const isFirstPage = pageIndex === 0;
 
@@ -16,6 +18,9 @@ export async function GET(req: NextRequest, { params }: { params: { isbn: string
 	const reviews = await prisma.review.findMany({
 		where: {
 			bookIsbn: params.isbn,
+			NOT: {
+				userId: session?.user.id,
+			},
 		},
 		orderBy: {
 			createdAt: "desc",
@@ -23,6 +28,7 @@ export async function GET(req: NextRequest, { params }: { params: { isbn: string
 		include: {
 			user: {
 				select: {
+					id: true,
 					name: true,
 					image: true,
 				},
