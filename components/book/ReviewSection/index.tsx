@@ -1,16 +1,14 @@
 "use client";
-import { useState } from "react";
 import { useParams, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
-import { fetcher, noRevalidationOption } from "@/lib/front/fetchers";
 import Link from "next/link";
-import { ReviewItemTypes, ReviewWithUser, ReviewsTypes } from "@/types/db";
+import { fetcher, noRevalidationOption } from "@/lib/front/fetchers";
+import { ReviewWithUser } from "@/types/db";
 import ReviewItem from "../ReviewItem";
 import { ChevronDownDoubleIcon, HorizontalLoaderIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
-
 const PAGE_SIZE = 10;
 
 export default function ReviewSection() {
@@ -38,13 +36,6 @@ export default function ReviewSection() {
 				<h2>
 					리뷰<small>({totalNum && totalNum > 999 ? "999+" : totalNum})</small>
 				</h2>
-
-				{userId && (
-					<Link href={`${pathname}/write-review`} className={reviewWriteBtn}>
-						{/* <span>리뷰 {myReview ? "수정하기" : "작성하기"}</span> */}
-						<PencilIcon />
-					</Link>
-				)}
 			</div>
 
 			{isEmpty && (

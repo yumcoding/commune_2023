@@ -1,5 +1,6 @@
 @import "@/app/variables.module.scss";
 @import "@/app/mixins.module.scss";
+
 .reviewHeader {
 	@include flexbox(between, end);
 	position: relative;
@@ -31,8 +32,6 @@
 	span {
 		font-size: 15px;
 		font-weight: 500;
-		position: relative;
-		top: 1px;
 	}
 }
 
