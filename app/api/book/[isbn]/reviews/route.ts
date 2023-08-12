@@ -17,6 +17,9 @@ export async function GET(req: NextRequest, { params }: { params: { isbn: string
 		where: {
 			bookIsbn: params.isbn,
 		},
+		orderBy: {
+			createdAt: "desc",
+		},
 		include: {
 			user: {
 				select: {
