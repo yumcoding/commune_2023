@@ -28,7 +28,9 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 
 	useEffect(() => {
 		if (mutateResult?.ok) {
-			router.replace(`/book/${params.isbn}`);
+			// router.replace(`/book/${params.isbn}`);
+			// TODO : router.replace 시 url은 변경되는데 화면 리로드 되지 않음
+			window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/book/${params.isbn}`;
 		}
 	}, [mutateResult, router, params.isbn]);
 
