@@ -6,11 +6,12 @@ import { fetcher } from "@/lib/front/fetchers";
 import useMutation from "@/hooks/useMutation";
 import { cls } from "@/lib/front/cls";
 import { ReviewItemTypes, ReviewWithUser } from "@/types/db";
-import { ChevronDownIcon, ChevronUpIcon, OutlineStarIcon, SolidStarIcon, LoginIcon, OutlineThumbUpIcon, SolidThumUpIcon } from "@/assets/icons";
+import { ChevronDownIcon, ChevronUpIcon, OutlineStarIcon, SolidStarIcon, LoginIcon, OutlineThumbUpIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 
 export default function ReviewItem(props: { review: ReviewWithUser }) {
-	const { flexbox, flexboxBetween, reviewItem, reviewWriter, writerAvatar, writerInfo, reviewTitle, author, date, rating, reviewText, moreText, btnWrapper, showMoreBtn, thumbBtnWrapper } = styles;
+	const { flexbox, flexboxBetween, reviewItem, reviewWriter, writerAvatar, writerInfo, reviewTitle, author, date, rating, reviewText, moreText, btnWrapper, showMoreBtn, thumbBtnWrapper, isLiked } =
+		styles;
 
 	const [showMore, setShowMore] = useState(false);
 	const toggleShowMore = () => setShowMore((prev) => !prev);
@@ -98,9 +99,9 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 							</>
 						)}
 					</button>
-					<div className={thumbBtnWrapper}>
+					<div className={cls(thumbBtnWrapper, reviewItemData?.isLiked ? isLiked : "")}>
 						<button type="button" onClick={onClickLike}>
-							{reviewItemData?.isLiked ? <SolidThumUpIcon /> : <OutlineThumbUpIcon />}
+							<OutlineThumbUpIcon />
 						</button>
 						<span>({reviewItemData?.review._count.likes})</span>
 					</div>
