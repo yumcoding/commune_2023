@@ -7,7 +7,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 export async function GET(req: Request, { params }: { params: { isbn: string } }) {
 	const session = await getServerSession(authOptions);
 
-	const review = await prisma.review.findUnique({
+	const review = await prisma.review.findFirst({
 		where: {
 			bookIsbn: params.isbn,
 			userId: session.user.id,
