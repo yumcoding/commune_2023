@@ -6,7 +6,7 @@ import { fetcher } from "@/lib/front/fetchers";
 import useMutation from "@/hooks/useMutation";
 import { cls } from "@/lib/front/cls";
 import { ReviewItemTypes, ReviewWithUser } from "@/types/db";
-import { ChevronDownIcon, ChevronUpIcon, OutlineStarIcon, SolidStarIcon, LoginIcon, OutlineThumbUpIcon } from "@/assets/icons";
+import { ChevronDownIcon, ChevronUpIcon, OutlineStarIcon, SolidStarIcon, LoginIcon, OutlineThumbUpIcon, SolidThumUpIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 
 export default function ReviewItem(props: { review: ReviewWithUser }) {
@@ -28,7 +28,7 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 	const [toggleLikes] = useMutation(`/api/book/${params.isbn}/reviews/${id}/likes`, "POST");
 
 	const { data: reviewItemData, mutate } = useSWR<ReviewItemTypes>(`/api/book/${params.isbn}/reviews/${id}`, fetcher);
-
+	console.log("reviewItemData", reviewItemData);
 	const onClickLike = () => {
 		if (!reviewItemData) return;
 		const currentLikesNum = reviewItemData.review._count.likes;
@@ -100,7 +100,7 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 					</button>
 					<div className={thumbBtnWrapper}>
 						<button type="button" onClick={onClickLike}>
-							<OutlineThumbUpIcon />
+							{reviewItemData?.isLiked ? <SolidThumUpIcon /> : <OutlineThumbUpIcon />}
 						</button>
 						<span>({reviewItemData?.review._count.likes})</span>
 					</div>
