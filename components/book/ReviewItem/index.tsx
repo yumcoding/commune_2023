@@ -10,8 +10,25 @@ import { ChevronDownIcon, ChevronUpIcon, OutlineStarIcon, SolidStarIcon, LoginIc
 import styles from "./styles.module.scss";
 
 export default function ReviewItem(props: { review: ReviewWithUser }) {
-	const { flexbox, flexboxBetween, reviewItem, reviewWriter, writerAvatar, writerInfo, reviewTitle, author, date, rating, reviewText, moreText, btnWrapper, showMoreBtn, thumbBtnWrapper, isLiked } =
-		styles;
+	const {
+		flexbox,
+		flexboxBetween,
+		reviewItem,
+		reviewWriter,
+		writerAvatar,
+		writerInfo,
+		reviewTitle,
+		author,
+		date,
+		rating,
+		reviewText,
+		moreText,
+		btnWrapper,
+		showMoreBtn,
+		isShort,
+		thumbBtnWrapper,
+		isLiked,
+	} = styles;
 
 	const [showMore, setShowMore] = useState(false);
 	const toggleShowMore = () => setShowMore((prev) => !prev);
@@ -86,7 +103,7 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 				</div>
 
 				<div className={btnWrapper}>
-					<button type="button" onClick={toggleShowMore} className={cls(flexbox, showMoreBtn)}>
+					<button type="button" onClick={toggleShowMore} className={cls(flexbox, showMoreBtn, content.length > 130 ? "" : isShort)}>
 						{showMore ? (
 							<>
 								접기
@@ -99,6 +116,7 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 							</>
 						)}
 					</button>
+
 					<div className={cls(thumbBtnWrapper, reviewItemData?.isLiked ? isLiked : "")}>
 						<button type="button" onClick={onClickLike}>
 							<OutlineThumbUpIcon />
