@@ -21,7 +21,7 @@ export default function MyReviewSection() {
 	const pathname = usePathname();
 
 	const params = useParams();
-	const { data: myReview, isLoading } = useSWR(`/api/book/${params.isbn}/reviews/mine`, fetcher, noRevalidationOption);
+	const { data: myReview, isLoading } = useSWR(`/api/book/${params.isbn}/reviews/mine`, fetcher);
 
 	// session 없는 경우, 즉 로그인하지 않은 경우 return null
 	const session = useSession();
