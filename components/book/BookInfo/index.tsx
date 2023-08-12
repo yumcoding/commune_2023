@@ -2,32 +2,18 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import useSWR from "swr";
-import { searchFetcherXML } from "@/lib/front/fetchers";
+import { noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import convertStrToDate from "@/lib/front/convertStrToDate";
 import { cls } from "@/lib/front/cls";
 import styles from "./styles.module.scss";
-
-export interface BookDescTypes {
-	author: string;
-	description: string;
-	discount: string;
-	image: string;
-	isbn: string;
-	link: string;
-	pubdate: string;
-	publisher: string;
-	title: string;
-}
+import { BookDescTypes } from "@/types/db";
+import { HorizontalLoaderIcon } from "@/assets/icons";
 
 export default function BookInfo() {
-	const { section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary } = styles;
+	const { section, bookWrapper, book, bookInfo, bookImg, sectionContentWrapper, summary, loadingWrapper } = styles;
 
 	const params = useParams();
-	const { data } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, {
-		revalidateIfStale: false,
-		revalidateOnFocus: false,
-		revalidateOnReconnect: false,
-	});
+	const { data, isLoading } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
 
 	return (
 		<>
@@ -50,7 +36,12 @@ export default function BookInfo() {
 			<section className={cls(section, summary)}>
 				<div className={sectionContentWrapper}>
 					<h2>책 소개</h2>
-					{data && <p>{data.description}</p>}
+					{isLoading && (
+						<div className={loadingWrapper}>
+							<HorizontalLoaderIcon />
+						</div>
+					)}
+					{!isLoading && data && <p>{data.description}</p>}
 				</div>
 			</section>
 		</>

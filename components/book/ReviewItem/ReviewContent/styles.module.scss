@@ -1,0 +1,92 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+@keyframes open {
+	from {
+		line-clamp: 3;
+		-webkit-line-clamp: 3;
+	}
+	to {
+		line-clamp: initial;
+		-webkit-line-clamp: initial;
+	}
+}
+
+@keyframes close {
+	from {
+		line-clamp: initial;
+		-webkit-line-clamp: initial;
+	}
+	to {
+		line-clamp: 3;
+		-webkit-line-clamp: 3;
+	}
+}
+
+.flexbox {
+	@include flexbox(start, center);
+}
+
+.reviewText {
+	margin: 8px 0 15px 0;
+	max-height: 72px;
+	overflow: hidden;
+	transition: max-height 300ms ease-in;
+
+	p {
+		font-size: 14px;
+		font-weight: 400;
+		letter-spacing: -0.2px;
+		line-height: 18px;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		animation: close 350ms ease-in forwards;
+	}
+
+	&.moreText {
+		max-height: 410px;
+		transition: max-height 300ms ease-in;
+
+		p {
+			animation: open 300ms ease-in forwards;
+		}
+	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		max-height: unset;
+		p {
+			line-clamp: initial;
+			-webkit-line-clamp: initial;
+			animation: none;
+		}
+	}
+}
+
+.btnWrapper {
+	@include flexbox(center, center);
+}
+ 
+.showMoreBtn {
+	font-size: 14px;
+	color: $background-dark;
+	position: relative;
+	top: -1px;
+
+	svg {
+		width: 16px;
+		height: 16px;
+		position: relative;
+		top: 1px;
+		margin: 0 0 0 1px;
+	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		display: none;
+	}
+
+	&.isShort {
+		display: none;
+	}
+}

@@ -7,6 +7,17 @@
 
 .header {
 	@include modalContentHeader();
+	h1 {
+		@include truncate();
+		font-size: 16px;
+		max-width: 260px;
+	}
+
+	@media screen and (min-width: $md-breakpoint) {
+		h1 {
+			max-width: 400px;
+		}
+	}
 }
 
 .closeBtn {
