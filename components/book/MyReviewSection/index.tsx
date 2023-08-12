@@ -11,9 +11,10 @@ import IsLikedBtn from "../ReviewItem/IsLikedBtn";
 import styles from "@/components/book/ReviewSection/styles.module.scss";
 import itemStyles from "./styles.module.scss";
 import sectionStyles from "@/app/book/[isbn]/styles.module.scss";
+import { cls } from "@/lib/front/cls";
 
 export default function MyReviewSection() {
-	const { reviewHeader, reviewWriteBtn, noListWrapper, isLoadingWrapper } = styles;
+	const { reviewHeader, reviewWriteBtn, noListWrapper, hasBorderBottom, isLoadingWrapper } = styles;
 	const { sectionContentWrapper } = sectionStyles;
 	const { section, reviewItem } = itemStyles;
 
@@ -53,10 +54,10 @@ export default function MyReviewSection() {
 					</>
 				) : (
 					<>
-						<div className={noListWrapper}>
+						<div className={cls(noListWrapper, hasBorderBottom)}>
 							<NoListItemIcon />
-							<p>아직 작성된 리뷰가 없어요.</p>
-							<p>혹시 책을 읽었다면, 리뷰를 작성해봐요 :)</p>
+							<p>혹시 책을 읽으셨나요😀?</p>
+							<p>리뷰를 작성해 책을 읽은 소감을 나눠주세요!</p>
 						</div>
 					</>
 				)}

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { fetcher, noRevalidationOption } from "@/lib/front/fetchers";
 import { ReviewWithUser } from "@/types/db";
 import ReviewItem from "../ReviewItem";
-import { ChevronDownDoubleIcon, HorizontalLoaderIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
+import { ArchiveIcon, ChevronDownDoubleIcon, HorizontalLoaderIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 const PAGE_SIZE = 10;
 
@@ -40,9 +40,9 @@ export default function ReviewSection() {
 
 			{isEmpty && (
 				<div className={noListWrapper}>
-					<NoListItemIcon />
+					<ArchiveIcon />
 					<p>아직 작성된 리뷰가 없어요.</p>
-					<p>혹시 책을 읽었다면, 리뷰를 작성해봐요 :)</p>
+					<p>상단 🔗 버튼을 클릭해 친구들에게 책을 소개해봐요!</p>
 				</div>
 			)}
 

@@ -38,8 +38,13 @@
 .noListWrapper {
 	@include column-flexbox(center, center);
 	padding: 20px 0;
+
+	&.hasBorderBottom {
+		border-bottom: 1px solid #e0e0e0;
+	}
+
 	svg {
-		width: 80px;
+		width: 70px;
 		color: $text-primary;
 		margin: 0 0 13px 0;
 	}
