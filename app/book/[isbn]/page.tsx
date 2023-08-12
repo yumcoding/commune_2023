@@ -8,6 +8,7 @@ import ReviewSection from "@/components/book/ReviewSection";
 import BookInfo from "../../../components/book/BookInfo/index";
 import { ChevronDownDoubleIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
+import MyReviewSection from "@/components/book/MyReviewSection";
 
 export default function Page() {
 	const { main, section, sectionContentWrapper, loadMoreReviewBtn } = styles;
@@ -18,6 +19,9 @@ export default function Page() {
 			<ButtonGroup />
 			<BookInfo />
 			<Divider />
+
+			<MyReviewSection />
+
 			{/* 사용자 리뷰 */}
 			<section className={section}>
 				<div className={sectionContentWrapper}>
