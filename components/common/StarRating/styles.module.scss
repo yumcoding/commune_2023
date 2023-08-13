@@ -1,0 +1,73 @@
+/* use display:inline-flex to prevent whitespace issues. alternatively, you can put all the children of .rating-group on a single line */
+.ratingGroup {
+	display: inline-flex;
+	text-align: center;
+}
+
+/* make hover effect work properly in IE */
+.ratingIcon {
+	pointer-events: none;
+}
+
+/* hide radio inputs */
+.ratingInput {
+	position: absolute !important;
+	left: -9999px !important;
+}
+
+/* set icon padding and size */
+.ratingLabel {
+	cursor: pointer;
+	/* if you change the left/right padding, update the margin-right property of .rating__label--half as well. */
+	padding: 0 0.1em;
+	font-size: 2rem;
+}
+
+/* add padding and positioning to half star labels */
+.ratingLabelHalf {
+	padding-right: 0;
+	margin-right: -0.6em;
+	z-index: 2;
+}
+
+/* set default star color */
+.ratingIconStar svg {
+	color: orange;
+}
+
+/* set color of none icon when unchecked */
+.ratingIconNone svg {
+	color: #eee;
+}
+
+/* if none icon is checked, make it red */
+.ratingInputNone:checked + .ratingLabel .ratingIconNone svg {
+	color: red;
+}
+
+/* if any input is checked, make its following siblings grey */
+.ratingInput:checked ~ .ratingLabel .ratingIconStar svg {
+	color: #ddd;
+}
+
+/* make all stars orange on rating group hover */
+.ratingGroup:hover .ratingLabel .ratingIconStar svg,
+.ratingGroup:hover .ratingLabelHalf .ratingIconStar svg {
+	color: orange;
+}
+
+/* make hovered input's following siblings grey on hover */
+.ratingInput:hover ~ .ratingLabel .ratingIconStar svg,
+.ratingInput:hover ~ .ratingLabelHalf .ratingIconStar svg {
+	color: #ddd;
+}
+
+/* make none icon grey on rating group hover */
+.ratingGroup:hover .ratingInputNone:not(:hover) + .ratingLabel .ratingIconNone svg {
+	color: #eee;
+}
+
+/* make none icon red on hover */
+.ratingInputNone:hover + .ratingLabel .ratingIconNone svg {
+	color: red;
+}
