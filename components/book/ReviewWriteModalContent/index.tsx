@@ -9,9 +9,10 @@ import { cls } from "@/lib/front/cls";
 import { noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import useMutation from "@/hooks/useMutation";
 import { BookDescTypes, ReviewMutationTypes } from "@/types/db";
+import StarRating from "@/components/common/StarRating";
 
 export default function ReviewWriteModalContent({ isModal }: { isModal: boolean }) {
-	const { wrapper, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, counter, backBtn } = styles;
+	const { wrapper, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, textareaWrapper, counter, ratingWrapper, backBtn } = styles;
 	const params = useParams();
 	const { data: searchData } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
 
@@ -23,6 +24,8 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 
 	const [content, setContent] = useState("");
 	const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value);
+
+	const [rating, setRating] = useState(0);
 
 	const [mutateData, { mutateLoading, mutateResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews`, "POST");
 
@@ -41,6 +44,7 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 			mutateData({
 				title,
 				content,
+				rating,
 				bookIsbn: searchData.isbn,
 				bookAuthor: searchData.author,
 				bookTitle: searchData.title,
@@ -61,17 +65,23 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 				<div className={formWrapper}>
 					<form onSubmit={onSubmit}>
 						<input type="text" placeholder="리뷰 제목을 정해주세요:)" value={title} onChange={onChangeTitle} />
-						<textarea placeholder="책에 대해 자유롭게 의견을 남겨주세요!" value={content} onChange={onChangeContent}></textarea>
+						<div className={textareaWrapper}>
+							<textarea placeholder="책에 대해 자유롭게 의견을 남겨주세요!" value={content} onChange={onChangeContent}></textarea>
+							<p className={counter}>{content?.length} / 1000</p>
+						</div>
+						<div className={ratingWrapper}>
+							<p>별점&nbsp;</p>
+							<StarRating rating={rating} setRating={setRating} />
+						</div>
+						<button type="button" className={backBtn} onClick={onClickClose}>
+						<ChevronLeftIcon />
+						뒤로가기
+					</button>
 						<button type="submit" className={cls(saveBtn, content?.length > 0 ? saveActive : "")} disabled={content?.length > 0 ? false : true}>
 							저장
 						</button>
 					</form>
-					<p className={counter}>{content?.length} / 1000</p>
 				</div>
-				<button type="button" className={backBtn} onClick={onClickClose}>
-					<ChevronLeftIcon />
-					뒤로가기
-				</button>
 			</section>
 		</>
 	);
