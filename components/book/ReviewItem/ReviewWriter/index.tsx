@@ -1,15 +1,18 @@
+import { cls } from "@/lib/front/cls";
 import styles from "./styles.module.scss";
-import { LoginIcon } from "@/assets/icons";
+import { LoginIcon, SolidStarIcon } from "@/assets/icons";
 
 interface propsTypes {
 	title: string;
 	name: string | null;
 	image: string | null;
 	updatedAt: Date;
+	rating: number;
 }
 export default function ReviewWriter(props: propsTypes) {
-	const { reviewWriter, writerAvatar, writerInfo, reviewTitle, flexboxBetween, flexbox, author, date, rating } = styles;
-	const { title, name, image, updatedAt } = props;
+	const { reviewWriter, writerAvatar, writerInfo, reviewTitle, flexboxBetween, flexbox, author, date, star } = styles;
+	const { title, name, image, updatedAt, rating } = props;
+
 	return (
 		<>
 			<div className={reviewWriter}>
@@ -26,14 +29,11 @@ export default function ReviewWriter(props: propsTypes) {
 							<strong className={author}>{name || "익명의 꼬뮤니"}</strong>
 							<small className={date}>{updatedAt.toString().slice(0, 10).replaceAll("-", ".")}</small>
 						</div>
-						{/* TODO : 책 별점 */}
-						{/* <div className={cls(flexbox, rating)}>
-          <SolidStarIcon />
-          <SolidStarIcon />
-          <SolidStarIcon />
-          <SolidStarIcon />
-          <OutlineStarIcon />
-        </div> */}
+						<div className={cls(flexbox, star)}>
+							{Array.from({ length: rating }).map((_, i) => (
+								<SolidStarIcon key={i} />
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
