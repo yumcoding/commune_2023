@@ -7,15 +7,17 @@ import { useParams } from "next/navigation";
 import { ReviewItemTypes } from "@/types/db";
 import { fetcher } from "@/lib/front/fetchers";
 import styles from "./styles.module.scss";
+import { useSession } from "next-auth/react";
 
 export default function IsLikedBtn(props: { reviewId: number }) {
 	const { thumbBtnWrapper, isLiked } = styles;
 
 	const params = useParams();
+	const session = useSession();
 
 	const [toggleLikes] = useMutation(`/api/book/${params.isbn}/reviews/${props.reviewId}/likes`, "POST");
 
-	const { data: reviewItemData, mutate } = useSWR<ReviewItemTypes>(`/api/book/${params.isbn}/reviews/${props.reviewId}`, fetcher);
+	const { data: reviewItemData, mutate } = useSWR<ReviewItemTypes>(`/api/book/${params.isbn}/reviews/${props.reviewId}/likes`, fetcher);
 
 	const onClickLike = () => {
 		if (!reviewItemData) return;
@@ -41,7 +43,7 @@ export default function IsLikedBtn(props: { reviewId: number }) {
 	return (
 		<>
 			<div className={cls(thumbBtnWrapper, reviewItemData?.isLiked ? isLiked : "")}>
-				<button type="button" onClick={onClickLike}>
+				<button type="button" onClick={onClickLike} disabled={session?.status === "unauthenticated"}>
 					<OutlineThumbUpIcon />
 				</button>
 				<span>({reviewItemData?.review._count.likes})</span>

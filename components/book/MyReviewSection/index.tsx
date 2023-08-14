@@ -20,13 +20,12 @@ export default function MyReviewSection() {
 
 	const pathname = usePathname();
 
-	const params = useParams();
-	const { data: myReview, isLoading } = useSWR(`/api/book/${params.isbn}/reviews/mine`, fetcher);
-
 	// session 없는 경우, 즉 로그인하지 않은 경우 return null
 	const session = useSession();
 	const userId = session?.data?.user?.id;
 
+	const params = useParams();
+	const { data: myReview, isLoading } = useSWR(userId ? `/api/book/${params.isbn}/reviews/user` : null, fetcher);
 	if (!userId) return null;
 
 	return (
@@ -47,7 +46,7 @@ export default function MyReviewSection() {
 				) : myReview?.review ? (
 					<>
 						<div className={reviewItem}>
-							<ReviewWriter title={myReview.review.title} name={myReview.review.user.name} image={myReview.review.user.image} updatedAt={myReview.review.updatedAt} />
+							<ReviewWriter title={myReview.review.title} name={myReview.review.user.name} image={myReview.review.user.image} updatedAt={myReview.review.updatedAt} rating={myReview.review.rating} />
 							<ReviewContent content={myReview.review.content} />
 							<IsLikedBtn reviewId={myReview.review.id} />
 						</div>

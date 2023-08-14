@@ -5,6 +5,10 @@
 	@include modalContentLayout();
 }
 
+.flexbox {
+	@include flexbox(between, center);
+}
+
 .header {
 	@include modalContentHeader();
 	h1 {
@@ -93,8 +97,8 @@
 
 	textarea {
 		width: 100%;
-		height: calc(100vh - 44px - 16px - 16px - 44px - 30px);
-		padding: 10px 15px 10px 10px;
+		height: calc(100vh - 44px - 16px - 16px - 44px - 30px - 30px);
+		padding: 10px 15px 26px 10px;
 		caret-color: $accent;
 		background-color: $input-grey-bg;
 		border: unset;
@@ -113,17 +117,47 @@
 	}
 }
 
+.textareaWrapper {
+	position: relative;
+}
+
 .counter {
 	position: absolute;
-	bottom: 16px;
-	right: 16px;
+	bottom: 8px;
+	right: 8px;
 	font-size: 13px;
 	font-weight: 400;
 	letter-spacing: -0.3px;
 	color: $text-tertiary;
+}
+
+.ratingWrapper {
+	@include flexbox(start, center);
+	margin: 3px 0 0 0;
+
+	> p {
+		position: relative;
+		top: 2px;
+		margin: 0 2px 0 0;
+		font-size: 14px;
+		color: $text-secondary;
+	}
+}
+
+.deleteBtn {
+	@include flexbox(start, center);
+	position: relative;
+	top: 5px;
+	padding: 0;
+	color: #eb217c;
+	svg {
+		width: 22px;
+	}
 
 	@media screen and (min-width: $md-breakpoint) {
-		right: 69px;
-		bottom: -61px;
+		position: absolute;
+		top: unset;
+		right: 66px;
+		bottom: -55px;
 	}
 }

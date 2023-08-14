@@ -13,14 +13,14 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 		updatedAt,
 		title,
 		content,
+		rating,
 	} = props.review;
 
 	return (
 		<>
 			<li className={reviewItem}>
-				<ReviewWriter title={title} name={name} image={image} updatedAt={updatedAt} />
+				<ReviewWriter title={title} name={name} image={image} updatedAt={updatedAt} rating={rating} />
 				<ReviewContent content={content} />
-				{/* ---------------- UI 수정  */}
 				<IsLikedBtn reviewId={id} />
 			</li>
 		</>

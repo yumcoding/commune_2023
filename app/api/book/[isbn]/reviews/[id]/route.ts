@@ -3,40 +3,41 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-// // 특정 책, 특정 사용자가 쓴 특정 리뷰를 GET, PATCH, DELETE
-export async function GET(req: Request, { params }: { params: { isbn: string; id: string } }) {
+// 특정 책에 대한 사용자의 리뷰 UPDATE
+export async function PATCH(req: Request, { params }: { params: { isbn: string; id: string } }) {
 	const session = await getServerSession(authOptions);
 
-	const review = await prisma.review.findUnique({
+	const body = await req.json();
+
+	const { title, content, rating } = body;
+
+	const review = await prisma.review.update({
 		where: {
 			id: +params.id,
+			bookIsbn: params.isbn,
+			userId: session.user.id,
 		},
-		include: {
-			user: {
-				select: {
-					id: true,
-					name: true,
-					image: true,
-				},
-			},
-			_count: {
-				select: {
-					likes: true,
-				},
-			},
+
+		data: {
+			title,
+			content,
+			rating,
 		},
 	});
-	const isLiked = Boolean(
-		await prisma.like.findFirst({
-			where: {
-				reviewId: +params.id,
-				userId: session.user.id,
-			},
-			select: {
-				id: true,
-			},
-		})
-	);
 
-	return NextResponse.json({ ok: true, review, isLiked });
+	return NextResponse.json({ ok: true, review });
+}
+
+// 특정 책에 대한 사용자의 리뷰 DELETE
+export async function DELETE(req: Request, { params }: { params: { isbn: string; id: string } }) {
+	const session = await getServerSession(authOptions);
+	const review = await prisma.review.delete({
+		where: {
+			id: +params.id,
+			bookIsbn: params.isbn,
+			userId: session.user.id,
+		},
+	});
+
+	return NextResponse.json({ ok: true, review });
 }

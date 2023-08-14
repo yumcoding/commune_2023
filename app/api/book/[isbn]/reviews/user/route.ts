@@ -3,7 +3,32 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-// // 특정 책, 특정 사용자가 쓴 특정 리뷰를 GET, PATCH, DELETE
+// 해당 사용자의 이 책에 대한 리뷰 POST
+export async function POST(req: Request) {
+	const session = await getServerSession(authOptions);
+	const body = await req.json();
+
+	const { title, content, bookIsbn, bookAuthor, bookTitle, bookImage } = body;
+	const review = await prisma.review.create({
+		data: {
+			title,
+			content,
+			bookIsbn,
+			bookAuthor,
+			bookTitle,
+			bookImage,
+			user: {
+				connect: {
+					id: session.user.id,
+				},
+			},
+		},
+	});
+
+	return NextResponse.json({ ok: true, data: review });
+}
+
+// 해당 사용자의 이 책에 대한 리뷰 GET
 export async function GET(req: Request, { params }: { params: { isbn: string } }) {
 	const session = await getServerSession(authOptions);
 
