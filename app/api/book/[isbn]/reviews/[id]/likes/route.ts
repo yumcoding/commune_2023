@@ -29,7 +29,7 @@ export async function GET(req: Request, { params }: { params: { isbn: string; id
 		await prisma.like.findFirst({
 			where: {
 				reviewId: +params.id,
-				userId: session.user.id,
+				userId: session?.user.id,
 			},
 			select: {
 				id: true,
