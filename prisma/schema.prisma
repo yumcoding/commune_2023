@@ -75,6 +75,7 @@ model Review {
   bookAuthor String
   bookTitle  String
   bookImage  String
+  rating     Int?
   likes      Like[]
 
   @@index([userId])
