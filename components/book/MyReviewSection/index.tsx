@@ -25,7 +25,7 @@ export default function MyReviewSection() {
 	const userId = session?.data?.user?.id;
 
 	const params = useParams();
-	const { data: myReview, isLoading } = useSWR(userId ? `/api/book/${params.isbn}/reviews/mine` : null, fetcher);
+	const { data: myReview, isLoading } = useSWR(userId ? `/api/book/${params.isbn}/reviews/user` : null, fetcher);
 
 	if (!userId) return null;
 

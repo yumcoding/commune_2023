@@ -6,15 +6,20 @@ import useSWR from "swr";
 import { ChevronLeftIcon, CloseMarkIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import { cls } from "@/lib/front/cls";
-import { noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
+import { fetcher, noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import useMutation from "@/hooks/useMutation";
 import { BookDescTypes, ReviewMutationTypes } from "@/types/db";
 import StarRating from "@/components/common/StarRating";
+import { useSession } from "next-auth/react";
 
 export default function ReviewWriteModalContent({ isModal }: { isModal: boolean }) {
 	const { wrapper, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, textareaWrapper, counter, ratingWrapper, backBtn } = styles;
 	const params = useParams();
 	const { data: searchData } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
+
+	const session = useSession();
+	const userId = session?.data?.user?.id;
+	const { data: myReview } = useSWR(userId ? `/api/book/${params.isbn}/reviews/user` : null, fetcher);
 
 	const router = useRouter();
 	const onClickClose = () => router.back();
@@ -27,29 +32,47 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 
 	const [rating, setRating] = useState(0);
 
-	const [mutateData, { mutateLoading, mutateResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews`, "POST");
-
 	useEffect(() => {
-		if (mutateResult?.ok) {
+		if (myReview?.review) {
+			setTitle(myReview.review.title);
+			setContent(myReview.review.content);
+			setRating(myReview.review.rating);
+		}
+	}, [myReview]);
+
+	const [mutateData, { mutateLoading, mutateResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/user`, "POST");
+	const [patchData, { mutateLoading: patchLoading, mutateResult: patchResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/${myReview?.review.id}`, "PATCH");
+	useEffect(() => {
+		if (mutateResult?.ok || patchResult?.ok) {
 			// router.replace(`/book/${params.isbn}`);
 			// TODO : router.replace 시 url은 변경되는데 화면 리로드 되지 않음
 			window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/book/${params.isbn}`;
 		}
-	}, [mutateResult, router, params.isbn]);
+	}, [mutateResult, patchResult, router, params.isbn]);
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		if (mutateLoading) return;
+
+		if (mutateLoading || patchLoading) return;
+
 		if (searchData && title?.length > 0 && content?.length > 0) {
-			mutateData({
-				title,
-				content,
-				rating,
-				bookIsbn: searchData.isbn,
-				bookAuthor: searchData.author,
-				bookTitle: searchData.title,
-				bookImage: searchData.image,
-			});
+			if (myReview?.review) {
+				patchData({
+					title,
+					content,
+					rating,
+				});
+			} else {
+				mutateData({
+					title,
+					content,
+					rating,
+					bookIsbn: searchData.isbn,
+					bookAuthor: searchData.author,
+					bookTitle: searchData.title,
+					bookImage: searchData.image,
+				});
+			}
 		}
 	};
 
@@ -74,9 +97,9 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 							<StarRating rating={rating} setRating={setRating} />
 						</div>
 						<button type="button" className={backBtn} onClick={onClickClose}>
-						<ChevronLeftIcon />
-						뒤로가기
-					</button>
+							<ChevronLeftIcon />
+							뒤로가기
+						</button>
 						<button type="submit" className={cls(saveBtn, content?.length > 0 ? saveActive : "")} disabled={content?.length > 0 ? false : true}>
 							저장
 						</button>

@@ -15,7 +15,7 @@ export default function IsLikedBtn(props: { reviewId: number }) {
 
 	const [toggleLikes] = useMutation(`/api/book/${params.isbn}/reviews/${props.reviewId}/likes`, "POST");
 
-	const { data: reviewItemData, mutate } = useSWR<ReviewItemTypes>(`/api/book/${params.isbn}/reviews/${props.reviewId}`, fetcher);
+	const { data: reviewItemData, mutate } = useSWR<ReviewItemTypes>(`/api/book/${params.isbn}/reviews/${props.reviewId}/likes`, fetcher);
 
 	const onClickLike = () => {
 		if (!reviewItemData) return;

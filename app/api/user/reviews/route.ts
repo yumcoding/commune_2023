@@ -3,8 +3,8 @@ import prisma from "@/lib/server/prisma";
 import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
 
-// 이 책에 대한 전체 리뷰 GET
-export async function GET(req: NextRequest, { params }: { params: { isbn: string } }) {
+// 해당 사용자가 작성한 리뷰 전체 GET
+export async function GET(req: NextRequest) {
 	const session = await getServerSession(authOptions);
 
 	const pageIndex = Number(req.nextUrl.searchParams.get("page"));
@@ -16,10 +16,7 @@ export async function GET(req: NextRequest, { params }: { params: { isbn: string
 
 	const reviews = await prisma.review.findMany({
 		where: {
-			bookIsbn: params.isbn,
-			NOT: {
-				userId: session?.user.id,
-			},
+			userId: session?.user.id,
 		},
 		orderBy: {
 			createdAt: "desc",
