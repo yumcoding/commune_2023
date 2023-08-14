@@ -85,10 +85,6 @@ $flex-map: (
 		box-shadow: rgba(0, 0, 0, 0.12) 0px 0px 6px 0px;
 	}
 
-	.backBtn {
-		display: none;
-	}
-
 	&.isPage {
 		z-index: $full-modal-level;
 		@media screen and (min-width: $md-breakpoint) {
@@ -101,12 +97,6 @@ $flex-map: (
 		.closeBtn {
 			@media screen and (min-width: $md-breakpoint) {
 				display: none;
-			}
-		}
-
-		.backBtn {
-			@media screen and (min-width: $md-breakpoint) {
-				display: flex;
 			}
 		}
 	}
