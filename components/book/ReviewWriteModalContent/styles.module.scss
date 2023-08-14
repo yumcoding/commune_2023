@@ -5,6 +5,10 @@
 	@include modalContentLayout();
 }
 
+.flexbox {
+	@include flexbox(between, center);
+}
+
 .header {
 	@include modalContentHeader();
 	h1 {
@@ -140,30 +144,20 @@
 	}
 }
 
-
-.backBtn {
-	display: none;
+.deleteBtn {
+	@include flexbox(start, center);
+	position: relative;
+	top: 5px;
+	padding: 0;
+	color: #eb217c;
+	svg {
+		width: 22px;
+	}
 
 	@media screen and (min-width: $md-breakpoint) {
-		@include flexbox(start, center);
 		position: absolute;
-		right: 70px;
-		bottom: -60px;
-		height: 34px;
-		padding: 0;
-		font-size: 15px;
-		letter-spacing: -0.3px;
-		line-height: 18px;
-		color: $pink;
-		transition: color 200ms ease-in-out;
-
-		&:hover {
-			color: $pink-dark;
-		}
-
-		svg {
-			width: 18px;
-			height: 18px;
-		}
+		top: unset;
+		right: 66px;
+		bottom: -55px;
 	}
 }
