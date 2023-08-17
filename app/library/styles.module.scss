@@ -23,27 +23,3 @@
 	}
 }
 
-// 리뷰
-.reviewSection {
-	margin: 405px 0 0 0;
-	padding: 20px 0;
-
-	h1 {
-		font-size: 20px;
-		margin: 0 0 15px 0;
-	}
-}
-
-.noItem {
-	@include column-flexbox(center, center);
-	margin: 35px 0 0 0;
-	color: $text-primary;
-	p {
-		margin: 15px 0 0 0;
-		font-size: 14px;
-	}
-
-	@media screen and (min-width: $md-breakpoint) {
-		margin: 55px 0 0 0;
-	}
-}
