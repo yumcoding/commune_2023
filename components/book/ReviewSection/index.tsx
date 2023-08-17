@@ -3,16 +3,16 @@ import { useParams, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
-import Link from "next/link";
 import { fetcher, noRevalidationOption } from "@/lib/front/fetchers";
 import { ReviewWithUser } from "@/types/db";
 import ReviewItem from "../ReviewItem";
 import { ArchiveIcon, ChevronDownDoubleIcon, HorizontalLoaderIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
+
 const PAGE_SIZE = 10;
 
 export default function ReviewSection() {
-	const { reviewHeader, reviewWriteBtn, noListWrapper, isLoadingWrapper, loadMoreReviewBtn } = styles;
+	const { reviewHeader, noListWrapper, isLoadingWrapper, loadMoreReviewBtn } = styles;
 
 	const pathname = usePathname();
 	const params = useParams();
