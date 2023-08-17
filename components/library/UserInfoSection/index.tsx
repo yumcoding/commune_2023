@@ -1,19 +1,16 @@
 "use client";
-import { useSession } from "next-auth/react";
+import useSWR from "swr";
 import styles from "./styles.module.scss";
 import { LoginIcon } from "@/assets/icons";
-import { useRouter } from "next/navigation";
+import { fetcher } from "@/lib/front/fetchers";
 
 export default function UserInfoSection() {
 	const { userInfoSection, userInfoBg, userInfo, avatarContainer, avatarImg, changeBtn, userName, statList, statItem } = styles;
-	const session = useSession();
 
-	const router = useRouter();
-	if (session.status === "unauthenticated") {
-		router.replace("/");
-	}
+	const { data } = useSWR(`/api/user/profile`, fetcher);
 
-	const name = session.status === "loading" ? "" : session?.data?.user?.name ? session.data.user.name : "익명의 꼬뮤니";
+	const showCount = (count: number) => (count > 999 ? "999+" : count);
+
 	return (
 		<section className={userInfoSection}>
 			<div className={userInfoBg} />
@@ -21,27 +18,30 @@ export default function UserInfoSection() {
 			{/* TODO : 사용자 이름, 아바타 변경은 2차 개발 */}
 			<div className={userInfo}>
 				<div className={avatarContainer}>
-					<div className={avatarImg}>{/* <LoginIcon /> */}</div>
+					<div className={avatarImg}>
+						<LoginIcon />
+					</div>
 					{/* <button type="button" className={changeBtn}>
 						사진 변경
 					</button> */}
 				</div>
 
 				<div>
-					<h1 className={userName}>{name}</h1>
+					<h1 className={userName}>{data?.user?.name}</h1>
 					<ul className={statList}>
 						<li className={statItem}>
 							<h3>리뷰</h3>
-							<strong>527</strong>
+							<strong>{showCount(data?.user?._count?.reviews)}</strong>
 							<p>
-								좋아요<small>535</small>
+								좋아요&nbsp;<small>{showCount(data?.user?._count?.likes)}</small>
 							</p>
 						</li>
 						<li className={statItem}>
-							<h3>한줄평</h3>
-							<strong>1920</strong>
+							<h3>기대평</h3>
+							<strong>2차</strong>
 							<p>
-								좋아요<small>777</small>
+								개발 예정 🚀
+								{/* <small>777</small> */}
 							</p>
 						</li>
 					</ul>
