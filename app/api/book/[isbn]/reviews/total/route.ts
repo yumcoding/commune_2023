@@ -7,28 +7,13 @@ import prisma from "@/lib/server/prisma";
 export async function GET(req: NextRequest, { params }: { params: { isbn: string } }) {
 	const session = await getServerSession(authOptions);
 
-	const reviews = await prisma.review.findMany({
+	const count = await prisma.review.count({
 		where: {
 			bookIsbn: params.isbn,
 			NOT: {
 				userId: session?.user.id,
 			},
 		},
-		include: {
-			user: {
-				select: {
-					name: true,
-					image: true,
-				},
-			},
-			_count: {
-				select: {
-					likes: true,
-				},
-			},
-		},
 	});
-
-	const total = reviews.length;
-	return NextResponse.json(total);
+	return NextResponse.json(count);
 }
