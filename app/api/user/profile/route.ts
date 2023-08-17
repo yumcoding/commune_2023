@@ -3,7 +3,7 @@ import prisma from "@/lib/server/prisma";
 import { getServerSession } from "next-auth/next";
 import { NextRequest, NextResponse } from "next/server";
 
-// 해당 사용자가 작성한 리뷰 전체 GET
+// 사용자 정보 GET
 export async function GET(req: NextRequest) {
 	const session = await getServerSession(authOptions);
 
