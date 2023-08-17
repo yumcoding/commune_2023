@@ -1,0 +1,96 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.item {
+	padding: 0 0 14px 0;
+	margin: 0 0 35px 0;
+	border-bottom: 1px solid $border-light;
+}
+
+.metaWrapper {
+	@include flexbox(start, center);
+	margin: 0 0 15px 0;
+
+	img {
+		border: 1px solid $book-border;
+	}
+}
+
+.infoWrapper {
+	flex-grow: 1;
+	flex-shrink: 0;
+	margin: 0 0 0 10px;
+}
+
+.bookInfo {
+	padding: 0 0 16px 0;
+	margin: 0 0 18px 0;
+	border-bottom: 1px solid $border-light;
+	max-width: calc(100vw - 15px - 15px - 100px - 10px);
+}
+
+.reviewInfo {
+	position: relative;
+	p {
+		font-size: 13px;
+	}
+}
+
+.heading {
+	@include truncate();
+	margin: 0 0 1px 0;
+	font-size: 18px;
+	font-weight: 700;
+	color: $text-primary;
+}
+
+.desc {
+	margin: 0 0 3px 0;
+	font-size: 14px;
+	font-weight: 400;
+	color: $text-secondary;
+}
+
+.statWrapper {
+	@include flexbox(start, center);
+}
+
+.likesNum {
+	margin: 0 0 0 12px;
+	position: relative;
+	bottom: 1px;
+
+	svg {
+		width: 18px;
+		color: $pink;
+		position: relative;
+		top: 3px;
+	}
+
+	small {
+		position: relative;
+		bottom: 1px;
+		font-size: 12px;
+		color: $text-secondary;
+	}
+}
+
+.btnGroup {
+	@include flexbox(start, center);
+	position: absolute;
+	top: 4px;
+	right: 4px;
+
+	a svg {
+		width: 16px;
+		height: 16px;
+		color: $text-primary;
+		transition: color 300ms ease-in-out;
+	}
+
+	a:hover {
+		svg {
+			color: $pink;
+		}
+	}
+}
