@@ -1,15 +1,15 @@
 "use client";
 import useSWR from "swr";
 import styles from "./styles.module.scss";
-import { LoginIcon } from "@/assets/icons";
+import {  UserDefaultIcon } from "@/assets/icons";
 import { fetcher } from "@/lib/front/fetchers";
+import showCount from "@/lib/front/showCount";
+import { UserInfoTypes } from "@/types/db";
 
 export default function UserInfoSection() {
 	const { userInfoSection, userInfoBg, userInfo, avatarContainer, avatarImg, changeBtn, userName, statList, statItem } = styles;
 
-	const { data } = useSWR(`/api/user/profile`, fetcher);
-
-	const showCount = (count: number) => (count > 999 ? "999+" : count);
+	const { data } = useSWR<UserInfoTypes>(`/api/user/profile`, fetcher);
 
 	return (
 		<section className={userInfoSection}>
@@ -19,7 +19,7 @@ export default function UserInfoSection() {
 			<div className={userInfo}>
 				<div className={avatarContainer}>
 					<div className={avatarImg}>
-						<LoginIcon />
+						<UserDefaultIcon />
 					</div>
 					{/* <button type="button" className={changeBtn}>
 						사진 변경
@@ -31,9 +31,9 @@ export default function UserInfoSection() {
 					<ul className={statList}>
 						<li className={statItem}>
 							<h3>리뷰</h3>
-							<strong>{showCount(data?.user?._count?.reviews)}</strong>
+							<strong>{data?.user?._count?.reviews ? showCount(data?.user?._count?.reviews) : "-"}</strong>
 							<p>
-								좋아요&nbsp;<small>{showCount(data?.user?._count?.likes)}</small>
+								좋아요&nbsp;<small>{data?.user?._count?.likes ? showCount(data?.user?._count?.likes) : "-"}</small>
 							</p>
 						</li>
 						<li className={statItem}>
