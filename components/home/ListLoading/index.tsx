@@ -6,7 +6,7 @@ export default function ListLoading() {
 	return (
 		<ul className={list}>
 			{Array.from({ length: 5 }).map((_, i) => (
-				<li key={`loader{i}`}>
+				<li key={crypto.randomUUID()}>
 					<div className={bookImg} />
 					<div className={bookDesc} />
 				</li>
