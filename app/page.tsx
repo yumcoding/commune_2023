@@ -1,5 +1,7 @@
 import DBBookList from "@/components/home/DBBookList";
 import styles from "./styles.module.scss";
+import { Suspense } from "react";
+import ListLoading from "@/components/home/ListLoading";
 export default function Page() {
 	const { main, section, sectionHeading } = styles;
 	return (
@@ -7,7 +9,9 @@ export default function Page() {
 			<main className={main}>
 				<section className={section}>
 					<h2 className={sectionHeading}>리뷰가 가장 많은 책 TOP 10 👑</h2>
-					<DBBookList />
+					<Suspense fallback={<ListLoading />}>
+						<DBBookList />
+					</Suspense>
 				</section>
 				<section className={section}>
 					<h2 className={sectionHeading}>가을맞이 추천 시리즈 1. &#39;띵&#39; </h2>
