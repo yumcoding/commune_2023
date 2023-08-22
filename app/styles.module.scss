@@ -4,3 +4,28 @@
 .main {
 	@include layout();
 }
+
+.section {
+	margin: 0 0 10px 0;
+	padding: 10px 0 0 0;
+
+	@media screen and (min-width: $md-breakpoint) {
+		margin: 0 0 15px 0;
+		padding: 15px 0 0 0;
+	}
+
+	@media screen and (min-width: $lg-breakpoint) {
+		margin: 0 0 20px 0;
+		padding: 20px 0 0 0;
+	}
+}
+
+.sectionHeading {
+	@include truncate();
+	margin: 0 0 9px;
+	font-size: 22px;
+	font-weight: 600;
+	letter-spacing: -0.4px;
+	line-height: 30px;
+	color: $text-primary;
+}
