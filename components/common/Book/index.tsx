@@ -1,37 +1,25 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
+import { Review } from "@prisma/client";
 import Image from "next/image";
-import { SearchItemTypes } from "@/types/db";
 
-// TODO 1
-// href 두 군데 넣어주어야 한다.
-
-// TODO 2
-// href에 넣어주는 값이 책 상세 페이지인지 리뷰인지 구분
-// props로 detail인지 review인지 구분해서
-// ? '/book/isbn'으로 갈지 '/review'로 갈지 구분하는 방법
-
-export default function Book(props: { item: SearchItemTypes }) {
+export default function Book(props: { item: Review }) {
 	const { book, bookImg, bookDesc } = styles;
-	const { isbn, image, title, author, publisher } = props.item;
+	const { bookIsbn, bookImage, bookTitle, bookAuthor } = props.item;
 	return (
 		<>
 			<div className={book}>
-				<Link href={`/book/${isbn}`}>
+				<Link href={`/book/${bookIsbn}`}>
 					<div className={bookImg}>
-						<div>
-							<Image src={image} alt={`${title} 책 표지`} fill={true} />
-						</div>
-						{/* 순위 표시 */}
+						<Image src={bookImage} alt={`${bookTitle} 책 표지`} fill />
 					</div>
 				</Link>
 
 				<div className={bookDesc}>
-					<Link href={`/book/${isbn}`}>
-						<h3>{title}</h3>
+					<Link href={`/book/${bookIsbn}`}>
+						<h3>{bookTitle}</h3>
 						<div>
-							<strong>{author.replaceAll("^", ", ")}</strong>
-							<span> | {publisher}</span>
+							<strong>{bookAuthor.replaceAll("^", ", ")}</strong>
 						</div>
 					</Link>
 				</div>

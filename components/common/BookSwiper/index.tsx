@@ -12,12 +12,14 @@ import styles from "./styles.module.scss";
 import ShowMoreBookSlide from "../ShowMoreBookSlide";
 import DefaultModalOverlay from "../Modal/DefaultModalOverlay";
 import MoreReviewModalContent from "@/components/library/MoreReviewModalContent";
+import { Review } from "@prisma/client";
 
 interface BookSwiperTypes {
 	hasShowMore: boolean;
+	list: Review[];
 }
 
-export default function BookSwiper({ hasShowMore }: BookSwiperTypes) {
+export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
 	const { swiperWrapper, btn, prevBtn, nextBtn } = styles;
 
 	const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
@@ -50,10 +52,12 @@ export default function BookSwiper({ hasShowMore }: BookSwiperTypes) {
 		<>
 			<div className={swiperWrapper}>
 				<Swiper {...swiperParams}>
-					{/* TODO: 책 리스트 데이터 */}
-					{[0, 1, 2, 3, 4, 5].map((item, i) => (
-						<SwiperSlide key={i}>{/* <Book /> */}</SwiperSlide>
+					{list.map((item) => (
+						<SwiperSlide key={item.id}>
+							<Book item={item} />
+						</SwiperSlide>
 					))}
+
 					{hasShowMore ? (
 						<SwiperSlide key="show-more-btn">
 							<ShowMoreBookSlide onClickMoreReview={onClickMoreReview} />
