@@ -1,9 +1,9 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
-import { Review } from "@prisma/client";
 import Image from "next/image";
+import { SwiperItemTypes } from "../BookSwiper";
 
-export default function Book(props: { item: Review }) {
+export default function Book(props: { item: SwiperItemTypes }) {
 	const { book, bookImg, bookDesc } = styles;
 	const { bookIsbn, bookImage, bookTitle, bookAuthor } = props.item;
 	return (

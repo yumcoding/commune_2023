@@ -12,12 +12,17 @@ import styles from "./styles.module.scss";
 import ShowMoreBookSlide from "../ShowMoreBookSlide";
 import DefaultModalOverlay from "../Modal/DefaultModalOverlay";
 import MoreReviewModalContent from "@/components/library/MoreReviewModalContent";
-import { Review } from "@prisma/client";
-import ListLoading from "@/components/home/ListLoading";
+
+export interface SwiperItemTypes {
+	bookIsbn: string;
+	bookImage: string;
+	bookTitle: string;
+	bookAuthor: string;
+}
 
 interface BookSwiperTypes {
 	hasShowMore?: boolean;
-	list?: Review[];
+	list?: SwiperItemTypes[];
 }
 
 export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
@@ -55,7 +60,7 @@ export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
 			<div className={swiperWrapper}>
 				<Swiper {...swiperParams}>
 					{list?.map((item) => (
-						<SwiperSlide key={item.id}>
+						<SwiperSlide key={item.bookIsbn}>
 							<Book item={item} />
 						</SwiperSlide>
 					))}
