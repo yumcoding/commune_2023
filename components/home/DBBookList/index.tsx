@@ -18,9 +18,5 @@ export const getReviews = cache(async () => {
 
 export default async function DBBookList() {
 	const reviews = await getReviews();
-	return (
-		<>
-			<BookSwiper hasShowMore={false} list={reviews} />
-		</>
-	);
+	return <BookSwiper list={reviews} />;
 }

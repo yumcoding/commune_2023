@@ -13,10 +13,11 @@ import ShowMoreBookSlide from "../ShowMoreBookSlide";
 import DefaultModalOverlay from "../Modal/DefaultModalOverlay";
 import MoreReviewModalContent from "@/components/library/MoreReviewModalContent";
 import { Review } from "@prisma/client";
+import ListLoading from "@/components/home/ListLoading";
 
 interface BookSwiperTypes {
-	hasShowMore: boolean;
-	list: Review[];
+	hasShowMore?: boolean;
+	list?: Review[];
 }
 
 export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
@@ -35,6 +36,7 @@ export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
 				slidesPerView: 5,
 			},
 		},
+
 		spaceBetween: 10,
 		modules: [Navigation],
 		navigation: {
@@ -52,7 +54,7 @@ export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
 		<>
 			<div className={swiperWrapper}>
 				<Swiper {...swiperParams}>
-					{list.map((item) => (
+					{list?.map((item) => (
 						<SwiperSlide key={item.id}>
 							<Book item={item} />
 						</SwiperSlide>
@@ -66,6 +68,7 @@ export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
 						""
 					)}
 				</Swiper>
+
 				<button type="button" ref={prevElRef} className={cls(btn, prevBtn)}>
 					<ChevronLeftIcon />
 				</button>
