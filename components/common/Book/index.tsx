@@ -11,7 +11,7 @@ export default function Book(props: { item: Review }) {
 			<div className={book}>
 				<Link href={`/book/${bookIsbn}`}>
 					<div className={bookImg}>
-						<Image src={bookImage} alt={`${bookTitle} 책 표지`} fill />
+						<Image src={bookImage} alt={`${bookTitle} 책 표지`} fill sizes="33vw" priority />
 					</div>
 				</Link>
 
