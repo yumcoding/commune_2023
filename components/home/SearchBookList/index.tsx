@@ -8,10 +8,7 @@ import { noRevalidationOption, searchFetcher } from "@/lib/front/fetchers";
 const PAGE_SIZE = 10;
 
 export default function SearchBookList({ query }: { query: string }) {
-	const { data, isLoading } = useSWR<SearchResultTypes>(query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}` : null, searchFetcher, {
-		...noRevalidationOption,
-		suspense: true,
-	});
+	const { data, isLoading } = useSWR<SearchResultTypes>(query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}` : null, searchFetcher, {});
 
 	const list = data?.items?.map((item) => {
 		return {
@@ -22,7 +19,7 @@ export default function SearchBookList({ query }: { query: string }) {
 		};
 	});
 
-	if (isLoading) return;
+	if (isLoading) return <BookSwiper isLoading />;
 
 	return <BookSwiper list={list} />;
 }

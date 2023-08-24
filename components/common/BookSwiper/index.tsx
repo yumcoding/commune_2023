@@ -23,9 +23,10 @@ export interface SwiperItemTypes {
 interface BookSwiperTypes {
 	hasShowMore?: boolean;
 	list?: SwiperItemTypes[];
+	isLoading?: boolean;
 }
 
-export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
+export default function BookSwiper({ hasShowMore, list, isLoading }: BookSwiperTypes) {
 	const { swiperWrapper, btn, prevBtn, nextBtn } = styles;
 
 	const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
@@ -54,6 +55,20 @@ export default function BookSwiper({ hasShowMore, list }: BookSwiperTypes) {
 	const [isReviewModalVisible, setIsReviewModalVisible] = useState(false);
 	const onClickMoreReview = () => setIsReviewModalVisible(true);
 	const onClickClose = () => setIsReviewModalVisible(false);
+
+	if (isLoading) {
+		return (
+			<>
+				<Swiper {...swiperParams}>
+					{Array.from({ length: 10 })?.map((_, i) => (
+						<SwiperSlide key={crypto.randomUUID()}>
+							<div>loading...</div>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</>
+		);
+	}
 
 	return (
 		<>

@@ -16,21 +16,15 @@ export default function Page() {
 				</section>
 				<section className={section}>
 					<h2 className={sectionHeading}>가을맞이 추천 시리즈 1. &#39;띵&#39; </h2>
-					<Suspense fallback={<ListLoading />}>
-						<SearchBookList query="띵 시리즈" />
-					</Suspense>
+					<SearchBookList query="띵 시리즈" />
 				</section>
 				<section className={section}>
 					<h2 className={sectionHeading}>가을맞이 추천 시리즈 2. &#39;아무튼&#39;</h2>
-					<Suspense fallback={<ListLoading />}>
-						<SearchBookList query="아무튼" />
-					</Suspense>
+					<SearchBookList query="아무튼" />
 				</section>
 				<section className={section}>
 					<h2 className={sectionHeading}>가을맞이 추천 시리즈 3. &#39;일상이 고고학&#39;</h2>
-					<Suspense fallback={<ListLoading />}>
-						<SearchBookList query="일상이 고고학" />
-					</Suspense>
+					<SearchBookList query="일상이 고고학" />
 				</section>
 			</main>
 		</>
