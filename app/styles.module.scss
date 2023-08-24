@@ -3,6 +3,7 @@
 
 .main {
 	@include layout();
+	overflow-x: hidden;
 }
 
 .section {
