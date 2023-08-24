@@ -28,4 +28,9 @@
 	letter-spacing: -0.4px;
 	line-height: 30px;
 	color: $text-primary;
+	span {
+		position: relative;
+		top: -3px;
+		left: 2px;
+	}
 }

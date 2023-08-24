@@ -9,7 +9,10 @@ export default function Page() {
 		<>
 			<main className={main}>
 				<section className={section}>
-					<h2 className={sectionHeading}>리뷰가 가장 많은 책 TOP 10 👑</h2>
+					<h2 className={sectionHeading}>
+						리뷰가 가장 많은 책 TOP 10
+						<span>👑</span>
+					</h2>
 					<Suspense fallback={<ListLoading />}>
 						<DBBookList />
 					</Suspense>
