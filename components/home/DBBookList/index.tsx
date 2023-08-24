@@ -1,22 +1,11 @@
-import { cache } from "react";
-import prisma from "@/lib/server/prisma";
+"use client";
 import BookSlider from "@/components/common/BookSlider";
+import { fetcher } from "@/lib/front/fetchers";
+import { Review } from "@prisma/client";
+import useSWR from "swr";
 
-export const revalidate = 3600;
+export default function DBBookList() {
+	const { data, isLoading } = useSWR<Review[]>(`/api/ranking/recent-reviews`, fetcher);
 
-export const getReviews = cache(async () => {
-	const reviews = await prisma.review.findMany({
-		take: 10,
-		orderBy: {
-			likes: {
-				_count: "desc",
-			},
-		},
-	});
-	return reviews;
-});
-
-export default async function DBBookList() {
-	const reviews = await getReviews();
-	return <BookSlider list={reviews} />;
+	return <BookSlider list={data} isLoading={isLoading} />;
 }
