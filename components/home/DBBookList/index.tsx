@@ -1,6 +1,6 @@
-import BookSwiper from "@/components/common/BookSwiper";
 import { cache } from "react";
 import prisma from "@/lib/server/prisma";
+import BookSlider from "@/components/common/BookSlider";
 
 export const revalidate = 3600;
 
@@ -18,5 +18,5 @@ export const getReviews = cache(async () => {
 
 export default async function DBBookList() {
 	const reviews = await getReviews();
-	return <BookSwiper list={reviews} />;
+	return <BookSlider list={reviews} />;
 }

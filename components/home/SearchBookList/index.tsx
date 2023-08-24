@@ -1,14 +1,11 @@
 "use client";
 import useSWR from "swr";
-
-import BookSwiper from "@/components/common/BookSwiper";
 import { SearchResultTypes } from "@/types/db";
 import { noRevalidationOption, searchFetcher } from "@/lib/front/fetchers";
-
-const PAGE_SIZE = 10;
+import BookSlider from "@/components/common/BookSlider";
 
 export default function SearchBookList({ query }: { query: string }) {
-	const { data, isLoading } = useSWR<SearchResultTypes>(query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}` : null, searchFetcher, {});
+	const { data, isLoading } = useSWR<SearchResultTypes>(query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=10` : null, searchFetcher, noRevalidationOption);
 
 	const list = data?.items?.map((item) => {
 		return {
@@ -19,7 +16,5 @@ export default function SearchBookList({ query }: { query: string }) {
 		};
 	});
 
-	if (isLoading) return <BookSwiper isLoading />;
-
-	return <BookSwiper list={list} />;
+	return <BookSlider list={list} isLoading={isLoading} />;
 }
