@@ -409,3 +409,23 @@ textarea {
 textarea::-webkit-scrollbar {
 	display: none;
 }
+
+.swiper-slide {
+	width: 33%;
+	max-width: 33%;
+	margin-right: 10px;
+}
+
+@media screen and (min-width: 720px) {
+	.swiper-slide {
+		width: 25%;
+		max-width: 25%;
+	}
+}
+
+@media screen and (min-width: 1366px) {
+	.swiper-slide {
+		width: 20%;
+		max-width: 20%;
+	}
+}

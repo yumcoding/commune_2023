@@ -13,11 +13,20 @@ import ShowMoreBookSlide from "../ShowMoreBookSlide";
 import DefaultModalOverlay from "../Modal/DefaultModalOverlay";
 import MoreReviewModalContent from "@/components/library/MoreReviewModalContent";
 
-interface BookSwiperTypes {
-	hasShowMore: boolean;
+export interface SwiperItemTypes {
+	bookIsbn: string;
+	bookImage: string;
+	bookTitle: string;
+	bookAuthor: string;
 }
 
-export default function BookSwiper({ hasShowMore }: BookSwiperTypes) {
+interface BookSwiperTypes {
+	hasShowMore?: boolean;
+	list?: SwiperItemTypes[];
+	isLoading?: boolean;
+}
+
+export default function BookSwiper({ hasShowMore, list, isLoading }: BookSwiperTypes) {
 	const { swiperWrapper, btn, prevBtn, nextBtn } = styles;
 
 	const [prevEl, prevElRef] = useSwiperRef<HTMLButtonElement>();
@@ -33,6 +42,7 @@ export default function BookSwiper({ hasShowMore }: BookSwiperTypes) {
 				slidesPerView: 5,
 			},
 		},
+
 		spaceBetween: 10,
 		modules: [Navigation],
 		navigation: {
@@ -46,14 +56,30 @@ export default function BookSwiper({ hasShowMore }: BookSwiperTypes) {
 	const onClickMoreReview = () => setIsReviewModalVisible(true);
 	const onClickClose = () => setIsReviewModalVisible(false);
 
+	if (isLoading) {
+		return (
+			<>
+				<Swiper {...swiperParams}>
+					{Array.from({ length: 10 })?.map((_, i) => (
+						<SwiperSlide key={crypto.randomUUID()}>
+							<div>loading...</div>
+						</SwiperSlide>
+					))}
+				</Swiper>
+			</>
+		);
+	}
+
 	return (
 		<>
 			<div className={swiperWrapper}>
 				<Swiper {...swiperParams}>
-					{/* TODO: 책 리스트 데이터 */}
-					{[0, 1, 2, 3, 4, 5].map((item, i) => (
-						<SwiperSlide key={i}>{/* <Book /> */}</SwiperSlide>
+					{list?.map((item) => (
+						<SwiperSlide key={item.bookIsbn}>
+							<Book item={item} />
+						</SwiperSlide>
 					))}
+
 					{hasShowMore ? (
 						<SwiperSlide key="show-more-btn">
 							<ShowMoreBookSlide onClickMoreReview={onClickMoreReview} />
@@ -62,6 +88,7 @@ export default function BookSwiper({ hasShowMore }: BookSwiperTypes) {
 						""
 					)}
 				</Swiper>
+
 				<button type="button" ref={prevElRef} className={cls(btn, prevBtn)}>
 					<ChevronLeftIcon />
 				</button>

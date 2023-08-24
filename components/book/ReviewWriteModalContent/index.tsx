@@ -9,7 +9,7 @@ import { cls } from "@/lib/front/cls";
 import { fetcher, noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import useMutation from "@/hooks/useMutation";
 import { BookDescTypes, ReviewMutationTypes } from "@/types/db";
-import StarRating from "@/components/common/StarRating";
+import StarRatingBtn from "@/components/common/StarRatingBtn";
 import { useSession } from "next-auth/react";
 
 export default function ReviewWriteModalContent({ isModal }: { isModal: boolean }) {
@@ -46,9 +46,7 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 
 	useEffect(() => {
 		if (mutateResult?.ok || patchResult?.ok || deleteResult?.ok) {
-			// router.replace(`/book/${params.isbn}`);
-			// TODO : router.replace 시 url은 변경되는데 화면 리로드 되지 않음
-			window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/book/${params.isbn}`;
+			router.back();
 		}
 	}, [mutateResult, patchResult, deleteResult, router, params.isbn]);
 
@@ -99,9 +97,9 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 						<div className={flexbox}>
 							<div className={ratingWrapper}>
 								<p>별점&nbsp;</p>
-								<StarRating rating={rating} setRating={setRating} />
+								<StarRatingBtn rating={rating} setRating={setRating} />
 							</div>
-				
+
 							{myReview?.review && (
 								<button type="button" onClick={onClickDelete} className={deleteBtn} aria-label="리뷰 삭제">
 									<DeleteIcon />

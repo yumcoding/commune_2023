@@ -37,6 +37,12 @@ export interface ReviewMutationTypes {
 	data: Review;
 }
 
+export interface ReviewWithLikes extends Review {
+	_count: {
+		likes: number;
+	};
+}
+
 export interface ReviewWithUser extends Review {
 	user: User;
 	_count: {
@@ -44,12 +50,20 @@ export interface ReviewWithUser extends Review {
 	};
 }
 
-export interface ReviewsTypes {
-	reviews: ReviewWithUser[];
-}
-
 export interface ReviewItemTypes {
 	ok: boolean;
 	review: ReviewWithUser;
 	isLiked: boolean;
+}
+
+export interface UserWithLikes extends User {
+	_count: {
+		reviews: number;
+		likes: number;
+	};
+}
+
+export interface UserInfoTypes {
+	ok: boolean;
+	user: UserWithLikes;
 }

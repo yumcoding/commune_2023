@@ -23,7 +23,7 @@ export default function MoreReviewModalContent({ onClickClose }: { onClickClose:
 					<ul className={bookList}>
 						{[0, 1, 2, 3, 4, 5].map((item, i) => (
 							<li key={`review${i}`}>
-								<Book />
+								{/* <Book /> */}
 							</li>
 						))}
 					</ul>

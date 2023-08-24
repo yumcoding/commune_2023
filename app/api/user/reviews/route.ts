@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
 	const isFirstPage = pageIndex === 0;
 
 	const pageCondition = {
-		skip: 10 * pageIndex,
+		skip: 5 * pageIndex,
 	};
 
 	const reviews = await prisma.review.findMany({
@@ -22,20 +22,13 @@ export async function GET(req: NextRequest) {
 			createdAt: "desc",
 		},
 		include: {
-			user: {
-				select: {
-					id: true,
-					name: true,
-					image: true,
-				},
-			},
 			_count: {
 				select: {
 					likes: true,
 				},
 			},
 		},
-		take: 10,
+		take: 5,
 		...(!isFirstPage && pageCondition),
 	});
 

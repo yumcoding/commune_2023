@@ -34,10 +34,9 @@
 	transition: max-height 300ms ease-in;
 
 	p {
-		font-size: 14px;
+		font-size: 15px;
 		font-weight: 400;
-		letter-spacing: -0.2px;
-		line-height: 18px;
+		line-height: 24px;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
 		text-overflow: ellipsis;
@@ -67,7 +66,7 @@
 .btnWrapper {
 	@include flexbox(center, center);
 }
- 
+
 .showMoreBtn {
 	font-size: 14px;
 	color: $background-dark;

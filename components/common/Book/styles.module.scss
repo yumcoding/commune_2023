@@ -2,7 +2,7 @@
 @import "@/app/mixins.module.scss";
 
 .book {
-	width: calc((100vw - 15px - 15px - 10px) / 2);
+	// width: calc((100vw - 15px - 15px - 10px) / 3);
 }
 
 .bookImg {
@@ -11,15 +11,8 @@
 	padding: 0 0 $book-height 0;
 	position: relative;
 
-	> div {
-		overflow: hidden;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
+	img {
 		border-radius: 4px;
-		background-color: $book-bg;
 		border: 1px solid $book-border;
 	}
 }
