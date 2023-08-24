@@ -10,13 +10,26 @@
 	li {
 		width: 33%;
 		margin: 0 6px 0 0;
+		display: none;
+
+		&:first-of-type,
+		&:nth-of-type(2),
+		&:nth-of-type(3) {
+			display: block;
+		}
 
 		@media screen and (min-width: $md-breakpoint) {
 			width: 25%;
+			&:nth-of-type(4) {
+				display: block;
+			}
 		}
 
 		@media screen and (min-width: $lg-breakpoint) {
 			width: 20%;
+			&:nth-of-type(5) {
+				display: block;
+			}
 		}
 	}
 }
