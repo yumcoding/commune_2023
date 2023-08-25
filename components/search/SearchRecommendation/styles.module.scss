@@ -50,6 +50,7 @@
 .list {
 	li {
 		@include flexbox(start, center);
+
 		width: 100%;
 		min-height: 44px;
 		border-bottom: 1px solid $border-light;
@@ -89,5 +90,9 @@
 			font-size: 13px;
 			line-height: unset;
 		}
+	}
+
+	a {
+		@include truncate();
 	}
 }
