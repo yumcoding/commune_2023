@@ -95,6 +95,7 @@
 	}
 
 	@media screen and (min-width: $md-breakpoint) {
+		width: 450px;
 		h1,
 		p {
 			color: $text-primary;
@@ -102,6 +103,7 @@
 	}
 
 	@media screen and (min-width: $lg-breakpoint) {
+		width: 750px;
 		h1 {
 			font-size: 25px;
 		}
