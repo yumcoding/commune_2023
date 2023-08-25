@@ -1,12 +1,8 @@
 @import "@/app/variables.module.scss";
 @import "@/app/mixins.module.scss";
 
-.section {
-	padding: 15px 0 0;
-}
-
 .reviewItem {
-	padding: 0 0 10px 0;
+	padding: 0 0 20px 0;
 	color: $text-primary;
 	border-bottom: 1px solid #e0e0e0;
 }

@@ -6,7 +6,10 @@
 	margin: 20px 0 10px;
 
 	@media screen and (min-width: $md-breakpoint) {
-		margin: 20px 0 0;
+		margin: 25px 0 30px;
+	}
+	@media screen and (min-width: $lg-breakpoint) {
+		margin: 35px 0 45px;
 	}
 }
 
