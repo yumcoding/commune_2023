@@ -36,7 +36,6 @@ export default function Header() {
 	// 검색창 바깥 영역 클릭 시
 	useEffect(() => {
 		const checkIfClickedOutside = (e: MouseEvent): void => {
-			console.log(e.target);
 			if (isSearchVisible && searchRef.current && (e.target instanceof HTMLElement || e.target instanceof SVGElement) && !searchRef.current.contains(e.target)) {
 				setIsSearchVisible(false);
 			}
