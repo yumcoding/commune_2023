@@ -95,8 +95,6 @@ export default function Header() {
 					{/* 우 */}
 					<div className={menuWrapper}>
 						<div className={menu}>
-							{/* TODO */}
-							{/* 태블릿, 데탑에서 검색 시 onSubmit하고 결과 받으면 router 이용해서 /search 페이지로 이동 */}
 							<div className={searchWrapper}>
 								<form className={cls(search, isSearchVisible ? visible : "")} ref={searchRef} onClick={showSearch} onSubmit={onSearchSubmit}>
 									<input type="text" placeholder="궁금한 책, 영화, 음악을 검색해봐요 :)" ref={inputRef} />
