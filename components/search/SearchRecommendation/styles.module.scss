@@ -50,9 +50,7 @@
 .list {
 	li {
 		@include flexbox(start, center);
-
 		width: 100%;
-		min-height: 44px;
 		border-bottom: 1px solid $border-light;
 		background-color: $white;
 		transition: background-color 400ms ease-in-out;
@@ -60,7 +58,6 @@
 		cursor: pointer;
 
 		@media screen and (min-width: $md-breakpoint) {
-			min-height: 26px;
 			padding: 0 0 0 6px;
 			border-bottom: 1px solid transparent;
 			border-radius: 4px;
@@ -68,20 +65,20 @@
 				background-color: rgba(0, 0, 0, 0.05);
 			}
 		}
-
-		@media screen and (min-width: $lg-breakpoint) {
-			min-height: 28px;
-		}
 	}
 
-	p {
+	a {
+		@include flexbox(start, center);
 		@include truncate();
+		width: 100%;
+		min-height: 44px;
 		color: $text-primary;
 		font-size: 14px;
 		letter-spacing: -0.6px;
 		line-height: 21px;
 
 		@media screen and (min-width: $md-breakpoint) {
+			min-height: 26px;
 			font-size: 12px;
 			line-height: unset;
 		}
@@ -89,10 +86,7 @@
 		@media screen and (min-width: $lg-breakpoint) {
 			font-size: 13px;
 			line-height: unset;
+			min-height: 28px;
 		}
-	}
-
-	a {
-		@include truncate();
 	}
 }
