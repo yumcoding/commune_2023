@@ -32,6 +32,7 @@ export default function Header() {
 		}
 	};
 
+	// 검색창 바깥 영역 클릭 시
 	useEffect(() => {
 		const checkIfClickedOutside = (e: MouseEvent): void => {
 			if (isSearchVisible && searchRef.current && e.target instanceof HTMLElement && !searchRef.current.contains(e.target)) {
@@ -45,14 +46,10 @@ export default function Header() {
 		};
 	}, [isSearchVisible]);
 
-	// 준비 중 모달
-	const [isModalVisible, setIsModalVisible] = useState(false);
-	const onClickPrepareMenu = () => setIsModalVisible(true);
-	const onClickClose = () => setIsModalVisible(false);
-
+	// scroll down 시 헤더 스타일링 변경
 	const hasScrolledDown = useScrollDownCheck();
 
-	// 검색어 입력
+	// 검색어
 	const router = useRouter();
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -61,6 +58,11 @@ export default function Header() {
 		setIsSearchVisible(false);
 		router.push(`/search?query=${inputRef.current?.value}&pageIndex=1`);
 	};
+
+	// 준비 중 모달
+	const [isModalVisible, setIsModalVisible] = useState(false);
+	const onClickPrepareMenu = () => setIsModalVisible(true);
+	const onClickClose = () => setIsModalVisible(false);
 
 	return (
 		<>
