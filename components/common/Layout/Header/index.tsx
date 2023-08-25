@@ -113,7 +113,7 @@ export default function Header() {
 							</div>
 							{session?.user ? (
 								<>
-									<Link href="/library" className={libraryLink}>
+									<Link href="/library" className={libraryLink} aria-label="내 서재로 이동">
 										<LibraryIcon />
 									</Link>
 									<button type="button" onClick={() => signOut()} className={loginBtn}>
