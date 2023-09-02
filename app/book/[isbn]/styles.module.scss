@@ -9,6 +9,7 @@
 
 .section {
 	@include layout();
+	position: relative;
 	margin: 30px 15px;
 
 	h2 {
@@ -37,4 +38,9 @@
 		height: 16px;
 		margin: 0 0 0 2px;
 	}
+}
+
+.preparation {
+	opacity: 0.1;
+	padding: 15px;
 }
