@@ -139,6 +139,10 @@
 		display: none;
 	}
 
+	.checkbox:disabled ~ label svg {
+		cursor: unset;
+	}
+
 	.checkbox:checked + label svg {
 		.heart {
 			transform: scale(0.2);
