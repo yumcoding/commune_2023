@@ -419,3 +419,50 @@ textarea::-webkit-scrollbar {
 .slick-slide > div {
 	margin: 0 3px;
 }
+
+.slick-prev,
+.slick-next {
+	display: none !important;
+	z-index: 1;
+}
+
+@media screen and (min-width: 720px) {
+	.slick-prev,
+	.slick-next {
+		display: block !important;
+	}
+}
+
+.slick-prev,
+.slick-next {
+	width: 40px !important;
+	height: 40px !important;
+}
+
+.slick-prev {
+	left: -38px !important;
+}
+
+.slick-next {
+	right: -38px !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+	font-size: 36px !important;
+	border-radius: 50%;
+	opacity: 1 !important;
+	color: #666 !important;
+	transition: color 300ms ease-in-out;
+}
+
+.slick-prev:hover:before,
+.slick-next:hover:before {
+	color: #333 !important;
+}
+
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before {
+	opacity: 0.25 !important;
+	pointer-events: none;
+}
