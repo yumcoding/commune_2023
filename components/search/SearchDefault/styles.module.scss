@@ -1,0 +1,12 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.wrapper {
+	@include searchInfoSection();
+	@include column-flexbox(center, center);
+  
+	height: calc(100vh - $sm-header-height - $sm-footer-height);
+	@media screen and (min-width: $md-breakpoint) {
+		height: calc(100vh - $md-header-height);
+	}
+}
