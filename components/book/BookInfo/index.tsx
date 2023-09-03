@@ -26,7 +26,7 @@ export default function BookInfo() {
 						{data ? (
 							<>
 								<h1>{data.title}</h1>
-								<p>{`${data.author} | ${data.publisher} | ${convertStrToDate(data.pubdate)} `}</p>
+								<p>{`${data.author.replaceAll("^", ", ")} | ${data.publisher} | ${convertStrToDate(data.pubdate)} `}</p>
 							</>
 						) : (
 							""
