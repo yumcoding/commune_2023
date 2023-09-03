@@ -52,5 +52,5 @@ export async function GET(req: Request, { params }: { params: { isbn: string } }
 		},
 	});
 
-	return NextResponse.json({ ok: true, review });
+	return NextResponse.json({ ok: true, data: review });
 }
