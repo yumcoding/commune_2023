@@ -11,11 +11,13 @@ export default function Page() {
 			{/* 모바일 */}
 			<section className={mobileSearch}>
 				<SearchForm />
-				<SearchRecommendation isRecent={true} />
-				<SearchRecommendation isRecent={false} />
+				{/* TODO : 검색어 추천 2차 DB 완성 후  */}
+				{/* <SearchRecommendation isRecent={true} />
+				<SearchRecommendation isRecent={false} /> */}
 			</section>
 
 			<SearchResultSection />
+			
 		</main>
 	);
 }
