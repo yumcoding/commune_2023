@@ -7,6 +7,7 @@
 	bottom: 0;
 	left: 0;
 	width: 100vw;
+	max-width: 100vw;
 	height: 60px;
 	background-color: $white;
 	border-top: 1px solid $border;
@@ -22,7 +23,7 @@
 	li {
 		@include flexbox(center, center);
 		flex: 1;
-		height: 59px;
+		height: 59px; //height - borderTop
 
 		a,
 		button {
