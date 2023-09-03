@@ -32,7 +32,7 @@ export default function MyReviewSection() {
 			<div className={reviewHeader}>
 				<h2>나의 리뷰</h2>
 				<Link href={`${pathname}/write-review`} className={reviewWriteBtn}>
-					<span>{myReview?.review ? "수정하기" : "작성하기"}</span>
+					<span>{myReview?.data ? "수정하기" : "작성하기"}</span>
 					<PencilIcon />
 				</Link>
 			</div>
@@ -41,12 +41,18 @@ export default function MyReviewSection() {
 				<div className={isLoadingWrapper}>
 					<HorizontalLoaderIcon />
 				</div>
-			) : myReview?.review ? (
+			) : myReview?.data ? (
 				<>
 					<div className={reviewItem}>
-						<ReviewWriter title={myReview.review.title} name={myReview.review.user.name} image={myReview.review.user.image} updatedAt={myReview.review.updatedAt} rating={myReview.review.rating} />
-						<ReviewContent content={myReview.review.content} />
-						<IsLikedBtn reviewId={myReview.review.id} />
+						<ReviewWriter
+							title={myReview.data.title}
+							name={myReview.data?.user?.name ?? ""}
+							image={myReview.data?.user?.image ?? ""}
+							updatedAt={myReview.data.updatedAt}
+							rating={Number(myReview.data.rating)}
+						/>
+						<ReviewContent content={myReview.data.content} />
+						<IsLikedBtn reviewId={myReview.data.id} />
 					</div>
 				</>
 			) : (
