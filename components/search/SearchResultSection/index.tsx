@@ -14,7 +14,7 @@ export default function SearchResultSection() {
 	const search = searchParams.get("query");
 	const pageIndex = Number(searchParams.get("pageIndex"));
 
-	const isResultHidden = search || search?.length === 0;
+	const isResultHidden = !search || search?.length === 0;
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
