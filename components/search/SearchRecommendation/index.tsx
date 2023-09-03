@@ -29,9 +29,7 @@ export default function SearchRecommendation({ isRecent }: { isRecent: Boolean }
 				<ul className={list}>
 					{recentSearch?.map((item, _) => (
 						<li key={item.id}>
-							<Link href={`/search?query=${item.query}&pageIndex=1`}>
-								<p>{item.query}</p>
-							</Link>
+							<Link href={`/search?query=${item.query}&pageIndex=1`}>{item.query}</Link>
 						</li>
 					))}
 				</ul>
@@ -39,9 +37,7 @@ export default function SearchRecommendation({ isRecent }: { isRecent: Boolean }
 				<ul className={list}>
 					{popularSearch?.map((item, _) => (
 						<li key={item.id}>
-							<Link href={`/search?query=${item.query}&pageIndex=1`}>
-								<p>{item.query}</p>
-							</Link>
+							<Link href={`/search?query=${item.query}&pageIndex=1`}>{item.query}</Link>
 						</li>
 					))}
 				</ul>
