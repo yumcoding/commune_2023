@@ -33,16 +33,16 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 	const [rating, setRating] = useState(0);
 
 	useEffect(() => {
-		if (myReview?.review) {
-			setTitle(myReview.review.title);
-			setContent(myReview.review.content);
-			setRating(myReview.review.rating);
+		if (myReview?.data) {
+			setTitle(myReview.data.title);
+			setContent(myReview.data.content);
+			setRating(myReview.data.rating ?? 0);
 		}
 	}, [myReview]);
 
 	const [mutateData, { mutateLoading, mutateResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/user`, "POST");
-	const [patchData, { mutateLoading: patchLoading, mutateResult: patchResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/${myReview?.review?.id}`, "PATCH");
-	const [deleteData, { mutateLoading: deleteLoading, mutateResult: deleteResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/${myReview?.review?.id}`, "DELETE");
+	const [patchData, { mutateLoading: patchLoading, mutateResult: patchResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/${myReview?.data?.id}`, "PATCH");
+	const [deleteData, { mutateLoading: deleteLoading, mutateResult: deleteResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/${myReview?.data?.id}`, "DELETE");
 
 	useEffect(() => {
 		if (mutateResult?.ok || patchResult?.ok || deleteResult?.ok) {
@@ -50,15 +50,17 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 		}
 	}, [mutateResult, patchResult, deleteResult, router, params.isbn]);
 
-	const onClickDelete = () => deleteData({});
+	const onClickDelete = () => {
+		deleteData({});
+	};
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
 		if (mutateLoading || patchLoading || deleteLoading) return;
 
-		if (searchData && title?.length > 0 && content?.length > 0) {
-			if (myReview?.review) {
+		if (searchData && title?.length > 0 && content?.length > 0 && session?.data?.user) {
+			if (myReview?.data) {
 				patchData({
 					title,
 					content,
@@ -100,7 +102,7 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 								<StarRatingBtn rating={rating} setRating={setRating} />
 							</div>
 
-							{myReview?.review && (
+							{myReview?.data && (
 								<button type="button" onClick={onClickDelete} className={deleteBtn} aria-label="리뷰 삭제">
 									<DeleteIcon />
 									{/* 삭제 */}
