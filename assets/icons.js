@@ -90,6 +90,97 @@ export const ChevronDownDoubleIcon = () => (
 	</svg>
 );
 
+export const SearchDefaultIcon = () => (
+	<svg
+		width="800px"
+		height="800px"
+		viewBox="0 0 32 32"
+		enableBackground="new 0 0 32 32"
+		id="_x3C_Layer_x3E_"
+		version="1.1"
+		xmlspace="preserve"
+		xmlns="http://www.w3.org/2000/svg"
+		xmlnsXlink="http://www.w3.org/1999/xlink"
+	>
+		<g id="search_x2C__magnifier_x2C__magnifying_x2C__emoji_x2C__happy">
+			<g id="XMLID_1949_">
+				<g id="XMLID_2132_">
+					<path d="M12,14.521h2c0,0.55-0.45,1-1,1S12,15.07,12,14.521z" fill="#263238" id="XMLID_2137_" />
+					<path d="M17.5,13c0.27,0,0.5,0.23,0.5,0.5S17.77,14,17.5,14S17,13.77,17,13.5S17.23,13,17.5,13z     " fill="#263238" id="XMLID_2134_" />
+					<path d="M8.5,13C8.77,13,9,13.23,9,13.5S8.77,14,8.5,14S8,13.77,8,13.5S8.23,13,8.5,13z" fill="#263238" id="XMLID_2133_" />
+				</g>
+			</g>
+
+			<g id="XMLID_1838_">
+				<g id="XMLID_4088_">
+					<line fill="none" id="XMLID_4094_" stroke="#455A64" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="23.43" x2="21.214" y1="23.401" y2="21.186" />
+					<path
+						d="     M29.914,27.086l-3.5-3.5c-0.756-0.756-2.072-0.756-2.828,0C23.208,23.964,23,24.466,23,25s0.208,1.036,0.586,1.414l3.5,3.5     c0.378,0.378,0.88,0.586,1.414,0.586s1.036-0.208,1.414-0.586S30.5,29.034,30.5,28.5S30.292,27.464,29.914,27.086z"
+						fill="none"
+						id="XMLID_4093_"
+						stroke="#455A64"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeMiterlimit="10"
+					/>
+					<circle cx="13" cy="13" fill="none" id="XMLID_4092_" r="11.5" stroke="#455A64" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" />
+					<path d="     M12,14.521h2c0,0.55-0.45,1-1,1S12,15.07,12,14.521z" fill="none" id="XMLID_4091_" stroke="#455A64" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" />
+					<path
+						d="     M17.5,13c0.27,0,0.5,0.23,0.5,0.5S17.77,14,17.5,14S17,13.77,17,13.5S17.23,13,17.5,13z"
+						fill="none"
+						id="XMLID_4090_"
+						stroke="#455A64"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeMiterlimit="10"
+					/>
+					<path
+						d="     M8.5,13C8.77,13,9,13.23,9,13.5S8.77,14,8.5,14S8,13.77,8,13.5S8.23,13,8.5,13z"
+						fill="none"
+						id="XMLID_4089_"
+						stroke="#455A64"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeMiterlimit="10"
+					/>
+				</g>
+				<g id="XMLID_3004_">
+					<line fill="none" id="XMLID_4087_" stroke="#263238" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" x1="23.43" x2="21.214" y1="23.401" y2="21.186" />
+					<path
+						d="     M29.914,27.086l-3.5-3.5c-0.756-0.756-2.072-0.756-2.828,0C23.208,23.964,23,24.466,23,25s0.208,1.036,0.586,1.414l3.5,3.5     c0.378,0.378,0.88,0.586,1.414,0.586s1.036-0.208,1.414-0.586S30.5,29.034,30.5,28.5S30.292,27.464,29.914,27.086z"
+						fill="none"
+						id="XMLID_3009_"
+						stroke="#263238"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeMiterlimit="10"
+					/>
+					<circle cx="13" cy="13" fill="none" id="XMLID_3008_" r="11.5" stroke="#263238" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" />
+					<path d="     M12,14.521h2c0,0.55-0.45,1-1,1S12,15.07,12,14.521z" fill="none" id="XMLID_3007_" stroke="#263238" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" />
+					<path
+						d="     M17.5,13c0.27,0,0.5,0.23,0.5,0.5S17.77,14,17.5,14S17,13.77,17,13.5S17.23,13,17.5,13z"
+						fill="none"
+						id="XMLID_3006_"
+						stroke="#263238"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeMiterlimit="10"
+					/>
+					<path
+						d="     M8.5,13C8.77,13,9,13.23,9,13.5S8.77,14,8.5,14S8,13.77,8,13.5S8.23,13,8.5,13z"
+						fill="none"
+						id="XMLID_3005_"
+						stroke="#263238"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeMiterlimit="10"
+					/>
+				</g>
+			</g>
+		</g>
+	</svg>
+);
+
 export const NoResultIcon = () => (
 	<svg
 		width="800px"
@@ -98,7 +189,7 @@ export const NoResultIcon = () => (
 		enableBackground="new 0 0 32 32"
 		id="_x3C_Layer_x3E_"
 		version="1.1"
-		xmlSpace="preserve"
+		xmlspace="preserve"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlnsXlink="http://www.w3.org/1999/xlink"
 	>
@@ -193,7 +284,7 @@ export const NoResultIcon = () => (
 );
 
 export const LoaderIcon = () => (
-	<svg version="1.1" id="L6" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" xmlSpace="preserve">
+	<svg version="1.1" id="L6" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" xmlspace="preserve">
 		<rect fill="none" stroke="#fff" strokeWidth="4" x="25" y="25" width="50" height="50">
 			<animateTransform attributeName="transform" dur="0.5s" from="0 50 50" to="180 50 50" type="rotate" id="strokeBox" attributeType="XML" begin="rectBox.end" />
 		</rect>
@@ -484,6 +575,16 @@ export const DeleteIcon = () => (
 			strokeLinecap="round"
 			strokeLinejoin="round"
 			d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+		/>
+	</svg>
+);
+
+export const BeakerIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+		<path
+			strokeLinecap="round"
+			strokeLinejoin="round"
+			d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"
 		/>
 	</svg>
 );

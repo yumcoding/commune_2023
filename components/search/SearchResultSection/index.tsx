@@ -1,27 +1,31 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import SearchResult from "../SearchResult";
 import styles from "./styles.module.scss";
 import Pagination from "@/components/common/Pagination";
-import { cls } from "@/lib/front/cls";
+import SearchDefault from "../SearchDefault";
 
 export default function SearchResultSection() {
-	const { wrapper, hidden, searchHeader } = styles;
+	const { wrapper, searchHeader } = styles;
 
 	const searchParams = useSearchParams();
 
 	const search = searchParams.get("query");
 	const pageIndex = Number(searchParams.get("pageIndex"));
 
-	const isResultHidden = search || search?.length === 0;
+	const isResultHidden = !search || search?.length === 0;
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [pageIndex]);
 
+	if (isResultHidden) {
+		return <SearchDefault />;
+	}
+
 	return (
-		<section className={isResultHidden ? cls(wrapper, hidden) : wrapper}>
+		<section className={wrapper}>
 			<header className={searchHeader}>
 				<div>&quot;{search ?? ""}&quot;의 검색 결과</div>
 			</header>

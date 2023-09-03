@@ -4,6 +4,7 @@ import { recentSearch, popularSearch } from "@/assets/mockData";
 import { useSearchParams } from "next/navigation";
 
 import styles from "./styles.module.scss";
+import Link from "next/link";
 
 export default function SearchRecommendation({ isRecent }: { isRecent: Boolean }) {
 	const { section, header, delBtn, list } = styles;
@@ -28,7 +29,7 @@ export default function SearchRecommendation({ isRecent }: { isRecent: Boolean }
 				<ul className={list}>
 					{recentSearch?.map((item, _) => (
 						<li key={item.id}>
-							<p>{item.query}</p>
+							<Link href={`/search?query=${item.query}&pageIndex=1`}>{item.query}</Link>
 						</li>
 					))}
 				</ul>
@@ -36,7 +37,7 @@ export default function SearchRecommendation({ isRecent }: { isRecent: Boolean }
 				<ul className={list}>
 					{popularSearch?.map((item, _) => (
 						<li key={item.id}>
-							<p>{item.query}</p>
+							<Link href={`/search?query=${item.query}&pageIndex=1`}>{item.query}</Link>
 						</li>
 					))}
 				</ul>

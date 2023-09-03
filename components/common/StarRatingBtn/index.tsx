@@ -13,7 +13,7 @@ export default function StarRatingBtn({ rating, setRating }: PropsTypes) {
 	return (
 		<>
 			<div className={styles.rate}>
-				{[1, 2, 3, 4, 5].map((item) => (
+				{[5, 4, 3, 2, 1].map((item) => (
 					<Fragment key={`star${item}`}>
 						<input type="radio" id={`star${item}`} name="rate" value={item} checked={rating === item} onChange={onChangeRating} />
 						<label htmlFor={`star${item}`} title="text"></label>

@@ -17,7 +17,7 @@ export const sliderSettings = {
 	infinite: false,
 	speed: 500,
 	slidesToShow: 5,
-	slidesToScroll: 5,
+	slidesToScroll: 1,
 	responsive: [
 		{
 			breakpoint: 1366,

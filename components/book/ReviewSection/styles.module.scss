@@ -1,6 +1,16 @@
 @import "@/app/variables.module.scss";
 @import "@/app/mixins.module.scss";
 
+.reviewsWrapper {
+	@media screen and (min-width: $md-breakpoint) {
+		margin-top: -30px;
+		padding: 0 0 40px 0;
+	}
+	@media screen and (min-width: $lg-breakpoint) {
+		padding: 0 0 60px 0;
+	}
+}
+
 .reviewHeader {
 	@include flexbox(between, end);
 	position: relative;

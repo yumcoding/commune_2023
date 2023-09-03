@@ -9,33 +9,36 @@ import BookInfo from "../../../components/book/BookInfo/index";
 import { ChevronDownDoubleIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import MyReviewSection from "@/components/book/MyReviewSection";
+import Preparation from "@/components/book/Preparation";
 
 export default function Page() {
-	const { main, section, sectionContentWrapper, loadMoreReviewBtn } = styles;
+	const { main, section, loadMoreReviewBtn, preparation } = styles;
 
 	return (
 		<main className={main}>
 			{/* 상단 버튼 nav */}
 			<ButtonGroup />
+
 			<BookInfo />
+
 			<Divider />
 
-			<MyReviewSection />
+			<section className={section}>
+				<MyReviewSection />
+			</section>
 
 			{/* 사용자 리뷰 */}
 			<section className={section}>
-				<div className={sectionContentWrapper}>
-					<ReviewSection />
-				</div>
+				<ReviewSection />
 			</section>
 
 			<Divider />
 
 			{/* 짧은 리뷰 */}
 			<section className={section}>
-				<div className={sectionContentWrapper}>
+				<div className={preparation}>
 					<h2>
-						한줄평<small>(127)</small>
+						기대평<small>(127)</small>
 					</h2>
 					<ul>
 						<CommentItem key={15} />
@@ -48,6 +51,7 @@ export default function Page() {
 					</button>
 					<CommentForm />
 				</div>
+				<Preparation />
 			</section>
 
 			{/* aside 버튼 - smHidden */}

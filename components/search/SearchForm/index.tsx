@@ -25,7 +25,7 @@ export default function SearchForm() {
 		if (inputRef.current && search && search.length > 0) {
 			inputRef.current.value = search;
 		}
-	}, []);
+	}, [search]);
 
 	const router = useRouter();
 

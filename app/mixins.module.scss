@@ -58,6 +58,8 @@ $flex-map: (
 	}
 }
 
+// layout -------------------------------------
+
 @mixin layout() {
 	margin: $sm-margin;
 	max-width: $content-max-width;
@@ -172,6 +174,36 @@ $flex-map: (
 	}
 }
 
+@mixin searchInfoSection() {
+	svg {
+		width: 72px;
+		height: 72px;
+		position: relative;
+		left: -1px;
+		color: $text-primary;
+
+		@media screen and (min-width: $md-breakpoint) {
+			width: 90px;
+			height: 94px;
+		}
+	}
+
+	p {
+		margin: 12px 0 0 0;
+		color: $text-secondary;
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 18px;
+		letter-spacing: -0.5px;
+		text-align: center;
+		@media screen and (min-width: $md-breakpoint) {
+			margin: 20px 0 0 0;
+			font-size: 15px;
+			line-height: 20px;
+		}
+	}
+}
+
 @mixin bookDetailSection() {
 	padding: 15px 0;
 
@@ -181,32 +213,6 @@ $flex-map: (
 
 	@media screen and (min-width: $lg-breakpoint) {
 		padding: 35px 0;
-	}
-}
-
-@mixin bookDetailSectionContent() {
-	max-width: 960px;
-	margin: 0 20px;
-
-	@media screen and (min-width: $md-breakpoint) {
-		margin: 0 3.5%;
-	}
-
-	@media screen and (min-width: $lg-breakpoint) {
-		margin: 0 auto;
-	}
-
-	h2 {
-		font-size: 19px;
-		font-weight: 700;
-		letter-spacing: -0.7px;
-		line-height: 28px;
-		color: $text-primary;
-		margin: 0 0 10px 0;
-
-		@media screen and (min-width: $lg-breakpoint) {
-			font-size: 21px;
-		}
 	}
 }
 

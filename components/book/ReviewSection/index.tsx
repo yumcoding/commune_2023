@@ -12,7 +12,7 @@ import styles from "./styles.module.scss";
 const PAGE_SIZE = 10;
 
 export default function ReviewSection() {
-	const { reviewHeader, noListWrapper, isLoadingWrapper, loadMoreReviewBtn } = styles;
+	const { reviewsWrapper, reviewHeader, noListWrapper, isLoadingWrapper, loadMoreReviewBtn } = styles;
 
 	const pathname = usePathname();
 	const params = useParams();
@@ -31,7 +31,7 @@ export default function ReviewSection() {
 	const onClickShowMoreReivew = () => setSize(size + 1);
 
 	return (
-		<>
+		<div className={reviewsWrapper}>
 			<div className={reviewHeader}>
 				<h2>
 					리뷰<small>({totalNum && totalNum > 999 ? "999+" : totalNum})</small>
@@ -64,6 +64,6 @@ export default function ReviewSection() {
 					<ChevronDownDoubleIcon />
 				</button>
 			)}
-		</>
+		</div>
 	);
 }

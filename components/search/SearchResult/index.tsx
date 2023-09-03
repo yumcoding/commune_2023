@@ -13,7 +13,7 @@ import { SearchResultTypes } from "@/types/db";
 export const PAGE_SIZE = 10;
 
 export default function SearchResult({ query, pageIndex }: { query: string; pageIndex: number }) {
-	const { list, listItem, bookInfo, desc, noResult } = styles;
+	const { list, listItem, bookInfo, desc, noResult, iconStyles, infoTextStyle } = styles;
 
 	const { data, isLoading } = useSWR<SearchResultTypes>(
 		query?.length > 0 ? `/openapi/v1/search/book.json?query=${query}&display=${PAGE_SIZE}&start=${PAGE_SIZE * (pageIndex - 1) + 1}` : null,
@@ -24,6 +24,7 @@ export default function SearchResult({ query, pageIndex }: { query: string; page
 		window.scrollTo(0, 0);
 	}, []);
 
+	// TODO : js가 아니라 css media query로
 	// to resize image and decide whether to show a book desc.
 	const [device, setDevice] = useState(window.innerWidth < 720 ? "sm" : "md");
 	const imageWidth = device === "sm" ? 60 : 100;

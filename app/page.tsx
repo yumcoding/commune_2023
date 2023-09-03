@@ -22,7 +22,7 @@ export default function Page() {
 					<h2 className={sectionHeading}>
 						가을<span>🍂</span> 추천 시리즈 2. &#39;아무튼&#39;
 					</h2>
-					<SearchBookList query="아무튼" />
+					<SearchBookList query="아무튼," />
 				</section>
 				<section className={section}>
 					<h2 className={sectionHeading}>
