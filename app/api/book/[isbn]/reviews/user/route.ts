@@ -8,11 +8,12 @@ export async function POST(req: Request) {
 	const session = await getServerSession(authOptions);
 	const body = await req.json();
 
-	const { title, content, bookIsbn, bookAuthor, bookTitle, bookImage } = body;
+	const { title, content,rating, bookIsbn, bookAuthor, bookTitle, bookImage } = body;
 	const review = await prisma.review.create({
 		data: {
 			title,
 			content,
+			rating,
 			bookIsbn,
 			bookAuthor,
 			bookTitle,
