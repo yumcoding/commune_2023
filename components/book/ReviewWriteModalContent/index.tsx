@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { redirect, useParams, useRouter } from "next/navigation";
 import useSWR from "swr";
 
 import { ChevronLeftIcon, CloseMarkIcon, DeleteIcon } from "@/assets/icons";
@@ -46,7 +46,9 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 
 	useEffect(() => {
 		if (mutateResult?.ok || patchResult?.ok || deleteResult?.ok) {
-			router.back();
+			window.location.replace(`${process.env.NEXT_PUBLIC_BASE_URL}/book/${params.isbn}`);
+			// redirect(`/book/${params.isbn}`);
+			// router.replace(`/book/${params.isbn}`);
 		}
 	}, [mutateResult, patchResult, deleteResult, router, params.isbn]);
 
