@@ -1,28 +1,24 @@
 "use client";
 import { useEffect, useState } from "react";
-import { redirect, useParams, useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import useSWR from "swr";
-
-import { ChevronLeftIcon, CloseMarkIcon, DeleteIcon } from "@/assets/icons";
-import styles from "./styles.module.scss";
-import { cls } from "@/lib/front/cls";
 import { fetcher, noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import useMutation from "@/hooks/useMutation";
 import { BookDescTypes, ReviewMutationTypes } from "@/types/db";
+import styles from "./styles.module.scss";
+import { cls } from "@/lib/front/cls";
 import StarRatingBtn from "@/components/common/StarRatingBtn";
-import { useSession } from "next-auth/react";
+import { CloseMarkIcon, DeleteIcon } from "@/assets/icons";
 
-export default function ReviewWriteModalContent({ isModal }: { isModal: boolean }) {
+export default function ReviewWriteModalContent({ isModal, setIsModalVisible }: { isModal: boolean; setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>> }) {
 	const { wrapper, flexbox, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, textareaWrapper, counter, ratingWrapper, deleteBtn } = styles;
 	const params = useParams();
 	const { data: searchData } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
 
 	const session = useSession();
 	const userId = session?.data?.user?.id;
-	const { data: myReview } = useSWR(userId ? `/api/book/${params.isbn}/reviews/user` : null, fetcher);
-
-	const router = useRouter();
-	const onClickClose = () => router.back();
+	const { data: myReview, mutate: mutateMyReview } = useSWR(userId ? `/api/book/${params.isbn}/reviews/user` : null, fetcher);
 
 	const [title, setTitle] = useState("");
 	const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
@@ -31,6 +27,9 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 	const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => setContent(e.target.value);
 
 	const [rating, setRating] = useState(0);
+
+	const router = useRouter();
+	const handleCloseModal = () => setIsModalVisible(false);
 
 	useEffect(() => {
 		if (myReview?.data) {
@@ -46,15 +45,12 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 
 	useEffect(() => {
 		if (mutateResult?.ok || patchResult?.ok || deleteResult?.ok) {
-			window.location.replace(`${process.env.NEXT_PUBLIC_BASE_URL}/book/${params.isbn}`);
-			// redirect(`/book/${params.isbn}`);
-			// router.replace(`/book/${params.isbn}`);
+			mutateMyReview();
+			handleCloseModal();
 		}
 	}, [mutateResult, patchResult, deleteResult, router, params.isbn]);
 
-	const onClickDelete = () => {
-		deleteData({});
-	};
+	const onClickDelete = () => deleteData({});
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -87,7 +83,7 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 			<section className={cls(wrapper, isModal ? "" : isPage)}>
 				<header className={header}>
 					<h1>{searchData ? searchData.title : ""}</h1>
-					<button type="button" className={closeBtn} onClick={onClickClose}>
+					<button type="button" className={closeBtn} onClick={handleCloseModal}>
 						<CloseMarkIcon />
 					</button>
 				</header>
@@ -107,7 +103,6 @@ export default function ReviewWriteModalContent({ isModal }: { isModal: boolean 
 							{myReview?.data && (
 								<button type="button" onClick={onClickDelete} className={deleteBtn} aria-label="리뷰 삭제">
 									<DeleteIcon />
-									{/* 삭제 */}
 								</button>
 							)}
 							<button type="submit" className={cls(saveBtn, content?.length > 0 ? saveActive : "")} disabled={content?.length > 0 ? false : true}>
