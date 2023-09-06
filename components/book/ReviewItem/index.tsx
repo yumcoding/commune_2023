@@ -19,7 +19,7 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 	return (
 		<>
 			<li className={reviewItem}>
-				<ReviewWriter title={title} name={name} image={image} updatedAt={updatedAt} rating={rating} />
+				<ReviewWriter title={title} name={name} image={image} updatedAt={updatedAt} rating={Number(rating)} />
 				<ReviewContent content={content} />
 				<IsLikedBtn reviewId={id} />
 			</li>
