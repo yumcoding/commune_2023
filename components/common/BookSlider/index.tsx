@@ -22,6 +22,7 @@ export const sliderSettings = {
 		{
 			breakpoint: 1366,
 			settings: {
+				dots: false,
 				slidesToShow: 4,
 				slidesToScroll: 4,
 			},
@@ -29,6 +30,7 @@ export const sliderSettings = {
 		{
 			breakpoint: 720,
 			settings: {
+				dots: true,
 				slidesToShow: 3,
 				slidesToScroll: 3,
 			},
