@@ -1,10 +1,10 @@
 "use client";
+
 import useSWR from "swr";
 import { useParams, usePathname } from "next/navigation";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
 import { HorizontalLoaderIcon, NoListItemIcon, PencilIcon } from "@/assets/icons";
-import { fetcher, noRevalidationOption } from "@/lib/front/fetchers";
+import { fetcher } from "@/lib/front/fetchers";
 import ReviewWriter from "../ReviewItem/ReviewWriter";
 import ReviewContent from "../ReviewItem/ReviewContent";
 import IsLikedBtn from "../ReviewItem/IsLikedBtn";
@@ -12,12 +12,13 @@ import IsLikedBtn from "../ReviewItem/IsLikedBtn";
 import { cls } from "@/lib/front/cls";
 import styles from "@/components/book/ReviewSection/styles.module.scss";
 import itemStyles from "./styles.module.scss";
+import { useState } from "react";
+import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
+import ReviewWriteModalContent from "../ReviewWriteModalContent";
 
 export default function MyReviewSection() {
 	const { reviewHeader, reviewWriteBtn, noListWrapper, hasBorderBottom, isLoadingWrapper } = styles;
 	const { reviewItem } = itemStyles;
-
-	const pathname = usePathname();
 
 	// session 없는 경우, 즉 로그인하지 않은 경우 return null
 	const session = useSession();
@@ -25,16 +26,22 @@ export default function MyReviewSection() {
 
 	const params = useParams();
 	const { data: myReview, isLoading } = useSWR(userId ? `/api/book/${params.isbn}/reviews/user` : null, fetcher);
+
+	// review write modal
+	const [isModalVisible, setIsModalVisible] = useState(false);
+	const onClickWriteModal = () => setIsModalVisible(true);
+	const onClickCloseModal = () => setIsModalVisible(false);
+
 	if (!userId) return null;
 
 	return (
 		<>
 			<div className={reviewHeader}>
 				<h2>나의 리뷰</h2>
-				<Link href={`${pathname}/write-review`} className={reviewWriteBtn}>
+				<button type="button" className={reviewWriteBtn} onClick={onClickWriteModal}>
 					<span>{myReview?.data ? "수정하기" : "작성하기"}</span>
 					<PencilIcon />
-				</Link>
+				</button>
 			</div>
 
 			{isLoading ? (
@@ -63,6 +70,11 @@ export default function MyReviewSection() {
 						<p>리뷰를 작성해 책을 읽은 소감을 나눠주세요!</p>
 					</div>
 				</>
+			)}
+			{isModalVisible && (
+				<DefaultModalOverlay onClickOverlay={onClickCloseModal}>
+					<ReviewWriteModalContent isModal setIsModalVisible={setIsModalVisible} />
+				</DefaultModalOverlay>
 			)}
 		</>
 	);

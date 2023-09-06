@@ -3,7 +3,7 @@ import ReviewWriteModalContent from "@/components/book/ReviewWriteModalContent";
 export default function WriteReview() {
 	return (
 		<PageModalOverlay>
-			<ReviewWriteModalContent isModal={true} />
+			{/* <ReviewWriteModalContent isModal={true} /> */}
 		</PageModalOverlay>
 	);
 }
