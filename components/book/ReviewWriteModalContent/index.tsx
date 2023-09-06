@@ -1,11 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
+import { useSWRConfig } from "swr";
+import useSWRInfinite from "swr/infinite";
+
 import { fetcher, noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import useMutation from "@/hooks/useMutation";
-import { BookDescTypes, ReviewMutationTypes } from "@/types/db";
+import { BookDescTypes, ReviewMutationTypes, ReviewWithLikes } from "@/types/db";
 import styles from "./styles.module.scss";
 import { cls } from "@/lib/front/cls";
 import StarRatingBtn from "@/components/common/StarRatingBtn";
@@ -20,6 +23,7 @@ export default function ReviewWriteModalContent({ isbn, isModal, setIsModalVisib
 	const session = useSession();
 	const userId = session?.data?.user?.id;
 	const { data: myReview, mutate: mutateMyReview } = useSWR(userId ? `/api/book/${isbn}/reviews/user` : null, fetcher);
+	const { mutate: reviewListMutate } = useSWRInfinite<ReviewWithLikes[]>((index) => `/api/user/reviews?page=${index}`, fetcher);
 
 	const [title, setTitle] = useState("");
 	const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
@@ -44,9 +48,13 @@ export default function ReviewWriteModalContent({ isbn, isModal, setIsModalVisib
 	const [patchData, { mutateLoading: patchLoading, mutateResult: patchResult }] = useMutation<ReviewMutationTypes>(`/api/book/${isbn}/reviews/${myReview?.data?.id}`, "PATCH");
 	const [deleteData, { mutateLoading: deleteLoading, mutateResult: deleteResult }] = useMutation<ReviewMutationTypes>(`/api/book/${isbn}/reviews/${myReview?.data?.id}`, "DELETE");
 
+	const { mutate: unboundMutate } = useSWRConfig();
+
 	useEffect(() => {
 		if (mutateResult?.ok || patchResult?.ok || deleteResult?.ok) {
 			mutateMyReview();
+			reviewListMutate();
+			unboundMutate("/api/user/profile");
 			handleCloseModal();
 		}
 	}, [mutateResult, patchResult, deleteResult, router, isbn]);
