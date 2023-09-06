@@ -3,13 +3,14 @@ import ButtonGroup from "@/components/book/ButtonGroup";
 import Divider from "@/components/common/Layout/Divider";
 import CommentForm from "@/components/book/CommentForm";
 import CommentItem from "@/components/book/CommentItem";
-import CartLink from "@/components/book/CartLink";
+import CartFloatingLink from "@/components/book/CartFloatingLink";
 import ReviewSection from "@/components/book/ReviewSection";
 import BookInfo from "../../../components/book/BookInfo/index";
 import { ChevronDownDoubleIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
 import MyReviewSection from "@/components/book/MyReviewSection";
 import Preparation from "@/components/book/Preparation";
+import BackFloatingBtn from "@/components/book/BackFloatingBtn";
 
 export default function Page() {
 	const { main, section, loadMoreReviewBtn, preparation } = styles;
@@ -56,7 +57,8 @@ export default function Page() {
 
 			{/* aside 버튼 - smHidden */}
 			<aside>
-				<CartLink />
+				<CartFloatingLink />
+				<BackFloatingBtn/>
 			</aside>
 		</main>
 	);

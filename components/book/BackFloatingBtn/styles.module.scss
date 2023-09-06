@@ -1,0 +1,6 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.btn {
+	@include floatingBtnStyle(20px, 60px);
+}
