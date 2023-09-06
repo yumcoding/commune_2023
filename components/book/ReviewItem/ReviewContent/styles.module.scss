@@ -42,6 +42,7 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		animation: close 350ms ease-in forwards;
+		white-space: pre-wrap;
 	}
 
 	&.moreText {
