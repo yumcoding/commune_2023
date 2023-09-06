@@ -38,10 +38,12 @@ export default function MyReviewSection() {
 		<>
 			<div className={reviewHeader}>
 				<h2>나의 리뷰</h2>
-				<button type="button" className={reviewWriteBtn} onClick={onClickWriteModal}>
-					<span>{myReview?.data ? "수정하기" : "작성하기"}</span>
-					<PencilIcon />
-				</button>
+				{!isLoading && (
+					<button type="button" className={reviewWriteBtn} onClick={onClickWriteModal}>
+						<span>{myReview?.data ? "수정하기" : "작성하기"}</span>
+						<PencilIcon />
+					</button>
+				)}
 			</div>
 
 			{isLoading ? (
