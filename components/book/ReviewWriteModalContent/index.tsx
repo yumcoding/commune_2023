@@ -12,14 +12,14 @@ import StarRatingBtn from "@/components/common/StarRatingBtn";
 import { AlertIcon, CloseMarkIcon, DeleteIcon } from "@/assets/icons";
 import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
 
-export default function ReviewWriteModalContent({ isModal, setIsModalVisible }: { isModal: boolean; setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>> }) {
+export default function ReviewWriteModalContent({ isbn, isModal, setIsModalVisible }: { isbn: string; isModal: boolean; setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>> }) {
 	const { wrapper, flexbox, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, textareaWrapper, counter, ratingWrapper, deleteBtn, deleteModalWrapper } = styles;
-	const params = useParams();
-	const { data: searchData } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
+
+	const { data: searchData } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${isbn}`, searchFetcherXML, noRevalidationOption);
 
 	const session = useSession();
 	const userId = session?.data?.user?.id;
-	const { data: myReview, mutate: mutateMyReview } = useSWR(userId ? `/api/book/${params.isbn}/reviews/user` : null, fetcher);
+	const { data: myReview, mutate: mutateMyReview } = useSWR(userId ? `/api/book/${isbn}/reviews/user` : null, fetcher);
 
 	const [title, setTitle] = useState("");
 	const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value);
@@ -40,16 +40,16 @@ export default function ReviewWriteModalContent({ isModal, setIsModalVisible }: 
 		}
 	}, [myReview]);
 
-	const [mutateData, { mutateLoading, mutateResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/user`, "POST");
-	const [patchData, { mutateLoading: patchLoading, mutateResult: patchResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/${myReview?.data?.id}`, "PATCH");
-	const [deleteData, { mutateLoading: deleteLoading, mutateResult: deleteResult }] = useMutation<ReviewMutationTypes>(`/api/book/${params.isbn}/reviews/${myReview?.data?.id}`, "DELETE");
+	const [mutateData, { mutateLoading, mutateResult }] = useMutation<ReviewMutationTypes>(`/api/book/${isbn}/reviews/user`, "POST");
+	const [patchData, { mutateLoading: patchLoading, mutateResult: patchResult }] = useMutation<ReviewMutationTypes>(`/api/book/${isbn}/reviews/${myReview?.data?.id}`, "PATCH");
+	const [deleteData, { mutateLoading: deleteLoading, mutateResult: deleteResult }] = useMutation<ReviewMutationTypes>(`/api/book/${isbn}/reviews/${myReview?.data?.id}`, "DELETE");
 
 	useEffect(() => {
 		if (mutateResult?.ok || patchResult?.ok || deleteResult?.ok) {
 			mutateMyReview();
 			handleCloseModal();
 		}
-	}, [mutateResult, patchResult, deleteResult, router, params.isbn]);
+	}, [mutateResult, patchResult, deleteResult, router, isbn]);
 
 	const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 	const onClickDeleteBtn = () => setIsDeleteModalVisible(true);

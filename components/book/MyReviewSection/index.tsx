@@ -75,7 +75,7 @@ export default function MyReviewSection() {
 			)}
 			{isModalVisible && (
 				<DefaultModalOverlay onClickOverlay={onClickCloseModal}>
-					<ReviewWriteModalContent isModal setIsModalVisible={setIsModalVisible} />
+					<ReviewWriteModalContent isbn={params.isbn} isModal setIsModalVisible={setIsModalVisible} />
 				</DefaultModalOverlay>
 			)}
 		</>
