@@ -21,7 +21,7 @@ export default function ReviewContent(props: propsTypes) {
 				<p>{content}</p>
 			</div>
 			<div className={btnWrapper}>
-				<button type="button" onClick={toggleShowMore} className={cls(flexbox, showMoreBtn, content.length > 130 ? "" : isShort)}>
+				<button type="button" onClick={toggleShowMore} className={cls(flexbox, showMoreBtn, content.length > 70 ? "" : isShort)}>
 					{showMore ? (
 						<>
 							접기
