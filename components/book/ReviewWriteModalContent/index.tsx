@@ -9,10 +9,11 @@ import { BookDescTypes, ReviewMutationTypes } from "@/types/db";
 import styles from "./styles.module.scss";
 import { cls } from "@/lib/front/cls";
 import StarRatingBtn from "@/components/common/StarRatingBtn";
-import { CloseMarkIcon, DeleteIcon } from "@/assets/icons";
+import { AlertIcon, CloseMarkIcon, DeleteIcon } from "@/assets/icons";
+import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
 
 export default function ReviewWriteModalContent({ isModal, setIsModalVisible }: { isModal: boolean; setIsModalVisible: React.Dispatch<React.SetStateAction<boolean>> }) {
-	const { wrapper, flexbox, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, textareaWrapper, counter, ratingWrapper, deleteBtn } = styles;
+	const { wrapper, flexbox, isPage, header, closeBtn, saveBtn, saveActive, formWrapper, textareaWrapper, counter, ratingWrapper, deleteBtn, deleteModalWrapper } = styles;
 	const params = useParams();
 	const { data: searchData } = useSWR<BookDescTypes>(`/openapi/v1/search/book_adv.xml?d_isbn=${params.isbn}`, searchFetcherXML, noRevalidationOption);
 
@@ -50,7 +51,10 @@ export default function ReviewWriteModalContent({ isModal, setIsModalVisible }: 
 		}
 	}, [mutateResult, patchResult, deleteResult, router, params.isbn]);
 
-	const onClickDelete = () => deleteData({});
+	const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
+	const onClickDeleteBtn = () => setIsDeleteModalVisible(true);
+	const onClickCancelDeleteBtn = () => setIsDeleteModalVisible(false);
+	const onClickConfirmDelete = () => deleteData({});
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -101,7 +105,7 @@ export default function ReviewWriteModalContent({ isModal, setIsModalVisible }: 
 							</div>
 
 							{myReview?.data && (
-								<button type="button" onClick={onClickDelete} className={deleteBtn} aria-label="리뷰 삭제">
+								<button type="button" onClick={onClickDeleteBtn} className={deleteBtn} aria-label="리뷰 삭제">
 									<DeleteIcon />
 								</button>
 							)}
@@ -112,6 +116,28 @@ export default function ReviewWriteModalContent({ isModal, setIsModalVisible }: 
 					</form>
 				</div>
 			</section>
+			{isDeleteModalVisible && (
+				<DefaultModalOverlay onClickOverlay={onClickCancelDeleteBtn}>
+					<div className={deleteModalWrapper}>
+						<AlertIcon />
+						<div>
+							<p>삭제 확인 후에는 </p>
+							<p>리뷰를 되돌릴 수 없어요.😭</p>
+						</div>
+
+						<p>작성한 리뷰를 삭제하시겠습니까?</p>
+
+						<div>
+							<button type="button" onClick={onClickCancelDeleteBtn}>
+								삭제 취소
+							</button>
+							<button type="button" onClick={onClickConfirmDelete}>
+								삭제 확인
+							</button>
+						</div>
+					</div>
+				</DefaultModalOverlay>
+			)}
 		</>
 	);
 }

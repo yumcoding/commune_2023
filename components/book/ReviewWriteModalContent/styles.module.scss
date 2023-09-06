@@ -161,3 +161,62 @@
 		bottom: -55px;
 	}
 }
+
+.deleteModalWrapper {
+	@include column-flexbox(center, center);
+	background-color: $white;
+	padding: 25px 40px;
+	border-radius: 6px;
+
+	svg {
+		color: $pink;
+		width: 80px;
+		height: 80px;
+		margin: 0 0 20px 0;
+	}
+
+	p {
+		font-size: 16px;
+		color: $text-primary;
+	}
+
+
+	> div:first-of-type {
+		@include column-flexbox(center, center);
+		margin: 0 0 32px 0;
+	}
+
+	>p{
+		font-weight:500;
+	}
+
+	> div:nth-of-type(2) {
+		margin: 18px 0 0 0;
+
+		button {
+			padding: 7px 10px;
+			border-radius: 6px;
+			font-weight: 500;
+
+			&:first-of-type {
+				margin: 0 4px 0 0;
+				color: $pink;
+				transition: color 300ms ease-in-out;
+
+				&:hover {
+					color: $pink-dark;
+				}
+			}
+
+			&:nth-of-type(2) {
+				color: $white;
+				background-color: $pink;
+				transition: background-color 300ms ease-in-out;
+
+				&:hover {
+					background-color: $pink-dark;
+				}
+			}
+		}
+	}
+}
