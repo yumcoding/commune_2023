@@ -1,0 +1,6 @@
+@import "@/app/variables.module.scss";
+@import "@/app/mixins.module.scss";
+
+.cart {
+	@include floatingBtnStyle(90px, 135px);
+}
