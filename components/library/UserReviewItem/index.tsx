@@ -3,11 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import ReviewContent from "@/components/book/ReviewItem/ReviewContent";
-import { DeleteIcon, OutlineThumbUpIcon, PencilIcon } from "@/assets/icons";
+import { OutlineThumbUpIcon, PencilIcon } from "@/assets/icons";
 import { cls } from "@/lib/front/cls";
 import StarRatingUI from "@/components/common/StarRatingUI";
 
-export default function UserReviewItem(props: { review: ReviewWithLikes }) {
+interface PropsTypes {
+	review: ReviewWithLikes;
+	onClickEdit: (isbn: string) => void;
+}
+
+export default function UserReviewItem(props: PropsTypes) {
 	const { item, metaWrapper, infoWrapper, heading, desc, bookInfo, reviewInfo, likesNum, statWrapper, btnGroup } = styles;
 	const {
 		id,
@@ -21,6 +26,7 @@ export default function UserReviewItem(props: { review: ReviewWithLikes }) {
 		bookTitle,
 		_count: { likes },
 	} = props.review;
+
 	return (
 		<li className={item}>
 			<div className={metaWrapper}>
@@ -52,9 +58,9 @@ export default function UserReviewItem(props: { review: ReviewWithLikes }) {
 						</div>
 
 						<div className={btnGroup}>
-							<Link href={`/book/${bookIsbn}/write-review`} aria-label="리뷰 수정하기">
+							<button type="button" aria-label="리뷰 수정하기" onClick={() => props.onClickEdit(bookIsbn)}>
 								<PencilIcon />
-							</Link>
+							</button>
 						</div>
 					</div>
 				</div>

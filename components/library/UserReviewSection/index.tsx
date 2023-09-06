@@ -8,6 +8,9 @@ import showCount from "@/lib/front/showCount";
 import { ReviewWithLikes, UserInfoTypes } from "@/types/db";
 import UserReviewItem from "../UserReviewItem";
 import reviewStyles from "@/components/book/ReviewSection/styles.module.scss";
+import { useState } from "react";
+import DefaultModalOverlay from "@/components/common/Modal/DefaultModalOverlay";
+import ReviewWriteModalContent from "@/components/book/ReviewWriteModalContent";
 
 const PAGE_SIZE = 5;
 
@@ -16,7 +19,7 @@ export default function UserReviewSection() {
 	const { isLoadingWrapper, loadMoreReviewBtn } = reviewStyles;
 
 	const { data: userInfo } = useSWR<UserInfoTypes>(`/api/user/profile`, fetcher);
-	const { data: reviewData, size, setSize, isLoading } = useSWRInfinite<ReviewWithLikes[]>((index) => `/api/user/reviews?page=${index}`, fetcher);
+	const { data: reviewData, size, setSize, isLoading, mutate } = useSWRInfinite<ReviewWithLikes[]>((index) => `/api/user/reviews?page=${index}`, fetcher);
 
 	const reviews = reviewData ? ([] as ReviewWithLikes[]).concat(...reviewData) : [];
 	const isLoadingMore = isLoading || (size > 0 && reviewData && typeof reviewData[size - 1] === "undefined");
@@ -24,6 +27,19 @@ export default function UserReviewSection() {
 	const isReachingEnd = isEmpty || (reviewData && reviewData[reviewData.length - 1]?.length < PAGE_SIZE);
 
 	const onClickShowMoreReivew = () => setSize(size + 1);
+
+	const [editBookIsbn, setEditBookIsbn] = useState("");
+	const [isModalVisible, setIsModalVisible] = useState(false);
+
+	const onClickCloseEditModal = () => {
+		setIsModalVisible(false);
+		setEditBookIsbn("");
+	};
+
+	const onClickEdit = (isbn: string) => {
+		setEditBookIsbn(isbn);
+		setIsModalVisible(true);
+	};
 
 	return (
 		<>
@@ -41,7 +57,7 @@ export default function UserReviewSection() {
 
 				<ul>
 					{reviews.map((review) => (
-						<UserReviewItem key={review.id} review={review} />
+						<UserReviewItem key={review.id} review={review} onClickEdit={onClickEdit} />
 					))}
 				</ul>
 
@@ -60,6 +76,11 @@ export default function UserReviewSection() {
 
 				{/* 작성한 책 리뷰 있을 때 --- 5개씩, 최신순, pagination */}
 			</section>
+			{isModalVisible && (
+				<DefaultModalOverlay onClickOverlay={onClickCloseEditModal}>
+					<ReviewWriteModalContent isbn={editBookIsbn} isModal setIsModalVisible={setIsModalVisible} />
+				</DefaultModalOverlay>
+			)}
 		</>
 	);
 }

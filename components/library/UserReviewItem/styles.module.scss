@@ -81,14 +81,14 @@
 	top: 4px;
 	right: 4px;
 
-	a svg {
+	button svg {
 		width: 16px;
 		height: 16px;
 		color: $text-primary;
 		transition: color 300ms ease-in-out;
 	}
 
-	a:hover {
+	button:hover {
 		svg {
 			color: $pink;
 		}
