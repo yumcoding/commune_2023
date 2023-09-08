@@ -98,7 +98,7 @@ export const SearchDefaultIcon = () => (
 		enableBackground="new 0 0 32 32"
 		id="_x3C_Layer_x3E_"
 		version="1.1"
-		xmlspace="preserve"
+		xmlSpace="preserve"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlnsXlink="http://www.w3.org/1999/xlink"
 	>
@@ -189,7 +189,7 @@ export const NoResultIcon = () => (
 		enableBackground="new 0 0 32 32"
 		id="_x3C_Layer_x3E_"
 		version="1.1"
-		xmlspace="preserve"
+		xmlSpace="preserve"
 		xmlns="http://www.w3.org/2000/svg"
 		xmlnsXlink="http://www.w3.org/1999/xlink"
 	>
@@ -284,7 +284,7 @@ export const NoResultIcon = () => (
 );
 
 export const LoaderIcon = () => (
-	<svg version="1.1" id="L6" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" xmlspace="preserve">
+	<svg version="1.1" id="L6" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 100 100" xmlSpace="preserve">
 		<rect fill="none" stroke="#fff" strokeWidth="4" x="25" y="25" width="50" height="50">
 			<animateTransform attributeName="transform" dur="0.5s" from="0 50 50" to="180 50 50" type="rotate" id="strokeBox" attributeType="XML" begin="rectBox.end" />
 		</rect>
