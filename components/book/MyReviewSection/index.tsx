@@ -61,7 +61,7 @@ export default function MyReviewSection() {
 							rating={Number(myReview.data.rating)}
 						/>
 						<ReviewContent content={myReview.data.content} />
-						<IsLikedBtn reviewId={myReview.data.id} />
+						<IsLikedBtn reviewId={myReview.data.id} key={`${crypto.randomUUID()}${myReview.data.id}`} />
 					</div>
 				</>
 			) : (

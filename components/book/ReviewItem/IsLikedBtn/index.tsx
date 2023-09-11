@@ -41,8 +41,8 @@ export default function IsLikedBtn(props: { reviewId: number }) {
 	return (
 		<div className={container}>
 			<form className={isLikedWrapper}>
-				<input type="checkbox" id="checkbox" className={checkbox} disabled={session?.status === "unauthenticated"} checked={reviewItemData?.isLiked} onChange={onChangeCheckbox} />
-				<label htmlFor="checkbox">
+				<input type="checkbox" id={`checkbox${props.reviewId}`} className={checkbox} disabled={session?.status === "unauthenticated"} checked={reviewItemData?.isLiked} onChange={onChangeCheckbox} />
+				<label htmlFor={`checkbox${props.reviewId}`}>
 					<svg id="heart-svg" viewBox="467 392 58 57" xmlns="http://www.w3.org/2000/svg">
 						<g id="Group" fill="none" fillRule="evenodd" transform="translate(467 392)">
 							<path

@@ -18,10 +18,10 @@ export default function ReviewItem(props: { review: ReviewWithUser }) {
 
 	return (
 		<>
-			<li className={reviewItem}>
+			<li className={reviewItem} key={crypto.randomUUID()}>
 				<ReviewWriter title={title} name={name} image={image} updatedAt={updatedAt} rating={Number(rating)} />
 				<ReviewContent content={content} />
-				<IsLikedBtn reviewId={id} />
+				<IsLikedBtn reviewId={id} key={`${crypto.randomUUID()}${id}`} />
 			</li>
 		</>
 	);
