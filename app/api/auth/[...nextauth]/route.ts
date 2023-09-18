@@ -18,7 +18,7 @@ export const authOptions = {
 	],
 	adapter: PrismaAdapter(prisma),
 	pages: {
-		signIn: "/auth/signin",
+		signIn: "/signin",
 	},
 	callbacks: {
 		async session({ session, user }: any) {
