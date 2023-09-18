@@ -27,6 +27,22 @@
 	}
 }
 
+.bookCover {
+	width: 60px;
+	height: calc(60px * 1.4537037);
+
+	@media screen and (min-width: $md-breakpoint) {
+		width: 100px;
+		height: calc(100px * 1.4537037);
+	}
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: fill;
+	}
+}
+
 .bookInfo {
 	margin: 0 0 0 13px;
 	font-size: 14px;
@@ -47,11 +63,15 @@
 }
 
 .desc {
-	@include multipleLineTruncate(3);
+	display: none;
 	margin: 12px 0 0 0;
 	font-size: 13px;
 	line-height: 18px;
 	color: $text-tertiary;
+	@media screen and (min-width: $md-breakpoint) {
+		display: block;
+		@include multipleLineTruncate(3);
+	}
 }
 
 .noResult {
