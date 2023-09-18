@@ -1,4 +1,4 @@
-// 메타데이터?
+import type { Metadata } from 'next'
 import ButtonGroup from "@/components/book/ButtonGroup";
 import Divider from "@/components/common/Layout/Divider";
 import CommentForm from "@/components/book/CommentForm";
@@ -11,6 +11,11 @@ import styles from "./styles.module.scss";
 import MyReviewSection from "@/components/book/MyReviewSection";
 import Preparation from "@/components/book/Preparation";
 import BackFloatingBtn from "@/components/book/BackFloatingBtn";
+
+export const metadata: Metadata = {
+  title: '꼬뮨 | 책 상세',
+}
+ 
 
 export default function Page() {
 	const { main, section, loadMoreReviewBtn, preparation } = styles;
@@ -58,7 +63,7 @@ export default function Page() {
 			{/* aside 버튼 - smHidden */}
 			<aside>
 				<CartFloatingLink />
-				<BackFloatingBtn/>
+				<BackFloatingBtn />
 			</aside>
 		</main>
 	);

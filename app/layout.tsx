@@ -5,7 +5,7 @@ import Header from "@/components/common/Layout/Header";
 import AuthSessionProvider from "@/providers/authSessionProvider";
 
 export const metadata = {
-	title: "Commune",
+	title: "꼬뮨 | 느슨한 취향 공동체",
 	description: "느슨한 취향 공동체",
 };
 

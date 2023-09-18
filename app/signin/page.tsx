@@ -1,4 +1,4 @@
-
+import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { dancing_script } from "@/app/fonts";
@@ -6,6 +6,10 @@ import { redirect } from "next/navigation";
 import SocialSignInList from "@/components/auth/SocialSignInList";
 import styles from "./styles.module.scss";
 import { cls } from "@/lib/front/cls";
+
+export const metadata: Metadata = {
+	title: "꼬뮨 | 로그인",
+};
 
 export default async function SignIn() {
 	const { wrapper, logo, desc } = styles;
