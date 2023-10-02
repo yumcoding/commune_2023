@@ -30,6 +30,7 @@
 .bookCover {
 	width: 60px;
 	height: calc(60px * 1.4537037);
+	flex-shrink: 0;
 
 	@media screen and (min-width: $md-breakpoint) {
 		width: 100px;
