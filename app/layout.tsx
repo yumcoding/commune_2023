@@ -7,6 +7,7 @@ import AuthSessionProvider from "@/providers/authSessionProvider";
 export const metadata = {
 	title: "꼬뮨 | 느슨한 취향 공동체",
 	description: "느슨한 취향 공동체",
+	viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({ modal, children }: { modal: React.ReactNode; children: React.ReactNode }) {
