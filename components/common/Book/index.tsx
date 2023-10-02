@@ -1,9 +1,9 @@
 import Link from "next/link";
 import styles from "./styles.module.scss";
 import Image from "next/image";
-import { SwiperItemTypes } from "../BookSwiper";
+import { SliderItemTypes } from "../BookSlider";
 
-export default function Book(props: { item: SwiperItemTypes }) {
+export default function Book(props: { item: SliderItemTypes }) {
 	const { book, bookImg, bookDesc } = styles;
 	const { bookIsbn, bookImage, bookTitle, bookAuthor } = props.item;
 	return (
