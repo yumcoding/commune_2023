@@ -2,13 +2,19 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { SwiperItemTypes } from "../BookSwiper";
 import Book from "../Book";
 import ListLoading from "@/components/home/ListLoading";
 
+export interface SliderItemTypes {
+	bookIsbn: string;
+	bookImage: string;
+	bookTitle: string;
+	bookAuthor: string;
+}
+
 interface SlickPropsTypes {
 	hasShowMore?: boolean;
-	list?: SwiperItemTypes[];
+	list?: SliderItemTypes[];
 	isLoading?: boolean;
 }
 
