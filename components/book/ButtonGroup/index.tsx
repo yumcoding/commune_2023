@@ -7,7 +7,7 @@ import useScrollDownCheck from "@/hooks/useScrollDownCheck";
 import { cls } from "@/lib/front/cls";
 import { ArrowLeftIcon, CartIcon, LinkIcon } from "@/assets/icons";
 import styles from "./styles.module.scss";
-import { BookDescTypes } from "../BookInfo";
+import { BookDescTypes } from "@/types/db";
 import { noRevalidationOption, searchFetcherXML } from "@/lib/front/fetchers";
 import { useState } from "react";
 import ToastPopup from "@/components/common/ToastPopup";
